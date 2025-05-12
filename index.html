@@ -17,15 +17,8 @@
             box-sizing: border-box;
         }
         
-        @font-face {
-            font-family: 'JetBrains Mono';
-            src: url('https://cdn.jsdelivr.net/gh/JetBrains/JetBrainsMono/web/woff2/JetBrainsMono-Regular.woff2') format('woff2');
-            font-weight: normal;
-            font-style: normal;
-        }
-        
         body {
-            font-family: 'JetBrains Mono', monospace;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
             background-color: var(--bg-color);
             color: var(--text-color);
             min-height: 100vh;
@@ -135,4 +128,338 @@
             transition: opacity 0.3s ease;
         }
         
-        .audio
+        .audio-bar {
+            width: 4px;
+            height: 5px;
+            background-color: var(--accent-color);
+            border-radius: 2px;
+            transition: height 0.1s ease;
+        }
+        
+        .film-card.active .audio-visualizer {
+            opacity: 1;
+        }
+        
+        @media (max-width: 768px) {
+            .grid-container {
+                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+                gap: 1rem;
+            }
+            
+            .film-title {
+                font-size: 1rem;
+            }
+            
+            .film-details {
+                font-size: 0.7rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Sound Design Portfolio</h1>
+        <p class="subtitle">Interagisci con la grid per esplorare i miei lavori</p>
+    </header>
+    
+    <main class="grid-container">
+        <!-- Film 1 -->
+        <div class="film-card" data-audio="https://assets.mixkit.co/sfx/preview/mixkit-cinematic-mystery-trailer-percussion-746.mp3">
+            <img class="film-poster" src="https://source.unsplash.com/nKO_1QyFh9o" alt="Echi nel Vuoto">
+            <div class="audio-visualizer">
+                <div class="audio-bar"></div>
+                <div class="audio-bar"></div>
+                <div class="audio-bar"></div>
+                <div class="audio-bar"></div>
+                <div class="audio-bar"></div>
+                <div class="audio-bar"></div>
+                <div class="audio-bar"></div>
+                <div class="audio-bar"></div>
+                <div class="audio-bar"></div>
+                <div class="audio-bar"></div>
+                <div class="audio-bar"></div>
+                <div class="audio-bar"></div>
+            </div>
+            <div class="film-info">
+                <h3 class="film-title">Echi nel Vuoto</h3>
+                <div class="film-details">
+                    <span>Marco Rossi</span>
+                    <span>2018</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Film 2 -->
+        <div class="film-card" data-audio="https://assets.mixkit.co/sfx/preview/mixkit-suspense-mystery-bass-685.mp3">
+            <img class="film-poster" src="https://source.unsplash.com/CiUR8zISX60" alt="Profondo Blu">
+            <div class="audio-visualizer">
+                <div class="audio-bar"></div>
+                <div class="audio-bar"></div>
+                <div class="audio-bar"></div>
+                <div class="audio-bar"></div>
+                <div class="audio-bar"></div>
+                <div class="audio-bar"></div>
+                <div class="audio-bar"></div>
+                <div class="audio-bar"></div>
+                <div class="audio-bar"></div>
+                <div class="audio-bar"></div>
+                <div class="audio-bar"></div>
+                <div class="audio-bar"></div>
+            </div>
+            <div class="film-info">
+                <h3 class="film-title">Profondo Blu</h3>
+                <div class="film-details">
+                    <span>Laura Bianchi</span>
+                    <span>2019</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Film 3 -->
+        <div class="film-card" data-audio="https://assets.mixkit.co/sfx/preview/mixkit-horror-sci-fi-wind-tunnel-871.mp3">
+            <img class="film-poster" src="https://source.unsplash.com/Qsjm7o3J7Gg" alt="Le Ombre del Bosco">
+            <div class="audio-visualizer">
+                <div class="audio-bar"></div>
+                <div class="audio-bar"></div>
+                <div class="audio-bar"></div>
+                <div class="audio-bar"></div>
+                <div class="audio-bar"></div>
+                <div class="audio-bar"></div>
+                <div class="audio-bar"></div>
+                <div class="audio-bar"></div>
+                <div class="audio-bar"></div>
+                <div class="audio-bar"></div>
+                <div class="audio-bar"></div>
+                <div class="audio-bar"></div>
+            </div>
+            <div class="film-info">
+                <h3 class="film-title">Le Ombre del Bosco</h3>
+                <div class="film-details">
+                    <span>Andrea Neri</span>
+                    <span>2020</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Film 4 -->
+        <div class="film-card" data-audio="https://assets.mixkit.co/sfx/preview/mixkit-tense-cinematic-background-heartbeat-490.mp3">
+            <img class="film-poster" src="https://source.unsplash.com/c1Jp-fo53U8" alt="Ultima Corsa">
+            <div class="audio-visualizer">
+                <div class="audio-bar"></div>
+                <div class="audio-bar"></div>
+                <div class="audio-bar"></div>
+                <div class="audio-bar"></div>
+                <div class="audio-bar"></div>
+                <div class="audio-bar"></div>
+                <div class="audio-bar"></div>
+                <div class="audio-bar"></div>
+                <div class="audio-bar"></div>
+                <div class="audio-bar"></div>
+                <div class="audio-bar"></div>
+                <div class="audio-bar"></div>
+            </div>
+            <div class="film-info">
+                <h3 class="film-title">Ultima Corsa</h3>
+                <div class="film-details">
+                    <span>Gianni Moretti</span>
+                    <span>2021</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Film 5 -->
+        <div class="film-card" data-audio="https://assets.mixkit.co/sfx/preview/mixkit-futuristic-bass-hit-2303.mp3">
+            <img class="film-poster" src="https://source.unsplash.com/GnvurwJsKaY" alt="Aurora 2077">
+            <div class="audio-visualizer">
+                <div class="audio-bar"></div>
+                <div class="audio-bar"></div>
+                <div class="audio-bar"></div>
+                <div class="audio-bar"></div>
+                <div class="audio-bar"></div>
+                <div class="audio-bar"></div>
+                <div class="audio-bar"></div>
+                <div class="audio-bar"></div>
+                <div class="audio-bar"></div>
+                <div class="audio-bar"></div>
+                <div class="audio-bar"></div>
+                <div class="audio-bar"></div>
+            </div>
+            <div class="film-info">
+                <h3 class="film-title">Aurora 2077</h3>
+                <div class="film-details">
+                    <span>Sofia Romano</span>
+                    <span>2022</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Film 6 -->
+        <div class="film-card" data-audio="https://assets.mixkit.co/sfx/preview/mixkit-game-show-suspense-waiting-667.mp3">
+            <img class="film-poster" src="https://source.unsplash.com/g1Kr4Ozfoac" alt="Tempo Sospeso">
+            <div class="audio-visualizer">
+                <div class="audio-bar"></div>
+                <div class="audio-bar"></div>
+                <div class="audio-bar"></div>
+                <div class="audio-bar"></div>
+                <div class="audio-bar"></div>
+                <div class="audio-bar"></div>
+                <div class="audio-bar"></div>
+                <div class="audio-bar"></div>
+                <div class="audio-bar"></div>
+                <div class="audio-bar"></div>
+                <div class="audio-bar"></div>
+                <div class="audio-bar"></div>
+            </div>
+            <div class="film-info">
+                <h3 class="film-title">Tempo Sospeso</h3>
+                <div class="film-details">
+                    <span>Luca Verdi</span>
+                    <span>2023</span>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Setup audio context for visualization
+            let audioContext;
+            let analyser;
+            let dataArray;
+            
+            // Try to initialize the AudioContext based on browser compatibility
+            try {
+                const AudioContext = window.AudioContext || window.webkitAudioContext;
+                audioContext = new AudioContext();
+            } catch (e) {
+                console.warn('Web Audio API is not supported in this browser');
+            }
+            
+            if (audioContext) {
+                analyser = audioContext.createAnalyser();
+                analyser.fftSize = 32;
+                const bufferLength = analyser.frequencyBinCount;
+                dataArray = new Uint8Array(bufferLength);
+            }
+            
+            const filmCards = document.querySelectorAll('.film-card');
+            let currentAudio = null;
+            let currentCard = null;
+            let visualizationFrame;
+            
+            // Helper to visualize audio with the bars
+            function visualizeAudio(card) {
+                const bars = card.querySelectorAll('.audio-bar');
+                
+                analyser.getByteFrequencyData(dataArray);
+                
+                const step = Math.floor(dataArray.length / bars.length);
+                
+                for (let i = 0; i < bars.length; i++) {
+                    const barHeight = dataArray[i * step] / 255 * 30 + 5; // scale to 5-35px
+                    bars[i].style.height = `${barHeight}px`;
+                }
+                
+                visualizationFrame = requestAnimationFrame(() => visualizeAudio(card));
+            }
+            
+            // Setup each film card
+            filmCards.forEach(card => {
+                const audioPath = card.getAttribute('data-audio');
+                const audio = new Audio(audioPath);
+                
+                // For touch devices
+                card.addEventListener('touchstart', handleInteraction);
+                
+                // For mouse devices
+                card.addEventListener('click', handleInteraction);
+                
+                function handleInteraction(e) {
+                    e.preventDefault();
+                    
+                    // If we have a playing audio, stop it
+                    if (currentAudio) {
+                        currentAudio.pause();
+                        currentAudio.currentTime = 0;
+                        currentCard.classList.remove('active');
+                        cancelAnimationFrame(visualizationFrame);
+                    }
+                    
+                    // If we're clicking the same card that's already active, just stop
+                    if (currentCard === card) {
+                        currentCard = null;
+                        currentAudio = null;
+                        return;
+                    }
+                    
+                    // Play the new audio
+                    if (audioContext && audioContext.state === 'suspended') {
+                        audioContext.resume();
+                    }
+                    
+                    audio.play();
+                    card.classList.add('active');
+                    currentAudio = audio;
+                    currentCard = card;
+                    
+                    // Set up audio visualization
+                    if (audioContext) {
+                        const source = audioContext.createMediaElementSource(audio);
+                        source.connect(analyser);
+                        analyser.connect(audioContext.destination);
+                        
+                        visualizeAudio(card);
+                        
+                        // When audio ends
+                        audio.addEventListener('ended', () => {
+                            card.classList.remove('active');
+                            cancelAnimationFrame(visualizationFrame);
+                            currentCard = null;
+                            currentAudio = null;
+                        });
+                    }
+                }
+            });
+            
+            // Alternative visualizer for browsers without Web Audio API
+            if (!audioContext) {
+                filmCards.forEach(card => {
+                    const bars = card.querySelectorAll('.audio-bar');
+                    
+                    card.addEventListener('click', () => {
+                        if (card.classList.contains('active')) {
+                            card.classList.remove('active');
+                            bars.forEach(bar => {
+                                bar.style.animation = 'none';
+                            });
+                            return;
+                        }
+                        
+                        // Remove active class from all cards
+                        filmCards.forEach(c => c.classList.remove('active'));
+                        
+                        // Add active class to current card
+                        card.classList.add('active');
+                        
+                        // Animate bars
+                        bars.forEach((bar, index) => {
+                            bar.style.animation = `barAnimation ${0.5 + Math.random() * 0.5}s ease-in-out infinite alternate`;
+                            bar.style.animationDelay = `${index * 0.05}s`;
+                        });
+                    });
+                });
+                
+                // Add keyframe animation for fallback
+                const styleSheet = document.createElement('style');
+                styleSheet.innerHTML = `
+                    @keyframes barAnimation {
+                        0% { height: 5px; }
+                        100% { height: 30px; }
+                    }
+                `;
+                document.head.appendChild(styleSheet);
+            }
+        });
+    </script>
+</body>
+</html>
