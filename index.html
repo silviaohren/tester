@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-    <meta charset="UTF-8">
+    <meta charsnavigazet="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Portfolio</title>
     
@@ -124,26 +124,50 @@
             transition: all 0.3s ease;
             position: relative;
         }
+        /* ============================================
+           MENU DI NAVIGAZIONE
+        ============================================ */
+        .nav-menu {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 2rem 0;
+            font-family: var(--body-font);
+            font-size: 0.9rem;
+            letter-spacing: 0.05em;
+        }
         
-/* Colore diverso per hover sui link secondari del menu */
-.nav-menu a.secondary-link:hover {
-    color: #1a5f9c; /* Blu marino */
-}
-
-.nav-menu a.secondary-link.active {
-    color: #1a5f9c; /* Blu marino */
-}
-
-.nav-menu a.secondary-link.active::after {
-    background-color: #1a5f9c; /* Blu marino per la linea sotto il link attivo */
-}
+        .nav-menu a {
+            color: var(--text-color);
+            text-decoration: none;
+            padding: 0.5rem 0.8rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-menu a:hover {
+            color: var(--accent-color);
+        }
+        
+        .nav-menu a.active {
+            color: var(--accent-color);
+        }
+        
+        .nav-menu a.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0.8rem;
+            right: 0.8rem;
+            height: 2px;
+            background-color: var(--accent-color);
+        }
         
         .nav-separator {
             margin: 0 0.2rem;
             color: rgba(255, 255, 255, 0.3);
         }
-        
-        /* ============================================
+                /* ============================================
            LAYOUT GRIGLIA
         ============================================ */
         .grid-container {
@@ -534,11 +558,11 @@
             <span class="nav-separator">-</span>
             <a href="#commercial" onclick="showPage('commercial-page', this); return false;">COMMERCIAL</a>
             <span class="nav-separator">-</span>
-            <a href="#libraries" class="secondary-link" onclick="showPage('libraries-page', this); return false;">LIBRARIES</a>
+            <a href="#libraries" onclick="showPage('libraries-page', this); return false;">LIBRARIES</a>
             <span class="nav-separator">-</span>
-            <a href="#bio" class="secondary-link" onclick="showPage('bio-page', this); return false;">BIO</a>
+            <a href="#bio" onclick="showPage('bio-page', this); return false;">BIO</a>
             <span class="nav-separator">-</span>
-            <a href="#contact" class="secondary-link" onclick="showPage('contact-page', this); return false;">CONTACT</a>
+            <a href="#contact" onclick="showPage('contact-page', this); return false;">CONTACT</a>
         </nav>
                         
         <!-- ============================================
