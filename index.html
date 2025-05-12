@@ -289,13 +289,13 @@
              MENU DI NAVIGAZIONE
         ============================================ -->
         <nav class="nav-menu">
-            <a href="#film" class="active" data-page="film-page">FILM</a>
+            <a href="#film" class="active" onclick="showPage('film-page', this); return false;">FILM</a>
             <span class="nav-separator">-</span>
-            <a href="#documentary" data-page="documentary-page">DOCUMENTARY</a>
+            <a href="#documentary" onclick="showPage('documentary-page', this); return false;">DOCUMENTARY</a>
             <span class="nav-separator">-</span>
-            <a href="#spot" data-page="spot-page">SPOT</a>
+            <a href="#spot" onclick="showPage('spot-page', this); return false;">SPOT</a>
             <span class="nav-separator">-</span>
-            <a href="#libraries" data-page="libraries-page">LIBRARIES</a>
+            <a href="#libraries" onclick="showPage('libraries-page', this); return false;">LIBRARIES</a>
         </nav>
         
         <!-- ============================================
@@ -448,51 +448,3 @@
                         </div>
                     </div>
                 </div>
-                
-                <!-- SCHEDA 2 -->
-                <div class="scheda">
-                    <img class="poster" src="https://source.unsplash.com/_H0fjILH5Vw" alt="Armonia Naturale">
-                    <div class="scheda-info">
-                        <h3 class="scheda-titolo">Armonia Naturale</h3>
-                        <div class="scheda-dettagli">
-                            <span>NatureCare</span>
-                            <span>2021</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- SCHEDA 3 -->
-                <div class="scheda">
-                    <img class="poster" src="https://source.unsplash.com/BtbjCFUvBXs" alt="Velocità Acustica">
-                    <div class="scheda-info">
-                        <h3 class="scheda-titolo">Velocità Acustica</h3>
-                        <div class="scheda-dettagli">
-                            <span>SonicMotors</span>
-                            <span>2022</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- SCHEDA 4 -->
-                <div class="scheda">
-                    <img class="poster" src="https://source.unsplash.com/tA90pRfL2gM" alt="Freschezza Sonora">
-                    <div class="scheda-info">
-                        <h3 class="scheda-titolo">Freschezza Sonora</h3>
-                        <div class="scheda-dettagli">
-                            <span>BeverageStudio</span>
-                            <span>2023</span>
-                        </div>
-                    </div>
-                </div>
-            </main>
-        </section>
-        
-        <!-- ============================================
-             PAGINA LIBRARIES
-        ============================================ -->
-        <section id="libraries-page" class="page">
-            <main class="grid-container">
-                <!-- SCHEDA 1 -->
-                <div class="scheda">
-                    <img class="poster" src="https://source.unsplash.com/pVoEPpLw818" alt="Atmosfere Futuristiche">
-                    <div class="scheda-info
