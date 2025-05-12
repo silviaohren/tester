@@ -251,12 +251,13 @@
         }
         
         .contact-footer {
-            margin: 5rem 0;
-            padding: 5rem 0;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            margin-top: 1rem;       /* Ridotto per minimizzare lo spazio vuoto */
+            margin-bottom: 4rem;    /* Manteniamo lo spazio sotto come richiesto prima */
+            padding-bottom: 4rem;     /* Manteniamo solo il padding sotto */
+            padding-top: 0;         /* Rimuoviamo il padding sopra */
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05); /* Solo la linea inferiore */
         }
-        
+
         .contact-footer a {
             font-family: var(--heading-font);
             font-size: 1.5rem;
