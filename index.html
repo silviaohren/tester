@@ -448,3 +448,139 @@
                         </div>
                     </div>
                 </div>
+                
+                <!-- SCHEDA 2 -->
+                <div class="scheda">
+                    <img class="poster" src="https://source.unsplash.com/_H0fjILH5Vw" alt="Armonia Naturale">
+                    <div class="scheda-info">
+                        <h3 class="scheda-titolo">Armonia Naturale</h3>
+                        <div class="scheda-dettagli">
+                            <span>NatureCare</span>
+                            <span>2021</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- SCHEDA 3 -->
+                <div class="scheda">
+                    <img class="poster" src="https://source.unsplash.com/BtbjCFUvBXs" alt="Velocità Acustica">
+                    <div class="scheda-info">
+                        <h3 class="scheda-titolo">Velocità Acustica</h3>
+                        <div class="scheda-dettagli">
+                            <span>SonicMotors</span>
+                            <span>2022</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- SCHEDA 4 -->
+                <div class="scheda">
+                    <img class="poster" src="https://source.unsplash.com/tA90pRfL2gM" alt="Freschezza Sonora">
+                    <div class="scheda-info">
+                        <h3 class="scheda-titolo">Freschezza Sonora</h3>
+                        <div class="scheda-dettagli">
+                            <span>BeverageStudio</span>
+                            <span>2023</span>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </section>
+        
+        <!-- ============================================
+             PAGINA LIBRARIES
+        ============================================ -->
+        <section id="libraries-page" class="page">
+            <main class="grid-container">
+                <!-- SCHEDA 1 -->
+                <div class="scheda">
+                    <img class="poster" src="https://source.unsplash.com/pVoEPpLw818" alt="Atmosfere Futuristiche">
+                    <div class="scheda-info">
+                        <h3 class="scheda-titolo">Atmosfere Futuristiche</h3>
+                        <div class="scheda-dettagli">
+                            <span>Sound Library</span>
+                            <span>2020</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- SCHEDA 2 -->
+                <div class="scheda">
+                    <img class="poster" src="https://source.unsplash.com/1Pgq9ZpIatI" alt="Inquietudini Sonore">
+                    <div class="scheda-info">
+                        <h3 class="scheda-titolo">Inquietudini Sonore</h3>
+                        <div class="scheda-dettagli">
+                            <span>Sound Library</span>
+                            <span>2021</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- SCHEDA 3 -->
+                <div class="scheda">
+                    <img class="poster" src="https://source.unsplash.com/nDd3dIkkOLo" alt="Paesaggi Urbani">
+                    <div class="scheda-info">
+                        <h3 class="scheda-titolo">Paesaggi Urbani</h3>
+                        <div class="scheda-dettagli">
+                            <span>Sound Library</span>
+                            <span>2022</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- SCHEDA 4 -->
+                <div class="scheda">
+                    <img class="poster" src="https://source.unsplash.com/iQSAuTAKfNo" alt="Sinfonie Orchestrali">
+                    <div class="scheda-info">
+                        <h3 class="scheda-titolo">Sinfonie Orchestrali</h3>
+                        <div class="scheda-dettagli">
+                            <span>Sound Library</span>
+                            <span>2023</span>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </section>
+    </div><!-- Fine web-area -->
+    
+    <!-- Script di navigazione incorporato direttamente -->
+    <script>
+        // Funzione per cambiare pagina
+        function showPage(pageId, clickedLink) {
+            // Nascondi tutte le pagine
+            var pages = document.querySelectorAll('.page');
+            for (var i = 0; i < pages.length; i++) {
+                pages[i].classList.remove('active');
+            }
+            
+            // Mostra la pagina selezionata
+            document.getElementById(pageId).classList.add('active');
+            
+            // Rimuovi classe active da tutti i link
+            var links = document.querySelectorAll('.nav-menu a');
+            for (var i = 0; i < links.length; i++) {
+                links[i].classList.remove('active');
+            }
+            
+            // Aggiungi classe active al link cliccato
+            clickedLink.classList.add('active');
+            
+            // Aggiorna URL senza causare refresh della pagina
+            history.pushState(null, null, clickedLink.getAttribute('href'));
+            
+            return false; // Previene l'azione predefinita del link
+        }
+        
+        // Controlla URL all'avvio
+        document.addEventListener('DOMContentLoaded', function() {
+            var hash = window.location.hash;
+            if (hash) {
+                var targetLink = document.querySelector('.nav-menu a[href="' + hash + '"]');
+                if (targetLink) {
+                    showPage(targetLink.getAttribute('href').replace('#', '') + '-page', targetLink);
+                }
+            }
+        });
+    </script>
+</body>
+</html>
