@@ -5,18 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sound Design Portfolio | Audio Responsive Grid</title>
     <style>
+        /* ============================================
+           VARIABILI GLOBALI E COLORI
+           Modifica qui per cambiare schema colori
+        ============================================ */
         :root {
-            --bg-color: #0a0a0a;
-            --text-color: #f5f5f5;
-            --accent-color: #ff4d6d;
+            --bg-color: #0a0a0a;        /* Colore sfondo pagina */
+            --text-color: #f5f5f5;      /* Colore testo principale */
+            --accent-color: #ff4d6d;    /* Colore accento/evidenziazione */
         }
         
+        /* ============================================
+           RESET CSS DI BASE
+           Azzera margini e padding predefiniti
+        ============================================ */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
         
+        /* ============================================
+           STILE CORPO PAGINA
+           Imposta font, colori e spaziatura base
+        ============================================ */
         body {
             font-family: 'Helvetica Neue', Arial, sans-serif;
             background-color: var(--bg-color);
@@ -25,6 +37,10 @@
             padding: 2rem;
         }
         
+        /* ============================================
+           STILE HEADER
+           Intestazione con titolo del portfolio
+        ============================================ */
         header {
             text-align: center;
             margin-bottom: 3rem;
@@ -42,6 +58,10 @@
             font-size: 1rem;
         }
         
+        /* ============================================
+           LAYOUT GRIGLIA
+           Struttura responsive per i poster dei film
+        ============================================ */
         .grid-container {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -50,38 +70,52 @@
             margin: 0 auto;
         }
         
+        /* ============================================
+           STILE CARD FILM
+           Aspetto base delle card dei film (inattive)
+        ============================================ */
         .film-card {
             position: relative;
-            aspect-ratio: 2/3;
+            aspect-ratio: 2/3;                /* Rapporto d'aspetto poster cinematografico */
             border-radius: 12px;
             overflow: hidden;
             cursor: pointer;
-            filter: grayscale(100%);
+            filter: grayscale(100%);          /* Inizialmente in bianco e nero */
             transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
         
+        /* Effetto hover sulla card */
         .film-card:hover {
             transform: translateY(-10px);
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
         }
         
+        /* Stile quando la card è attiva (audio in riproduzione) */
         .film-card.active {
-            filter: grayscale(0%);
+            filter: grayscale(0%);            /* Rimuove filtro B/N quando attiva */
             transform: scale(1.03);
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
         }
         
+        /* ============================================
+           STILE POSTER FILM
+           Immagine di copertina del film
+        ============================================ */
         .film-poster {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: cover;                /* Mantiene proporzioni coprendo contenitore */
             transition: transform 0.5s ease;
         }
         
         .film-card.active .film-poster {
-            transform: scale(1.05);
+            transform: scale(1.05);          /* Leggero zoom quando attivo */
         }
         
+        /* ============================================
+           INFORMAZIONI FILM
+           Box con titolo e dettagli del film
+        ============================================ */
         .film-info {
             position: absolute;
             bottom: 0;
@@ -89,11 +123,12 @@
             right: 0;
             padding: 1.5rem;
             background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
-            transform: translateY(20px);
+            transform: translateY(20px);     /* Inizialmente spostato fuori visuale */
             opacity: 0;
             transition: all 0.3s ease;
         }
         
+        /* Mostra info su hover o quando attiva */
         .film-card:hover .film-info,
         .film-card.active .film-info {
             transform: translateY(0);
@@ -113,6 +148,10 @@
             justify-content: space-between;
         }
         
+        /* ============================================
+           VISUALIZZATORE AUDIO
+           Barre che reagiscono all'audio
+        ============================================ */
         .audio-visualizer {
             position: absolute;
             top: 0;
@@ -124,22 +163,26 @@
             align-items: flex-end;
             padding: 0 10px;
             background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), transparent);
-            opacity: 0;
+            opacity: 0;                      /* Nascosto finché inattivo */
             transition: opacity 0.3s ease;
         }
         
         .audio-bar {
             width: 4px;
-            height: 5px;
+            height: 5px;                     /* Altezza minima di partenza */
             background-color: var(--accent-color);
             border-radius: 2px;
             transition: height 0.1s ease;
         }
         
         .film-card.active .audio-visualizer {
-            opacity: 1;
+            opacity: 1;                      /* Mostra visualizzatore quando attivo */
         }
         
+        /* ============================================
+           RESPONSIVE DESIGN
+           Adattamento per dispositivi mobili
+        ============================================ */
         @media (max-width: 768px) {
             .grid-container {
                 grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
@@ -157,13 +200,27 @@
     </style>
 </head>
 <body>
+    <!-- ============================================
+         INTESTAZIONE PAGINA
+         Titolo del portfolio e sottotitolo 
+    ============================================ -->
     <header>
         <h1>Sound Design Portfolio</h1>
         <p class="subtitle">Interagisci con la grid per esplorare i miei lavori</p>
     </header>
     
+    <!-- ============================================
+         GRIGLIA PRINCIPALE
+         Contenitore dei progetti film
+    ============================================ -->
     <main class="grid-container">
-        <!-- Film 1 -->
+        <!-- ============================================
+             CARD FILM 1
+             Ogni card contiene:
+             - Poster
+             - Visualizzatore audio (12 barre)
+             - Box info con titolo e dettagli
+        ============================================ -->
         <div class="film-card" data-audio="https://assets.mixkit.co/sfx/preview/mixkit-cinematic-mystery-trailer-percussion-746.mp3">
             <img class="film-poster" src="https://source.unsplash.com/nKO_1QyFh9o" alt="Echi nel Vuoto">
             <div class="audio-visualizer">
@@ -189,7 +246,9 @@
             </div>
         </div>
         
-        <!-- Film 2 -->
+        <!-- ============================================
+             CARD FILM 2
+        ============================================ -->
         <div class="film-card" data-audio="https://assets.mixkit.co/sfx/preview/mixkit-suspense-mystery-bass-685.mp3">
             <img class="film-poster" src="https://source.unsplash.com/CiUR8zISX60" alt="Profondo Blu">
             <div class="audio-visualizer">
@@ -215,7 +274,9 @@
             </div>
         </div>
         
-        <!-- Film 3 -->
+        <!-- ============================================
+             CARD FILM 3
+        ============================================ -->
         <div class="film-card" data-audio="https://assets.mixkit.co/sfx/preview/mixkit-horror-sci-fi-wind-tunnel-871.mp3">
             <img class="film-poster" src="https://source.unsplash.com/Qsjm7o3J7Gg" alt="Le Ombre del Bosco">
             <div class="audio-visualizer">
@@ -241,7 +302,9 @@
             </div>
         </div>
         
-        <!-- Film 4 -->
+        <!-- ============================================
+             CARD FILM 4
+        ============================================ -->
         <div class="film-card" data-audio="https://assets.mixkit.co/sfx/preview/mixkit-tense-cinematic-background-heartbeat-490.mp3">
             <img class="film-poster" src="https://source.unsplash.com/c1Jp-fo53U8" alt="Ultima Corsa">
             <div class="audio-visualizer">
@@ -267,7 +330,9 @@
             </div>
         </div>
         
-        <!-- Film 5 -->
+        <!-- ============================================
+             CARD FILM 5
+        ============================================ -->
         <div class="film-card" data-audio="https://assets.mixkit.co/sfx/preview/mixkit-futuristic-bass-hit-2303.mp3">
             <img class="film-poster" src="https://source.unsplash.com/GnvurwJsKaY" alt="Aurora 2077">
             <div class="audio-visualizer">
@@ -293,7 +358,9 @@
             </div>
         </div>
         
-        <!-- Film 6 -->
+        <!-- ============================================
+             CARD FILM 6
+        ============================================ -->
         <div class="film-card" data-audio="https://assets.mixkit.co/sfx/preview/mixkit-game-show-suspense-waiting-667.mp3">
             <img class="film-poster" src="https://source.unsplash.com/g1Kr4Ozfoac" alt="Tempo Sospeso">
             <div class="audio-visualizer">
@@ -321,145 +388,92 @@
     </main>
     
     <script>
+        /* ============================================
+           INIZIALIZZAZIONE AL CARICAMENTO PAGINA
+           Esegue il codice quando il DOM è pronto
+        ============================================ */
         document.addEventListener('DOMContentLoaded', () => {
-            // Setup audio context for visualization
+            /* ============================================
+               SETUP WEB AUDIO API
+               Inizializza sistema per analisi audio
+            ============================================ */
             let audioContext;
             let analyser;
             let dataArray;
             
-            // Try to initialize the AudioContext based on browser compatibility
+            // Inizializza AudioContext con compatibilità cross-browser
             try {
                 const AudioContext = window.AudioContext || window.webkitAudioContext;
                 audioContext = new AudioContext();
             } catch (e) {
-                console.warn('Web Audio API is not supported in this browser');
+                console.warn('Web Audio API non supportata in questo browser');
             }
             
+            // Se AudioContext è disponibile, configura analyzer
             if (audioContext) {
                 analyser = audioContext.createAnalyser();
-                analyser.fftSize = 32;
-                const bufferLength = analyser.frequencyBinCount;
-                dataArray = new Uint8Array(bufferLength);
+                analyser.fftSize = 32;  // Dimensione FFT (deve essere potenza di 2)
+                const bufferLength = analyser.frequencyBinCount; // Metà dell'fftSize
+                dataArray = new Uint8Array(bufferLength); // Array per dati frequenza
             }
             
+            /* ============================================
+               RIFERIMENTI E VARIABILI GLOBALI
+               Elementi DOM e stato corrente
+            ============================================ */
             const filmCards = document.querySelectorAll('.film-card');
-            let currentAudio = null;
-            let currentCard = null;
-            let visualizationFrame;
+            let currentAudio = null;  // Riferimento all'audio attualmente in riproduzione
+            let currentCard = null;   // Riferimento alla card attualmente attiva
+            let visualizationFrame;   // ID frame per cancelAnimationFrame
             
-            // Helper to visualize audio with the bars
+            /* ============================================
+               FUNZIONE VISUALIZZAZIONE AUDIO
+               Aggiorna altezza barre in base all'audio
+            ============================================ */
             function visualizeAudio(card) {
                 const bars = card.querySelectorAll('.audio-bar');
                 
+                // Ottiene dati di frequenza attuali
                 analyser.getByteFrequencyData(dataArray);
                 
+                // Calcola quanti bin di frequenza per barra
                 const step = Math.floor(dataArray.length / bars.length);
                 
+                // Aggiorna altezza di ogni barra
                 for (let i = 0; i < bars.length; i++) {
-                    const barHeight = dataArray[i * step] / 255 * 30 + 5; // scale to 5-35px
+                    // Scala valore da 0-255 a 5-35px
+                    const barHeight = dataArray[i * step] / 255 * 30 + 5;
                     bars[i].style.height = `${barHeight}px`;
                 }
                 
+                // Richiama se stessa per il prossimo frame
                 visualizationFrame = requestAnimationFrame(() => visualizeAudio(card));
             }
             
-            // Setup each film card
+            /* ============================================
+               SETUP INTERAZIONE CARDS
+               Gestisce eventi per ogni card film
+            ============================================ */
             filmCards.forEach(card => {
                 const audioPath = card.getAttribute('data-audio');
                 const audio = new Audio(audioPath);
                 
-                // For touch devices
+                // Event listener per dispositivi touch
                 card.addEventListener('touchstart', handleInteraction);
                 
-                // For mouse devices
+                // Event listener per mouse
                 card.addEventListener('click', handleInteraction);
                 
+                /* ============================================
+                   GESTORE INTERAZIONE
+                   Funzione per click e touch su card
+                ============================================ */
                 function handleInteraction(e) {
-                    e.preventDefault();
+                    e.preventDefault();  // Previene azioni predefinite
                     
-                    // If we have a playing audio, stop it
+                    // Ferma audio precedente se esiste
                     if (currentAudio) {
                         currentAudio.pause();
                         currentAudio.currentTime = 0;
                         currentCard.classList.remove('active');
-                        cancelAnimationFrame(visualizationFrame);
-                    }
-                    
-                    // If we're clicking the same card that's already active, just stop
-                    if (currentCard === card) {
-                        currentCard = null;
-                        currentAudio = null;
-                        return;
-                    }
-                    
-                    // Play the new audio
-                    if (audioContext && audioContext.state === 'suspended') {
-                        audioContext.resume();
-                    }
-                    
-                    audio.play();
-                    card.classList.add('active');
-                    currentAudio = audio;
-                    currentCard = card;
-                    
-                    // Set up audio visualization
-                    if (audioContext) {
-                        const source = audioContext.createMediaElementSource(audio);
-                        source.connect(analyser);
-                        analyser.connect(audioContext.destination);
                         
-                        visualizeAudio(card);
-                        
-                        // When audio ends
-                        audio.addEventListener('ended', () => {
-                            card.classList.remove('active');
-                            cancelAnimationFrame(visualizationFrame);
-                            currentCard = null;
-                            currentAudio = null;
-                        });
-                    }
-                }
-            });
-            
-            // Alternative visualizer for browsers without Web Audio API
-            if (!audioContext) {
-                filmCards.forEach(card => {
-                    const bars = card.querySelectorAll('.audio-bar');
-                    
-                    card.addEventListener('click', () => {
-                        if (card.classList.contains('active')) {
-                            card.classList.remove('active');
-                            bars.forEach(bar => {
-                                bar.style.animation = 'none';
-                            });
-                            return;
-                        }
-                        
-                        // Remove active class from all cards
-                        filmCards.forEach(c => c.classList.remove('active'));
-                        
-                        // Add active class to current card
-                        card.classList.add('active');
-                        
-                        // Animate bars
-                        bars.forEach((bar, index) => {
-                            bar.style.animation = `barAnimation ${0.5 + Math.random() * 0.5}s ease-in-out infinite alternate`;
-                            bar.style.animationDelay = `${index * 0.05}s`;
-                        });
-                    });
-                });
-                
-                // Add keyframe animation for fallback
-                const styleSheet = document.createElement('style');
-                styleSheet.innerHTML = `
-                    @keyframes barAnimation {
-                        0% { height: 5px; }
-                        100% { height: 30px; }
-                    }
-                `;
-                document.head.appendChild(styleSheet);
-            }
-        });
-    </script>
-</body>
-</html>
