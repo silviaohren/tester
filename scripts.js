@@ -1,55 +1,71 @@
 /**
- * Sound Design Portfolio - Navigazione e Gestione Pagine
+ * Sound Design Portfolio - Sistema di navigazione
+ * Versione semplice e diretta 
  */
-
 document.addEventListener('DOMContentLoaded', function() {
-    // Seleziona tutti i link del menu e le pagine
+    // Debug: verifica che lo script sia caricato
+    console.log('Script di navigazione caricato');
+    
+    // Collegamenti menu e pagine
     const navLinks = document.querySelectorAll('.nav-menu a');
     const pages = document.querySelectorAll('.page');
     
-    // Aggiungi event listener a ciascun link del menu
-    navLinks.forEach(function(link) {
+    // Debug: verifica che gli elementi siano trovati
+    console.log('Link menu trovati:', navLinks.length);
+    console.log('Pagine trovate:', pages.length);
+    
+    // Funzione per cambiare pagina
+    function switchPage(pageId) {
+        console.log('Cambio alla pagina:', pageId);
+        
+        // Rimuovi classe active da tutti i link e pagine
+        navLinks.forEach(link => link.classList.remove('active'));
+        pages.forEach(page => page.classList.remove('active'));
+        
+        // Attiva il link selezionato
+        const activeLink = document.querySelector(`.nav-menu a[data-page="${pageId}"]`);
+        if (activeLink) {
+            activeLink.classList.add('active');
+            console.log('Link attivato:', activeLink.textContent);
+        } else {
+            console.error('Link non trovato per la pagina:', pageId);
+        }
+        
+        // Attiva la pagina selezionata
+        const activePage = document.getElementById(pageId);
+        if (activePage) {
+            activePage.classList.add('active');
+            console.log('Pagina attivata:', pageId);
+        } else {
+            console.error('Pagina non trovata:', pageId);
+        }
+    }
+    
+    // Gestione click sui link del menu
+    navLinks.forEach(link => {
         link.addEventListener('click', function(e) {
             e.preventDefault();
+            const targetPage = this.getAttribute('data-page');
             
-            // Rimuovi classe active da tutti i link e tutte le pagine
-            navLinks.forEach(function(el) {
-                el.classList.remove('active');
-            });
+            // Aggiorna l'URL
+            const href = this.getAttribute('href');
+            history.pushState(null, null, href);
             
-            pages.forEach(function(page) {
-                page.classList.remove('active');
-            });
-            
-            // Aggiungi classe active al link cliccato
-            this.classList.add('active');
-            
-            // Trova l'ID della pagina da visualizzare
-            const pageId = this.getAttribute('data-page');
-            
-            // Attiva la pagina corrispondente
-            const targetPage = document.getElementById(pageId);
-            if (targetPage) {
-                targetPage.classList.add('active');
-            }
-            
-            // Aggiorna l'URL con l'hash, ma non fa scorrere la pagina
-            history.pushState(null, null, this.getAttribute('href'));
+            // Cambia pagina
+            switchPage(targetPage);
         });
     });
     
     // Controlla se c'è un hash nell'URL all'avvio
-    function checkInitialHash() {
-        const hash = window.location.hash;
-        if (hash) {
-            // Trova il link corrispondente all'hash e simulane il click
-            const targetLink = document.querySelector(`.nav-menu a[href="${hash}"]`);
-            if (targetLink) {
-                targetLink.click();
-            }
-        }
+    function checkHash() {
+        const hash = window.location.hash || '#film'; // Default: film
+        const pageId = document.querySelector(`.nav-menu a[href="${hash}"]`)?.getAttribute('data-page') || 'film-page';
+        switchPage(pageId);
     }
     
-    // Controlla hash iniziale
-    checkInitialHash();
+    // Esegui controllo hash iniziale
+    checkHash();
+    
+    // Gestisci navigazione con pulsanti browser
+    window.addEventListener('popstate', checkHash);
 });
