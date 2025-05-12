@@ -6,8 +6,32 @@
     <title>Sound Design Portfolio | Audio Responsive Grid</title>
     <style>
         /* ============================================
+           IMPORTAZIONE FONT PERSONALIZZATI
+           Carica i font dalla cartella locale
+        ============================================ */
+        @font-face {
+            font-family: 'SVBasicManual';
+            src: url('main/font/SVBasicManual.woff2') format('woff2'),
+                 url('main/font/SVBasicManual.woff') format('woff'),
+                 url('main/font/SVBasicManual.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap; /* Previene FOUT (Flash of Unstyled Text) */
+        }
+        
+        @font-face {
+            font-family: 'SVBasicManualBold';
+            src: url('main/font/SVBasicManualBold.woff2') format('woff2'),
+                 url('main/font/SVBasicManualBold.woff') format('woff'),
+                 url('main/font/SVBasicManualBold.ttf') format('truetype');
+            font-weight: bold;
+            font-style: normal;
+            font-display: swap;
+        }
+        
+        /* ============================================
            VARIABILI GLOBALI E COLORI
-           Modifica qui per cambiare schema colori
+           Modifica qui per cambiare schema colori e font
         ============================================ */
         :root {
             --bg-color: #1E1E2E;        /* Colore sfondo principale modificato */
@@ -16,6 +40,8 @@
             --sidebands-color: #14141F; /* Colore complementare scuro per bande laterali */
             --content-max-width: 1024px; /* Larghezza massima contenuto (tipo iPad Pro) */
             --content-padding: 2rem;    /* Padding interno della web-area */
+            --body-font: 'SVBasicManual', monospace;      /* Font corpo testo */
+            --heading-font: 'SVBasicManualBold', monospace; /* Font titoli */
         }
         
         /* ============================================
@@ -33,7 +59,7 @@
            Struttura di base della pagina
         ============================================ */
         body {
-            font-family: 'Helvetica Neue', Arial, sans-serif;
+            font-family: var(--body-font); /* Usa il font personalizzato per il corpo */
             background-color: var(--sidebands-color); /* Sfondo esterno = bande laterali */
             color: var(--text-color);
             min-height: 100vh;
@@ -67,13 +93,15 @@
         }
         
         h1 {
+            font-family: var(--heading-font); /* Usa il font bold per titoli */
             font-size: 2.5rem;
             font-weight: 700;
             margin-bottom: 0.5rem;
-            letter-spacing: -0.05em;
+            letter-spacing: -0.02em; /* Ridotto leggermente per i font monospace */
         }
         
         .subtitle {
+            font-family: var(--body-font);
             color: rgba(255, 255, 255, 0.6);
             font-size: 1rem;
         }
@@ -156,12 +184,14 @@
         }
         
         .film-title {
+            font-family: var(--heading-font); /* Usa il font bold per titoli film */
             font-size: 1.2rem;
             font-weight: 600;
             margin-bottom: 0.3rem;
         }
         
         .film-details {
+            font-family: var(--body-font);
             font-size: 0.8rem;
             color: rgba(255, 255, 255, 0.7);
             display: flex;
@@ -401,33 +431,4 @@
             <!-- ============================================
                  CARD FILM 6
             ============================================ -->
-            <div class="film-card" data-audio="https://assets.mixkit.co/sfx/preview/mixkit-game-show-suspense-waiting-667.mp3">
-                <img class="film-poster" src="https://source.unsplash.com/g1Kr4Ozfoac" alt="Tempo Sospeso">
-                <div class="audio-visualizer">
-                    <div class="audio-bar"></div>
-                    <div class="audio-bar"></div>
-                    <div class="audio-bar"></div>
-                    <div class="audio-bar"></div>
-                    <div class="audio-bar"></div>
-                    <div class="audio-bar"></div>
-                    <div class="audio-bar"></div>
-                    <div class="audio-bar"></div>
-                    <div class="audio-bar"></div>
-                    <div class="audio-bar"></div>
-                    <div class="audio-bar"></div>
-                    <div class="audio-bar"></div>
-                </div>
-                <div class="film-info">
-                    <h3 class="film-title">Tempo Sospeso</h3>
-                    <div class="film-details">
-                        <span>Luca Verdi</span>
-                        <span>2023</span>
-                    </div>
-                </div>
-            </div>
-        </main>
-    </div><!-- Fine web-area -->
-    
-    <script>
-        /* ============================================
-           INIZIALIZZAZIONE AL CARICAMENTO PAG
+            <div class="
