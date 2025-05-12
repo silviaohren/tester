@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Portfolio | Audio Responsive Grid</title>
+    <title>Sound Design Portfolio | Audio Responsive Grid</title>
     <style>
         /* ============================================
            IMPORTAZIONE FONT PERSONALIZZATI
@@ -89,7 +89,7 @@
         ============================================ */
         header {
             text-align: center;
-            margin-bottom: 3rem;
+            margin-bottom: 1rem; /* Ridotto per far spazio al menu */
         }
         
         h1 {
@@ -104,6 +104,51 @@
             font-family: var(--body-font);
             color: rgba(255, 255, 255, 0.6);
             font-size: 1rem;
+        }
+        
+        /* ============================================
+           MENU DI NAVIGAZIONE
+           Menu con le categorie del portfolio
+        ============================================ */
+        .nav-menu {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 2rem 0;
+            font-family: var(--body-font);
+            font-size: 0.9rem;
+            letter-spacing: 0.05em;
+        }
+        
+        .nav-menu a {
+            color: var(--text-color);
+            text-decoration: none;
+            padding: 0.5rem 0.8rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-menu a:hover {
+            color: var(--accent-color);
+        }
+        
+        .nav-menu a.active {
+            color: var(--accent-color);
+        }
+        
+        .nav-menu a.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0.8rem;
+            right: 0.8rem;
+            height: 2px;
+            background-color: var(--accent-color);
+        }
+        
+        .nav-separator {
+            margin: 0 0.2rem;
+            color: rgba(255, 255, 255, 0.3);
         }
         
         /* ============================================
@@ -230,6 +275,18 @@
         }
         
         /* ============================================
+           GESTIONE PAGINE
+           Stili per controllare quali pagine mostrare
+        ============================================ */
+        .page {
+            display: none; /* Tutte le pagine sono nascoste di default */
+        }
+        
+        .page.active {
+            display: block; /* Solo la pagina attiva viene mostrata */
+        }
+        
+        /* ============================================
            RESPONSIVE DESIGN
            Adattamento per dispositivi mobili
         ============================================ */
@@ -249,6 +306,15 @@
             
             .web-area {
                 padding: 1rem;  /* Padding ridotto su mobile */
+            }
+            
+            .nav-menu {
+                flex-wrap: wrap;
+                font-size: 0.8rem;
+            }
+            
+            h1 {
+                font-size: 2rem;
             }
         }
         
@@ -280,184 +346,14 @@
         </header>
         
         <!-- ============================================
-             GRIGLIA PRINCIPALE
-             Contenitore dei progetti film
+             MENU DI NAVIGAZIONE
+             Menu equispaziato con trattini
         ============================================ -->
-        <main class="grid-container">
-            <!-- ============================================
-                 CARD FILM 1
-                 Ogni card contiene:
-                 - Poster
-                 - Visualizzatore audio (12 barre)
-                 - Box info con titolo e dettagli
-            ============================================ -->
-            <div class="film-card" data-audio="https://assets.mixkit.co/sfx/preview/mixkit-cinematic-mystery-trailer-percussion-746.mp3">
-                <img class="film-poster" src="https://source.unsplash.com/nKO_1QyFh9o" alt="Echi nel Vuoto">
-                <div class="audio-visualizer">
-                    <div class="audio-bar"></div>
-                    <div class="audio-bar"></div>
-                    <div class="audio-bar"></div>
-                    <div class="audio-bar"></div>
-                    <div class="audio-bar"></div>
-                    <div class="audio-bar"></div>
-                    <div class="audio-bar"></div>
-                    <div class="audio-bar"></div>
-                    <div class="audio-bar"></div>
-                    <div class="audio-bar"></div>
-                    <div class="audio-bar"></div>
-                    <div class="audio-bar"></div>
-                </div>
-                <div class="film-info">
-                    <h3 class="film-title">Echi nel Vuoto</h3>
-                    <div class="film-details">
-                        <span>Marco Rossi</span>
-                        <span>2018</span>
-                    </div>
-                </div>
-            </div>
+        <nav class="nav-menu">
+            <a href="#film" class="active" data-page="film-page">FILM</a>
+            <span class="nav-separator">-</span>
+            <a href="#documentary" data-page="documentary-page">DOCUMENTARY</a>
+            <span class="nav-separator">-</span>
+            <a href="#spot" data-page="spot-page">SPOT</a>
+            <span class="nav-separator">-</span>
             
-            <!-- ============================================
-                 CARD FILM 2
-            ============================================ -->
-            <div class="film-card" data-audio="https://assets.mixkit.co/sfx/preview/mixkit-suspense-mystery-bass-685.mp3">
-                <img class="film-poster" src="https://source.unsplash.com/CiUR8zISX60" alt="Profondo Blu">
-                <div class="audio-visualizer">
-                    <div class="audio-bar"></div>
-                    <div class="audio-bar"></div>
-                    <div class="audio-bar"></div>
-                    <div class="audio-bar"></div>
-                    <div class="audio-bar"></div>
-                    <div class="audio-bar"></div>
-                    <div class="audio-bar"></div>
-                    <div class="audio-bar"></div>
-                    <div class="audio-bar"></div>
-                    <div class="audio-bar"></div>
-                    <div class="audio-bar"></div>
-                    <div class="audio-bar"></div>
-                </div>
-                <div class="film-info">
-                    <h3 class="film-title">Profondo Blu</h3>
-                    <div class="film-details">
-                        <span>Laura Bianchi</span>
-                        <span>2019</span>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- ============================================
-                 CARD FILM 3
-            ============================================ -->
-            <div class="film-card" data-audio="https://assets.mixkit.co/sfx/preview/mixkit-horror-sci-fi-wind-tunnel-871.mp3">
-                <img class="film-poster" src="https://source.unsplash.com/Qsjm7o3J7Gg" alt="Le Ombre del Bosco">
-                <div class="audio-visualizer">
-                    <div class="audio-bar"></div>
-                    <div class="audio-bar"></div>
-                    <div class="audio-bar"></div>
-                    <div class="audio-bar"></div>
-                    <div class="audio-bar"></div>
-                    <div class="audio-bar"></div>
-                    <div class="audio-bar"></div>
-                    <div class="audio-bar"></div>
-                    <div class="audio-bar"></div>
-                    <div class="audio-bar"></div>
-                    <div class="audio-bar"></div>
-                    <div class="audio-bar"></div>
-                </div>
-                <div class="film-info">
-                    <h3 class="film-title">Le Ombre del Bosco</h3>
-                    <div class="film-details">
-                        <span>Andrea Neri</span>
-                        <span>2020</span>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- ============================================
-                 CARD FILM 4
-            ============================================ -->
-            <div class="film-card" data-audio="https://assets.mixkit.co/sfx/preview/mixkit-tense-cinematic-background-heartbeat-490.mp3">
-                <img class="film-poster" src="https://source.unsplash.com/c1Jp-fo53U8" alt="Ultima Corsa">
-                <div class="audio-visualizer">
-                    <div class="audio-bar"></div>
-                    <div class="audio-bar"></div>
-                    <div class="audio-bar"></div>
-                    <div class="audio-bar"></div>
-                    <div class="audio-bar"></div>
-                    <div class="audio-bar"></div>
-                    <div class="audio-bar"></div>
-                    <div class="audio-bar"></div>
-                    <div class="audio-bar"></div>
-                    <div class="audio-bar"></div>
-                    <div class="audio-bar"></div>
-                    <div class="audio-bar"></div>
-                </div>
-                <div class="film-info">
-                    <h3 class="film-title">Ultima Corsa</h3>
-                    <div class="film-details">
-                        <span>Gianni Moretti</span>
-                        <span>2021</span>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- ============================================
-                 CARD FILM 5
-            ============================================ -->
-            <div class="film-card" data-audio="https://assets.mixkit.co/sfx/preview/mixkit-futuristic-bass-hit-2303.mp3">
-                <img class="film-poster" src="https://source.unsplash.com/GnvurwJsKaY" alt="Aurora 2077">
-                <div class="audio-visualizer">
-                    <div class="audio-bar"></div>
-                    <div class="audio-bar"></div>
-                    <div class="audio-bar"></div>
-                    <div class="audio-bar"></div>
-                    <div class="audio-bar"></div>
-                    <div class="audio-bar"></div>
-                    <div class="audio-bar"></div>
-                    <div class="audio-bar"></div>
-                    <div class="audio-bar"></div>
-                    <div class="audio-bar"></div>
-                    <div class="audio-bar"></div>
-                    <div class="audio-bar"></div>
-                </div>
-                <div class="film-info">
-                    <h3 class="film-title">Aurora 2077</h3>
-                    <div class="film-details">
-                        <span>Sofia Romano</span>
-                        <span>2022</span>
-                    </div>
-                </div>
-            </div>
-            
-             <!-- ============================================
-                 CARD FILM 6
-            ============================================ -->
-            <div class="film-card" data-audio="https://assets.mixkit.co/sfx/preview/mixkit-game-show-suspense-waiting-667.mp3">
-                <img class="film-poster" src="https://source.unsplash.com/g1Kr4Ozfoac" alt="Tempo Sospeso">
-                <div class="audio-visualizer">
-                    <div class="audio-bar"></div>
-                    <div class="audio-bar"></div>
-                    <div class="audio-bar"></div>
-                    <div class="audio-bar"></div>
-                    <div class="audio-bar"></div>
-                    <div class="audio-bar"></div>
-                    <div class="audio-bar"></div>
-                    <div class="audio-bar"></div>
-                    <div class="audio-bar"></div>
-                    <div class="audio-bar"></div>
-                    <div class="audio-bar"></div>
-                    <div class="audio-bar"></div>
-                </div>
-                <div class="film-info">
-                    <h3 class="film-title">Tempo Sospeso</h3>
-                    <div class="film-details">
-                        <span>Luca Verdi</span>
-                        <span>2023</span>
-                    </div>
-                </div>
-            </div>
-        </main>
-    </div><!-- Fine web-area -->
-    
-    <script>
-        /* ============================================
-           INIZIALIZZAZIONE AL CARICAMENTO PAG
