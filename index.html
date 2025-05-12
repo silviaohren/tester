@@ -3,13 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sound Design Portfolio | Timeline Sonora</title>
+    <title>Sound Design Portfolio | Audio Responsive Grid</title>
     <style>
         :root {
             --bg-color: #0a0a0a;
             --text-color: #f5f5f5;
-            --accent-color: #e63946;
-            --transition-time: 0.5s;
+            --accent-color: #ff4d6d;
         }
         
         * {
@@ -18,402 +17,122 @@
             box-sizing: border-box;
         }
         
+        @font-face {
+            font-family: 'JetBrains Mono';
+            src: url('https://cdn.jsdelivr.net/gh/JetBrains/JetBrainsMono/web/woff2/JetBrainsMono-Regular.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
+        
         body {
-            font-family: 'Inter', 'Helvetica Neue', sans-serif;
+            font-family: 'JetBrains Mono', monospace;
             background-color: var(--bg-color);
             color: var(--text-color);
             min-height: 100vh;
-            transition: background-color var(--transition-time) ease;
-            overflow-x: hidden;
+            padding: 2rem;
         }
         
         header {
-            padding: 2rem;
             text-align: center;
-            position: relative;
-            z-index: 2;
+            margin-bottom: 3rem;
         }
         
         h1 {
             font-size: 2.5rem;
-            font-weight: 800;
-            letter-spacing: -0.03em;
+            font-weight: 700;
             margin-bottom: 0.5rem;
+            letter-spacing: -0.05em;
         }
         
         .subtitle {
-            font-size: 1.1rem;
-            opacity: 0.8;
-            font-weight: 300;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 1rem;
         }
         
-        .timeline-container {
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .film-card {
             position: relative;
-            padding: 3rem 0;
-            width: 100%;
-            height: 70vh;
-            display: flex;
-            align-items: center;
-            overflow-x: auto;
-            overflow-y: hidden;
-            scrollbar-width: thin;
-            scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
-        }
-        
-        .timeline-container::-webkit-scrollbar {
-            height: 5px;
-        }
-        
-        .timeline-container::-webkit-scrollbar-track {
-            background: transparent;
-        }
-        
-        .timeline-container::-webkit-scrollbar-thumb {
-            background-color: rgba(255, 255, 255, 0.2);
-            border-radius: 10px;
-        }
-        
-        .timeline {
-            display: flex;
-            align-items: center;
-            padding: 0 15%;
-            min-width: max-content;
-        }
-        
-        .timeline-line {
-            position: absolute;
-            top: 50%;
-            left: 0;
-            width: 100%;
-            height: 1px;
-            background-color: rgba(255, 255, 255, 0.1);
-            z-index: 1;
-        }
-        
-        .film-item {
-            position: relative;
-            margin: 0 2rem;
+            aspect-ratio: 2/3;
+            border-radius: 12px;
+            overflow: hidden;
             cursor: pointer;
-            z-index: 3;
-            perspective: 1000px;
+            filter: grayscale(100%);
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+        
+        .film-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+        }
+        
+        .film-card.active {
+            filter: grayscale(0%);
+            transform: scale(1.03);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
         }
         
         .film-poster {
-            width: 180px;
-            height: 270px;
+            width: 100%;
+            height: 100%;
             object-fit: cover;
-            border-radius: 8px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            transition: all var(--transition-time) cubic-bezier(0.34, 1.56, 0.64, 1);
-            transform-style: preserve-3d;
-            backface-visibility: hidden;
+            transition: transform 0.5s ease;
         }
         
-        .film-dot {
-            position: absolute;
-            bottom: -2rem;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 10px;
-            height: 10px;
-            background-color: var(--accent-color);
-            border-radius: 50%;
-            opacity: 0;
-            transition: all var(--transition-time) ease;
-        }
-        
-        .film-year {
-            position: absolute;
-            bottom: -3.5rem;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 0.8rem;
-            opacity: 0.6;
-            transition: all var(--transition-time) ease;
+        .film-card.active .film-poster {
+            transform: scale(1.05);
         }
         
         .film-info {
             position: absolute;
-            width: 200px;
-            text-align: center;
-            left: 50%;
-            transform: translateX(-50%) translateY(1rem);
-            top: 100%;
-            padding: 1rem 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 1.5rem;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+            transform: translateY(20px);
             opacity: 0;
-            transition: all var(--transition-time) ease;
+            transition: all 0.3s ease;
+        }
+        
+        .film-card:hover .film-info,
+        .film-card.active .film-info {
+            transform: translateY(0);
+            opacity: 1;
         }
         
         .film-title {
-            font-size: 1rem;
+            font-size: 1.2rem;
             font-weight: 600;
             margin-bottom: 0.3rem;
         }
         
-        .film-director {
+        .film-details {
             font-size: 0.8rem;
-            opacity: 0.7;
-        }
-        
-        .film-item:hover .film-poster {
-            transform: translateY(-30px) rotateX(10deg);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
-        }
-        
-        .film-item:hover .film-dot {
-            opacity: 1;
-            transform: translateX(-50%) scale(1.5);
-        }
-        
-        .film-item:hover .film-info {
-            opacity: 1;
-            transform: translateX(-50%) translateY(0);
-        }
-        
-        .playing-indicator {
-            position: absolute;
-            top: -20px;
-            left: 50%;
-            transform: translateX(-50%);
+            color: rgba(255, 255, 255, 0.7);
             display: flex;
-            justify-content: center;
-            gap: 3px;
+            justify-content: space-between;
+        }
+        
+        .audio-visualizer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-end;
+            padding: 0 10px;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), transparent);
             opacity: 0;
-            transition: opacity var(--transition-time) ease;
+            transition: opacity 0.3s ease;
         }
         
-        .bar {
-            width: 3px;
-            height: 12px;
-            background-color: var(--accent-color);
-            border-radius: 3px;
-            animation: sound 0ms -800ms linear infinite alternate;
-        }
-        
-        @keyframes sound {
-            0% {
-                height: 3px;
-            }
-            100% {
-                height: 12px;
-            }
-        }
-        
-        .bar:nth-child(1) {
-            animation-duration: 474ms;
-        }
-        
-        .bar:nth-child(2) {
-            animation-duration: 433ms;
-        }
-        
-        .bar:nth-child(3) {
-            animation-duration: 407ms;
-        }
-        
-        .bar:nth-child(4) {
-            animation-duration: 458ms;
-        }
-        
-        .film-item.playing .playing-indicator {
-            opacity: 1;
-        }
-        
-        @media (max-width: 768px) {
-            .timeline {
-                padding: 0 5%;
-            }
-            
-            .film-item {
-                margin: 0 1rem;
-            }
-            
-            .film-poster {
-                width: 140px;
-                height: 210px;
-            }
-            
-            .film-info {
-                width: 140px;
-            }
-        }
-    </style>
-</head>
-<body>
-    <header>
-        <h1>Sound Design Portfolio</h1>
-        <p class="subtitle">Esplora la timeline dei miei progetti cinematografici</p>
-    </header>
-    
-    <div class="timeline-container">
-        <div class="timeline-line"></div>
-        <div class="timeline">
-            <div class="film-item" data-audio="https://assets.mixkit.co/sfx/preview/mixkit-cinematic-mystery-trailer-percussion-746.mp3" data-color="#8c1c13">
-                <div class="playing-indicator">
-                    <div class="bar"></div>
-                    <div class="bar"></div>
-                    <div class="bar"></div>
-                    <div class="bar"></div>
-                </div>
-                <img class="film-poster" src="https://source.unsplash.com/nKO_1QyFh9o" alt="Echi nel Vuoto">
-                <div class="film-dot"></div>
-                <div class="film-year">2018</div>
-                <div class="film-info">
-                    <h3 class="film-title">Echi nel Vuoto</h3>
-                    <p class="film-director">dir. Marco Rossi</p>
-                </div>
-            </div>
-            
-            <div class="film-item" data-audio="https://assets.mixkit.co/sfx/preview/mixkit-suspense-mystery-bass-685.mp3" data-color="#1a759f">
-                <div class="playing-indicator">
-                    <div class="bar"></div>
-                    <div class="bar"></div>
-                    <div class="bar"></div>
-                    <div class="bar"></div>
-                </div>
-                <img class="film-poster" src="https://source.unsplash.com/CiUR8zISX60" alt="Profondo Blu">
-                <div class="film-dot"></div>
-                <div class="film-year">2019</div>
-                <div class="film-info">
-                    <h3 class="film-title">Profondo Blu</h3>
-                    <p class="film-director">dir. Laura Bianchi</p>
-                </div>
-            </div>
-            
-            <div class="film-item" data-audio="https://assets.mixkit.co/sfx/preview/mixkit-horror-sci-fi-wind-tunnel-871.mp3" data-color="#6d597a">
-                <div class="playing-indicator">
-                    <div class="bar"></div>
-                    <div class="bar"></div>
-                    <div class="bar"></div>
-                    <div class="bar"></div>
-                </div>
-                <img class="film-poster" src="https://source.unsplash.com/Qsjm7o3J7Gg" alt="Le Ombre del Bosco">
-                <div class="film-dot"></div>
-                <div class="film-year">2020</div>
-                <div class="film-info">
-                    <h3 class="film-title">Le Ombre del Bosco</h3>
-                    <p class="film-director">dir. Andrea Neri</p>
-                </div>
-            </div>
-            
-            <div class="film-item" data-audio="https://assets.mixkit.co/sfx/preview/mixkit-tense-cinematic-background-heartbeat-490.mp3" data-color="#e76f51">
-                <div class="playing-indicator">
-                    <div class="bar"></div>
-                    <div class="bar"></div>
-                    <div class="bar"></div>
-                    <div class="bar"></div>
-                </div>
-                <img class="film-poster" src="https://source.unsplash.com/c1Jp-fo53U8" alt="Ultima Corsa">
-                <div class="film-dot"></div>
-                <div class="film-year">2021</div>
-                <div class="film-info">
-                    <h3 class="film-title">Ultima Corsa</h3>
-                    <p class="film-director">dir. Gianni Moretti</p>
-                </div>
-            </div>
-            
-            <div class="film-item" data-audio="https://assets.mixkit.co/sfx/preview/mixkit-futuristic-bass-hit-2303.mp3" data-color="#457b9d">
-                <div class="playing-indicator">
-                    <div class="bar"></div>
-                    <div class="bar"></div>
-                    <div class="bar"></div>
-                    <div class="bar"></div>
-                </div>
-                <img class="film-poster" src="https://source.unsplash.com/GnvurwJsKaY" alt="Aurora 2077">
-                <div class="film-dot"></div>
-                <div class="film-year">2022</div>
-                <div class="film-info">
-                    <h3 class="film-title">Aurora 2077</h3>
-                    <p class="film-director">dir. Sofia Romano</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const filmItems = document.querySelectorAll('.film-item');
-            let currentAudio = null;
-            let currentItem = null;
-            
-            filmItems.forEach(item => {
-                const audioPath = item.getAttribute('data-audio');
-                const bgColor = item.getAttribute('data-color');
-                const audio = new Audio(audioPath);
-                
-                item.addEventListener('mouseenter', () => {
-                    // Stop previous audio
-                    if (currentAudio) {
-                        currentAudio.pause();
-                        currentAudio.currentTime = 0;
-                        if (currentItem) currentItem.classList.remove('playing');
-                    }
-                    
-                    // Play new audio
-                    audio.volume = 0.7;
-                    audio.play();
-                    currentAudio = audio;
-                    currentItem = item;
-                    item.classList.add('playing');
-                    
-                    // Change background color
-                    document.body.style.backgroundColor = bgColor;
-                });
-                
-                item.addEventListener('mouseleave', () => {
-                    // Fade out audio
-                    const fadeOut = setInterval(() => {
-                        if (audio.volume > 0.1) {
-                            audio.volume -= 0.1;
-                        } else {
-                            audio.pause();
-                            audio.volume = 0.7;
-                            clearInterval(fadeOut);
-                        }
-                    }, 50);
-                    
-                    item.classList.remove('playing');
-                    
-                    // Return to original background color
-                    document.body.style.backgroundColor = 'var(--bg-color)';
-                });
-                
-                // Touch handling for mobile
-                item.addEventListener('touchstart', function(e) {
-                    e.preventDefault();
-                    
-                    if (currentAudio) {
-                        currentAudio.pause();
-                        currentAudio.currentTime = 0;
-                        if (currentItem) currentItem.classList.remove('playing');
-                    }
-                    
-                    if (currentItem === item) {
-                        // If tapping the same item, just stop the audio
-                        currentItem = null;
-                        currentAudio = null;
-                        document.body.style.backgroundColor = 'var(--bg-color)';
-                    } else {
-                        // Play the new audio
-                        audio.volume = 0.7;
-                        audio.play();
-                        currentAudio = audio;
-                        currentItem = item;
-                        item.classList.add('playing');
-                        document.body.style.backgroundColor = bgColor;
-                    }
-                });
-            });
-            
-            // Create smooth horizontal scrolling effect
-            const container = document.querySelector('.timeline-container');
-            
-            // Mouse wheel for horizontal scroll
-            container.addEventListener('wheel', (e) => {
-                e.preventDefault();
-                container.scrollLeft += e.deltaY;
-            });
-        });
-    </script>
-</body>
-</html>
+        .audio
