@@ -765,27 +765,41 @@
     </footer>
 </section>
         
-        <!-- ============================================
-             PAGINA UPLOAD
-        ============================================ -->
-        <section id="upload-page" class="page">
-            <div class="upload-container">
-                <h2>UPLOAD</h2>
-                <p class="contact-intro">Area di caricamento contenuti (in sviluppo)</p>
-                <!-- Contenuto da sviluppare in futuro -->
+<!-- ============================================
+     PAGINA UPLOAD (CON PROTEZIONE PASSWORD)
+============================================ -->
+<section id="upload-page" class="page">
+    <div class="upload-container">
+        <h2>Area Riservata</h2>
+        
+        <!-- Form di accesso con password -->
+        <div id="password-form-container">
+            <p class="upload-intro">Inserisci la password per accedere all'area di upload</p>
+            <div class="form-group">
+                <input type="password" id="access-password" placeholder="Password" class="contact-input">
             </div>
-            
-            <!-- Footer (in ogni pagina) -->
-            <footer class="site-footer">
-                <div class="contact-footer">
-                    <a href="#contact" onclick="showPage('contact-page', document.querySelector('.nav-menu a[href=\'#contact\']')); return false;">- CONTACT ME -</a>
-                </div>
-                
-                <div class="copyright">
-                    © 2025 silviaohrenwebdesign | <a href="#privacy">Privacy Policy</a>
-                </div>
-            </footer>
-        </section>
+            <button onclick="checkPassword()" class="submit-btn">Accedi</button>
+        </div>
+        
+        <!-- Contenuto protetto (invisibile fino all'autenticazione) -->
+        <div id="upload-content" style="display: none;">
+            <h3>UPLOAD</h3>
+            <p class="upload-intro">Area di caricamento contenuti</p>
+            <!-- Qui inseriremo il contenuto dell'area riservata -->
+        </div>
+    </div>
+    
+    <!-- Footer (in ogni pagina) -->
+    <footer class="site-footer">
+        <div class="contact-footer">
+            <a href="#contact" onclick="showPage('contact-page', document.querySelector('.nav-menu a[href=\'#contact\']')); return false;">- CONTACT ME -</a>
+        </div>
+        
+        <div class="copyright">
+            © 2025 silviaohrenwebdesign | <a href="#privacy">Privacy Policy</a>
+        </div>
+    </footer>
+</section>
     </div><!-- Fine web-area -->
     
     <!-- Script di navigazione incorporato direttamente -->
@@ -830,5 +844,38 @@
             }
         });
     </script>
+
+   <!-- INSERISCI IL NUOVO SCRIPT QUI SOTTO -->
+    <script>
+        // Sistema di verifica password per area upload
+        function checkPassword() {
+            var password = document.getElementById('access-password').value;
+            var correctPassword = 'bastacinema42';
+            
+            if (password === correctPassword) {
+                // Nascondi il form di accesso
+                document.getElementById('password-form-container').style.display = 'none';
+                
+                // Mostra il contenuto protetto
+                document.getElementById('upload-content').style.display = 'block';
+                
+                // Opzionale: salva un flag in sessionStorage
+                sessionStorage.setItem('authenticated', 'true');
+            } else {
+                alert('Password non corretta. Riprova.');
+            }
+        }
+
+        // Controlla se l'utente è già autenticato all'apertura della pagina
+        document.addEventListener('DOMContentLoaded', function() {
+            if (sessionStorage.getItem('authenticated') === 'true') {
+                if (document.getElementById('password-form-container')) {
+                    document.getElementById('password-form-container').style.display = 'none';
+                    document.getElementById('upload-content').style.display = 'block';
+                }
+            }
+        });
+    </script>
+
 </body>
 </html>
