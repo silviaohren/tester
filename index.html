@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Sound Design | Nome Cognome</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Helvetica Neue', sans-serif;
+            background-color: #0f0f0f;
+            color: #fff;
+            transition: background-color 1s ease;
+        }
+        
+        header {
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .timeline-container {
+            position: relative;
+            width: 100%;
+            overflow-x: auto;
+            padding: 3rem 0;
+        }
+        
+        .timeline {
+            display: flex;
+            align-items: center;
+            padding: 0 10%;
+            min-width: max-content;
+        }
+        
+        .film-item {
+            margin: 0 1.5rem;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .film-poster {
+            width: 200px;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .film-item:hover {
+            transform: translateY(-10px);
+        }
+        
+        .film-item:hover .film-poster {
+            box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+        }
+        
+        .film-info {
+            margin-top: 1rem;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+        }
+        
+        .film-item:hover .film-info {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        @media (max-width: 768px) {
+            .timeline {
+                flex-direction: column;
+                padding: 0 1rem;
+            }
+            
+            .film-item {
+                margin: 1.5rem 0;
+            }
+            
+            .film-poster {
+                width: 150px;
+                height: 225px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Nome Cognome</h1>
+        <p>Sound Design per Cinema</p>
+    </header>
+    
+    <div class="timeline-container">
+        <div class="timeline">
+            <!-- Ripeti questo blocco per ogni film -->
+            <div class="film-item" data-audio="path/to/audio1.mp3" data-color="#3a1c71">
+                <img class="film-poster" src="path/to/poster1.jpg" alt="Titolo Film">
+                <div class="film-info">
+                    <h3>Titolo Film</h3>
+                    <p>Anno • Regista</p>
+                </div>
+            </div>
+            <!-- Fine blocco film -->
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const filmItems = document.querySelectorAll('.film-item');
+            let currentAudio = null;
+            
+            filmItems.forEach(item => {
+                const audioPath = item.getAttribute('data-audio');
+                const bgColor = item.getAttribute('data-color');
+                const audio = new Audio(audioPath);
+                
+                item.addEventListener('mouseenter', () => {
+                    // Ferma l'audio precedente se esiste
+                    if (currentAudio) {
+                        currentAudio.pause();
+                        currentAudio.currentTime = 0;
+                    }
+                    
+                    // Riproduce il nuovo audio
+                    audio.play();
+                    currentAudio = audio;
+                    
+                    // Cambia colore di sfondo
+                    document.body.style.backgroundColor = bgColor;
+                });
+                
+                item.addEventListener('mouseleave', () => {
+                    // Fade out dell'audio
+                    const fadeOut = setInterval(() => {
+                        if (audio.volume > 0.1) {
+                            audio.volume -= 0.1;
+                        } else {
+                            audio.pause();
+                            audio.volume = 1.0;
+                            clearInterval(fadeOut);
+                        }
+                    }, 100);
+                    
+                    // Ritorna al colore di sfondo originale
+                    document.body.style.backgroundColor = '#0f0f0f';
+                });
+            });
+            
+            // Gestione touch per dispositivi mobili
+            filmItems.forEach(item => {
+                item.addEventListener('touchstart', function(e) {
+                    e.preventDefault();
+                    const audioPath = this.getAttribute('data-audio');
+                    const bgColor = this.getAttribute('data-color');
+                    const audio = new Audio(audioPath);
+                    
+                    if (currentAudio) {
+                        currentAudio.pause();
+                        currentAudio.currentTime = 0;
+                    }
+                    
+                    audio.play();
+                    currentAudio = audio;
+                    document.body.style.backgroundColor = bgColor;
+                });
+            });
+        });
+    </script>
+</body>
+</html>
