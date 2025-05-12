@@ -723,47 +723,47 @@
             </footer>
         </section>
         
-        <!-- ============================================
-             PAGINA CONTACT ME
-        ============================================ -->
-        <section id="contact-page" class="page">
-            <div class="contact-container">
-                <h2>Contattami</h2>
-                <p class="contact-intro">Per collaborazioni o informazioni, compila il form qui sotto:</p>
-                
-                <form id="contact-form" action="https://formsubmit.co/silviaoren92@gmail.com" method="POST">
-                    <!-- Honeypot per evitare spam -->
-                    <input type="text" name="_honey" style="display:none">
-                    
-                    <!-- Disabilita captcha -->
-                    <input type="hidden" name="_captcha" value="false">
-                    
-                    <!-- Redirect dopo l'invio -->
-                    <input type="hidden" name="_next" value="https://tuosito.com/thanks.html">
-                    
-                    <div class="form-group">
-                        <input type="email" name="email" placeholder="La tua email" required class="contact-input">
-                    </div>
-                    
-                    <div class="form-group">
-                        <input type="text" name="subject" placeholder="Oggetto" required class="contact-input">
-                    </div>
-                    
-                    <div class="form-group">
-                        <textarea name="message" placeholder="Il tuo messaggio" required class="contact-input"></textarea>
-                    </div>
-                    
-                    <button type="submit" class="submit-btn">Invia Messaggio</button>
-                </form>
+<!-- ============================================
+     PAGINA CONTACT ME
+============================================ -->
+<section id="contact-page" class="page">
+    <div class="contact-container">
+        <h2>Contattami</h2>
+        <p class="contact-intro">Per collaborazioni o informazioni, compila il form qui sotto:</p>
+        
+        <form id="contact-form" action="https://api.web3forms.com/submit" method="POST">
+            <!-- Chiave API di Web3Forms -->
+            <input type="hidden" name="access_key" value="5a0361fa-4845-411c-b03d-1cec2e59091b">
+            
+            <!-- URL di redirect dopo invio -->
+            <input type="hidden" name="redirect" value="https://web3forms.com/success">
+            
+            <!-- Email di destinazione nascosta (opzionale) -->
+            <input type="hidden" name="to" value="silviaoren92@gmail.com">
+            
+            <div class="form-group">
+                <input type="email" name="email" placeholder="La tua email" required class="contact-input">
             </div>
             
-            <!-- Footer (in ogni pagina) -->
-            <footer class="site-footer">
-                <div class="copyright">
-                    © 2025 silviaohrenwebdesign | <a href="#privacy">Privacy Policy</a>
-                </div>
-            </footer>
-        </section>
+            <div class="form-group">
+                <input type="text" name="subject" placeholder="Oggetto" required class="contact-input">
+            </div>
+            
+            <div class="form-group">
+                <textarea name="message" placeholder="Il tuo messaggio" required class="contact-input"></textarea>
+            </div>
+            
+            <button type="submit" class="submit-btn">Invia Messaggio</button>
+        </form>
+    </div>
+    
+    <!-- Footer (in ogni pagina) -->
+    <footer class="site-footer">
+        <div class="copyright">
+            © 2025 silviaohrenwebdesign | <a href="#privacy">Privacy Policy</a>
+        </div>
+    </footer>
+</section>
         
         <!-- ============================================
              PAGINA UPLOAD
