@@ -241,6 +241,132 @@
         }
         
         /* ============================================
+           STILE FOOTER
+        ============================================ */
+        .site-footer {
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+        }
+
+        .contact-footer {
+            margin-bottom: 2rem;
+        }
+
+        .contact-footer a {
+            font-family: var(--heading-font);
+            font-size: 1.5rem;
+            color: var(--text-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-footer a:hover {
+            color: var(--accent-color);
+        }
+
+        .copyright {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 1rem;
+        }
+
+        .copyright a {
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .copyright a:hover {
+            color: var(--accent-color);
+        }
+
+        /* ============================================
+           STILE FORM CONTATTO
+        ============================================ */
+        .contact-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 2rem 0;
+        }
+
+        .contact-intro {
+            margin-bottom: 2rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-input {
+            width: 100%;
+            padding: 1rem;
+            border: none;
+            border-radius: 5px;
+            background-color: rgba(255, 77, 109, 0.15); /* Sfumatura del rosso accent */
+            color: var(--text-color);
+            font-family: var(--body-font);
+            transition: background-color 0.3s ease;
+        }
+
+        .contact-input:focus {
+            outline: none;
+            background-color: rgba(255, 77, 109, 0.25); /* Sfumatura più intensa al focus */
+        }
+
+        textarea.contact-input {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 5px;
+            font-family: var(--heading-font);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background-color: #e04463; /* Versione leggermente più scura */
+            transform: translateY(-2px);
+        }
+        
+        /* ============================================
+           ALIEN BUTTON
+        ============================================ */
+        .alien-button {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 100;
+            font-size: 2.5rem;
+            cursor: pointer;
+            transition: transform 0.3s ease, text-shadow 0.3s ease;
+            text-shadow: 0 0 10px rgba(255, 77, 109, 0.5);
+        }
+        
+        .alien-button:hover {
+            transform: scale(1.2);
+            text-shadow: 0 0 20px rgba(255, 77, 109, 0.8);
+        }
+        
+        /* ============================================
+           UPLOAD PAGE
+        ============================================ */
+        .upload-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 2rem 0;
+            text-align: center;
+        }
+        
+        /* ============================================
            RESPONSIVE DESIGN
         ============================================ */
         @media (max-width: 768px) {
@@ -269,10 +395,19 @@
             h1 {
                 font-size: 2rem;
             }
+            
+            .alien-button {
+                bottom: 20px;
+                right: 20px;
+                font-size: 2rem;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Bottone Alieno -->
+    <div class="alien-button" onclick="showPage('upload-page', null); return false;">👽</div>
+    
     <!-- ============================================
          WEB-AREA (CONTENITORE PRINCIPALE)
     ============================================ -->
@@ -296,6 +431,8 @@
             <a href="#spot" onclick="showPage('spot-page', this); return false;">SPOT</a>
             <span class="nav-separator">-</span>
             <a href="#libraries" onclick="showPage('libraries-page', this); return false;">LIBRARIES</a>
+            <span class="nav-separator">-</span>
+            <a href="#contact" onclick="showPage('contact-page', this); return false;">CONTACT</a>
         </nav>
         
         <!-- ============================================
@@ -375,6 +512,17 @@
                     </div>
                 </div>
             </main>
+            
+            <!-- Footer (in ogni pagina) -->
+            <footer class="site-footer">
+                <div class="contact-footer">
+                    <a href="#contact" onclick="showPage('contact-page', document.querySelector('.nav-menu a[href=\'#contact\']')); return false;">- CONTACT ME -</a>
+                </div>
+                
+                <div class="copyright">
+                    © 2025 silviaohrenwebdesign | <a href="#privacy">Privacy Policy</a>
+                </div>
+            </footer>
         </section>
         
         <!-- ============================================
@@ -430,6 +578,17 @@
                     </div>
                 </div>
             </main>
+            
+            <!-- Footer (in ogni pagina) -->
+            <footer class="site-footer">
+                <div class="contact-footer">
+                    <a href="#contact" onclick="showPage('contact-page', document.querySelector('.nav-menu a[href=\'#contact\']')); return false;">- CONTACT ME -</a>
+                </div>
+                
+                <div class="copyright">
+                    © 2025 silviaohrenwebdesign | <a href="#privacy">Privacy Policy</a>
+                </div>
+            </footer>
         </section>
         
         <!-- ============================================
@@ -485,6 +644,17 @@
                     </div>
                 </div>
             </main>
+            
+            <!-- Footer (in ogni pagina) -->
+            <footer class="site-footer">
+                <div class="contact-footer">
+                    <a href="#contact" onclick="showPage('contact-page', document.querySelector('.nav-menu a[href=\'#contact\']')); return false;">- CONTACT ME -</a>
+                </div>
+                
+                <div class="copyright">
+                    © 2025 silviaohrenwebdesign | <a href="#privacy">Privacy Policy</a>
+                </div>
+            </footer>
         </section>
         
         <!-- ============================================
@@ -540,6 +710,81 @@
                     </div>
                 </div>
             </main>
+            
+            <!-- Footer (in ogni pagina) -->
+            <footer class="site-footer">
+                <div class="contact-footer">
+                    <a href="#contact" onclick="showPage('contact-page', document.querySelector('.nav-menu a[href=\'#contact\']')); return false;">- CONTACT ME -</a>
+                </div>
+                
+                <div class="copyright">
+                    © 2025 silviaohrenwebdesign | <a href="#privacy">Privacy Policy</a>
+                </div>
+            </footer>
+        </section>
+        
+        <!-- ============================================
+             PAGINA CONTACT ME
+        ============================================ -->
+        <section id="contact-page" class="page">
+            <div class="contact-container">
+                <h2>Contattami</h2>
+                <p class="contact-intro">Per collaborazioni o informazioni, compila il form qui sotto:</p>
+                
+                <form id="contact-form" action="https://formsubmit.co/silviaoren92@gmail.com" method="POST">
+                    <!-- Honeypot per evitare spam -->
+                    <input type="text" name="_honey" style="display:none">
+                    
+                    <!-- Disabilita captcha -->
+                    <input type="hidden" name="_captcha" value="false">
+                    
+                    <!-- Redirect dopo l'invio -->
+                    <input type="hidden" name="_next" value="https://tuosito.com/thanks.html">
+                    
+                    <div class="form-group">
+                        <input type="email" name="email" placeholder="La tua email" required class="contact-input">
+                    </div>
+                    
+                    <div class="form-group">
+                        <input type="text" name="subject" placeholder="Oggetto" required class="contact-input">
+                    </div>
+                    
+                    <div class="form-group">
+                        <textarea name="message" placeholder="Il tuo messaggio" required class="contact-input"></textarea>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">Invia Messaggio</button>
+                </form>
+            </div>
+            
+            <!-- Footer (in ogni pagina) -->
+            <footer class="site-footer">
+                <div class="copyright">
+                    © 2025 silviaohrenwebdesign | <a href="#privacy">Privacy Policy</a>
+                </div>
+            </footer>
+        </section>
+        
+        <!-- ============================================
+             PAGINA UPLOAD
+        ============================================ -->
+        <section id="upload-page" class="page">
+            <div class="upload-container">
+                <h2>UPLOAD</h2>
+                <p class="contact-intro">Area di caricamento contenuti (in sviluppo)</p>
+                <!-- Contenuto da sviluppare in futuro -->
+            </div>
+            
+            <!-- Footer (in ogni pagina) -->
+            <footer class="site-footer">
+                <div class="contact-footer">
+                    <a href="#contact" onclick="showPage('contact-page', document.querySelector('.nav-menu a[href=\'#contact\']')); return false;">- CONTACT ME -</a>
+                </div>
+                
+                <div class="copyright">
+                    © 2025 silviaohrenwebdesign | <a href="#privacy">Privacy Policy</a>
+                </div>
+            </footer>
         </section>
     </div><!-- Fine web-area -->
     
@@ -556,17 +801,20 @@
             // Mostra la pagina selezionata
             document.getElementById(pageId).classList.add('active');
             
-            // Rimuovi classe active da tutti i link
-            var links = document.querySelectorAll('.nav-menu a');
-            for (var i = 0; i < links.length; i++) {
-                links[i].classList.remove('active');
+            // Se è stato passato un link (non per il bottone alieno)
+            if (clickedLink) {
+                // Rimuovi classe active da tutti i link
+                var links = document.querySelectorAll('.nav-menu a');
+                for (var i = 0; i < links.length; i++) {
+                    links[i].classList.remove('active');
+                }
+                
+                // Aggiungi classe active al link cliccato
+                clickedLink.classList.add('active');
+                
+                // Aggiorna URL senza causare refresh della pagina
+                history.pushState(null, null, clickedLink.getAttribute('href'));
             }
-            
-            // Aggiungi classe active al link cliccato
-            clickedLink.classList.add('active');
-            
-            // Aggiorna URL senza causare refresh della pagina
-            history.pushState(null, null, clickedLink.getAttribute('href'));
             
             return false; // Previene l'azione predefinita del link
         }
