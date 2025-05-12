@@ -288,6 +288,93 @@
         .copyright a:hover {
             color: var(--accent-color);
         }
+        /* ============================================
+           BIO PAGE STYLING
+        ============================================ */
+        .bio-container {
+            display: flex;
+            flex-direction: row;
+            gap: 3rem;
+            margin: 3rem auto;
+            max-width: 900px;
+        }
+        
+        .bio-photo-container {
+            flex: 0 0 300px;
+        }
+        
+        .bio-photo {
+            width: 100%;
+            aspect-ratio: 3/4;
+            object-fit: cover;
+            border-radius: 12px;
+            filter: grayscale(50%);
+            transition: filter 0.3s ease;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+        
+        .bio-photo:hover {
+            filter: grayscale(0%);
+        }
+        
+        .bio-text-container {
+            flex: 1;
+        }
+        
+        .bio-text {
+            line-height: 1.7;
+            margin-bottom: 2rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .bio-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .bio-button {
+            padding: 0.7rem 1.5rem;
+            background-color: var(--bg-color);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 6px;
+            color: var(--text-color);
+            font-family: var(--body-font);
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .bio-button:hover {
+            background-color: rgba(255, 77, 109, 0.1);
+            border-color: var(--accent-color);
+            transform: translateY(-3px);
+        }
+        
+        .bio-button img {
+            height: 20px;
+            width: auto;
+        }
+        
+        /* Responsive design per la pagina bio */
+        @media (max-width: 768px) {
+            .bio-container {
+                flex-direction: column;
+                gap: 2rem;
+            }
+            
+            .bio-photo-container {
+                flex: 0 0 auto;
+                max-width: 250px;
+                margin: 0 auto;
+            }
+        }
+
 
         /* ============================================
            STILE FORM CONTATTO
@@ -454,9 +541,11 @@
             <span class="nav-separator">-</span>
             <a href="#libraries" onclick="showPage('libraries-page', this); return false;">LIBRARIES</a>
             <span class="nav-separator">-</span>
+            <a href="#bio" onclick="showPage('bio-page', this); return false;">BIO</a>
+            <span class="nav-separator">-</span>
             <a href="#contact" onclick="showPage('contact-page', this); return false;">CONTACT</a>
         </nav>
-        
+                
         <!-- ============================================
              PAGINA FILM (ATTIVA DI DEFAULT)
         ============================================ -->
@@ -744,7 +833,66 @@
                 </div>
             </footer>
         </section>
-        
+
+        <!-- ============================================
+             PAGINA BIO
+        ============================================ -->
+        <section id="bio-page" class="page">
+            <div class="bio-container">
+                <!-- Colonna Foto -->
+                <div class="bio-photo-container">
+                    <img src="https://source.unsplash.com/m663zRzRe40" alt="Silvia Orengo" class="bio-photo">
+                </div>
+                
+                <!-- Colonna Testo e Links -->
+                <div class="bio-text-container">
+                    <h2>Silvia Orengo</h2>
+                    <p class="bio-text">
+                        Sound designer e compositrice con oltre 10 anni di esperienza nell'industria cinematografica e audiovisiva. 
+                        Specializzata nella creazione di paesaggi sonori immersivi e design del suono per film, documentari e contenuti commerciali.
+                    </p>
+                    
+                    <p class="bio-text">
+                        Ho collaborato con registi e produttori di fama internazionale, contribuendo a progetti che hanno ricevuto 
+                        riconoscimenti in festival cinematografici di tutto il mondo. Il mio approccio combina tecniche tradizionali 
+                        con sperimentazioni sonore innovative, cercando sempre di elevare la narrazione attraverso un design sonoro preciso e creativo.
+                    </p>
+                    
+                    <p class="bio-text">
+                        Attualmente lavoro come sound designer freelance, dividendo il mio tempo tra commissioni per 
+                        produzioni cinematografiche, composizioni originali e la creazione di librerie sonore specializzate.
+                    </p>
+                    
+                    <!-- Bottoni Link -->
+                    <div class="bio-links">
+                        <a href="https://www.imdb.com/it/name/nm8344062/?ref_=nv_sr_srsg_0_tt_1_nm_7_in_0_q_silvia%2520orengo" target="_blank" class="bio-button">
+                            IMDB Page
+                        </a>
+                        
+                        <a href="https://www.imdb.com/it/name/nm8344062/?ref_=nv_sr_srsg_0_tt_1_nm_7_in_0_q_silvia%2520orengo" target="_blank" class="bio-button">
+                            CV
+                        </a>
+                        
+                        <a href="https://www.bncapps.it/" target="_blank" class="bio-button">
+                            <img src="images/Master_logo_BNC_web_color.png" alt="BNC">
+                            Studio Facility
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Footer (in ogni pagina) -->
+            <footer class="site-footer">
+                <div class="contact-footer">
+                    <a href="#contact" onclick="showPage('contact-page', document.querySelector('.nav-menu a[href=\'#contact\']')); return false;">- CONTACT ME -</a>
+                </div>
+                
+                <div class="copyright">
+                    © 2025 silviaohrenwebdesign | <a href="#privacy">Privacy Policy</a>
+                </div>
+            </footer>
+        </section>
+                
 <!-- ============================================
      PAGINA CONTACT ME
 ============================================ -->
