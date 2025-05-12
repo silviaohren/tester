@@ -10,9 +10,12 @@
            Modifica qui per cambiare schema colori
         ============================================ */
         :root {
-            --bg-color: #1E1E2E;        /* Colore sfondo pagina */
+            --bg-color: #1E1E2E;        /* Colore sfondo principale modificato */
             --text-color: #f5f5f5;      /* Colore testo principale */
             --accent-color: #ff4d6d;    /* Colore accento/evidenziazione */
+            --sidebands-color: #14141F; /* Colore complementare scuro per bande laterali */
+            --content-max-width: 1024px; /* Larghezza massima contenuto (tipo iPad Pro) */
+            --content-padding: 2rem;    /* Padding interno della web-area */
         }
         
         /* ============================================
@@ -26,15 +29,32 @@
         }
         
         /* ============================================
-           STILE CORPO PAGINA
-           Imposta font, colori e spaziatura base
+           LAYOUT PRINCIPALE CON BANDE LATERALI
+           Struttura di base della pagina
         ============================================ */
         body {
             font-family: 'Helvetica Neue', Arial, sans-serif;
-            background-color: var(--bg-color);
+            background-color: var(--sidebands-color); /* Sfondo esterno = bande laterali */
             color: var(--text-color);
             min-height: 100vh;
-            padding: 2rem;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center; /* Centra la web-area orizzontalmente */
+        }
+        
+        /* ============================================
+           WEB-AREA (CONTENITORE PRINCIPALE)
+           Area contenuta a dimensione iPad
+        ============================================ */
+        .web-area {
+            background-color: var(--bg-color);
+            width: 100%; 
+            max-width: var(--content-max-width);
+            min-height: 100vh;
+            padding: var(--content-padding);
+            position: relative;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.3); /* Ombra leggera per separare dalle bande */
         }
         
         /* ============================================
@@ -66,7 +86,7 @@
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
             gap: 2rem;
-            max-width: 1200px;
+            width: 100%;
             margin: 0 auto;
         }
         
@@ -196,284 +216,218 @@
             .film-details {
                 font-size: 0.7rem;
             }
+            
+            .web-area {
+                padding: 1rem;  /* Padding ridotto su mobile */
+            }
+        }
+        
+        /* ============================================
+           SIDE-BANDS VISIBILI SU SCHERMI GRANDI
+           Bande laterali proporzionali all'extra spazio
+        ============================================ */
+        @media (min-width: 1025px) {
+            /* Le bande laterali sono già visibili grazie al colore di sfondo del body */
+            .web-area {
+                border-radius: 0px; /* Opzionale: arrotonda leggermente i bordi della web-area */
+            }
         }
     </style>
 </head>
 <body>
     <!-- ============================================
-         INTESTAZIONE PAGINA
-         Titolo del portfolio e sottotitolo 
+         WEB-AREA (CONTENITORE PRINCIPALE)
+         Limita larghezza e crea bande laterali
     ============================================ -->
-    <header>
-        <h1>Sound Design Portfolio</h1>
-        <p class="subtitle">Interagisci con la grid per esplorare i miei lavori</p>
-    </header>
-    
-    <!-- ============================================
-         GRIGLIA PRINCIPALE
-         Contenitore dei progetti film
-    ============================================ -->
-    <main class="grid-container">
+    <div class="web-area">
         <!-- ============================================
-             CARD FILM 1
-             Ogni card contiene:
-             - Poster
-             - Visualizzatore audio (12 barre)
-             - Box info con titolo e dettagli
+             INTESTAZIONE PAGINA
+             Titolo del portfolio e sottotitolo 
         ============================================ -->
-        <div class="film-card" data-audio="https://assets.mixkit.co/sfx/preview/mixkit-cinematic-mystery-trailer-percussion-746.mp3">
-            <img class="film-poster" src="https://source.unsplash.com/nKO_1QyFh9o" alt="Echi nel Vuoto">
-            <div class="audio-visualizer">
-                <div class="audio-bar"></div>
-                <div class="audio-bar"></div>
-                <div class="audio-bar"></div>
-                <div class="audio-bar"></div>
-                <div class="audio-bar"></div>
-                <div class="audio-bar"></div>
-                <div class="audio-bar"></div>
-                <div class="audio-bar"></div>
-                <div class="audio-bar"></div>
-                <div class="audio-bar"></div>
-                <div class="audio-bar"></div>
-                <div class="audio-bar"></div>
-            </div>
-            <div class="film-info">
-                <h3 class="film-title">Echi nel Vuoto</h3>
-                <div class="film-details">
-                    <span>Marco Rossi</span>
-                    <span>2018</span>
-                </div>
-            </div>
-        </div>
+        <header>
+            <h1>Sound Design Portfolio</h1>
+            <p class="subtitle">Interagisci con la grid per esplorare i miei lavori</p>
+        </header>
         
         <!-- ============================================
-             CARD FILM 2
+             GRIGLIA PRINCIPALE
+             Contenitore dei progetti film
         ============================================ -->
-        <div class="film-card" data-audio="https://assets.mixkit.co/sfx/preview/mixkit-suspense-mystery-bass-685.mp3">
-            <img class="film-poster" src="https://source.unsplash.com/CiUR8zISX60" alt="Profondo Blu">
-            <div class="audio-visualizer">
-                <div class="audio-bar"></div>
-                <div class="audio-bar"></div>
-                <div class="audio-bar"></div>
-                <div class="audio-bar"></div>
-                <div class="audio-bar"></div>
-                <div class="audio-bar"></div>
-                <div class="audio-bar"></div>
-                <div class="audio-bar"></div>
-                <div class="audio-bar"></div>
-                <div class="audio-bar"></div>
-                <div class="audio-bar"></div>
-                <div class="audio-bar"></div>
-            </div>
-            <div class="film-info">
-                <h3 class="film-title">Profondo Blu</h3>
-                <div class="film-details">
-                    <span>Laura Bianchi</span>
-                    <span>2019</span>
+        <main class="grid-container">
+            <!-- ============================================
+                 CARD FILM 1
+                 Ogni card contiene:
+                 - Poster
+                 - Visualizzatore audio (12 barre)
+                 - Box info con titolo e dettagli
+            ============================================ -->
+            <div class="film-card" data-audio="https://assets.mixkit.co/sfx/preview/mixkit-cinematic-mystery-trailer-percussion-746.mp3">
+                <img class="film-poster" src="https://source.unsplash.com/nKO_1QyFh9o" alt="Echi nel Vuoto">
+                <div class="audio-visualizer">
+                    <div class="audio-bar"></div>
+                    <div class="audio-bar"></div>
+                    <div class="audio-bar"></div>
+                    <div class="audio-bar"></div>
+                    <div class="audio-bar"></div>
+                    <div class="audio-bar"></div>
+                    <div class="audio-bar"></div>
+                    <div class="audio-bar"></div>
+                    <div class="audio-bar"></div>
+                    <div class="audio-bar"></div>
+                    <div class="audio-bar"></div>
+                    <div class="audio-bar"></div>
+                </div>
+                <div class="film-info">
+                    <h3 class="film-title">Echi nel Vuoto</h3>
+                    <div class="film-details">
+                        <span>Marco Rossi</span>
+                        <span>2018</span>
+                    </div>
                 </div>
             </div>
-        </div>
-        
-        <!-- ============================================
-             CARD FILM 3
-        ============================================ -->
-        <div class="film-card" data-audio="https://assets.mixkit.co/sfx/preview/mixkit-horror-sci-fi-wind-tunnel-871.mp3">
-            <img class="film-poster" src="https://source.unsplash.com/Qsjm7o3J7Gg" alt="Le Ombre del Bosco">
-            <div class="audio-visualizer">
-                <div class="audio-bar"></div>
-                <div class="audio-bar"></div>
-                <div class="audio-bar"></div>
-                <div class="audio-bar"></div>
-                <div class="audio-bar"></div>
-                <div class="audio-bar"></div>
-                <div class="audio-bar"></div>
-                <div class="audio-bar"></div>
-                <div class="audio-bar"></div>
-                <div class="audio-bar"></div>
-                <div class="audio-bar"></div>
-                <div class="audio-bar"></div>
-            </div>
-            <div class="film-info">
-                <h3 class="film-title">Le Ombre del Bosco</h3>
-                <div class="film-details">
-                    <span>Andrea Neri</span>
-                    <span>2020</span>
+            
+            <!-- ============================================
+                 CARD FILM 2
+            ============================================ -->
+            <div class="film-card" data-audio="https://assets.mixkit.co/sfx/preview/mixkit-suspense-mystery-bass-685.mp3">
+                <img class="film-poster" src="https://source.unsplash.com/CiUR8zISX60" alt="Profondo Blu">
+                <div class="audio-visualizer">
+                    <div class="audio-bar"></div>
+                    <div class="audio-bar"></div>
+                    <div class="audio-bar"></div>
+                    <div class="audio-bar"></div>
+                    <div class="audio-bar"></div>
+                    <div class="audio-bar"></div>
+                    <div class="audio-bar"></div>
+                    <div class="audio-bar"></div>
+                    <div class="audio-bar"></div>
+                    <div class="audio-bar"></div>
+                    <div class="audio-bar"></div>
+                    <div class="audio-bar"></div>
+                </div>
+                <div class="film-info">
+                    <h3 class="film-title">Profondo Blu</h3>
+                    <div class="film-details">
+                        <span>Laura Bianchi</span>
+                        <span>2019</span>
+                    </div>
                 </div>
             </div>
-        </div>
-        
-        <!-- ============================================
-             CARD FILM 4
-        ============================================ -->
-        <div class="film-card" data-audio="https://assets.mixkit.co/sfx/preview/mixkit-tense-cinematic-background-heartbeat-490.mp3">
-            <img class="film-poster" src="https://source.unsplash.com/c1Jp-fo53U8" alt="Ultima Corsa">
-            <div class="audio-visualizer">
-                <div class="audio-bar"></div>
-                <div class="audio-bar"></div>
-                <div class="audio-bar"></div>
-                <div class="audio-bar"></div>
-                <div class="audio-bar"></div>
-                <div class="audio-bar"></div>
-                <div class="audio-bar"></div>
-                <div class="audio-bar"></div>
-                <div class="audio-bar"></div>
-                <div class="audio-bar"></div>
-                <div class="audio-bar"></div>
-                <div class="audio-bar"></div>
-            </div>
-            <div class="film-info">
-                <h3 class="film-title">Ultima Corsa</h3>
-                <div class="film-details">
-                    <span>Gianni Moretti</span>
-                    <span>2021</span>
+            
+            <!-- ============================================
+                 CARD FILM 3
+            ============================================ -->
+            <div class="film-card" data-audio="https://assets.mixkit.co/sfx/preview/mixkit-horror-sci-fi-wind-tunnel-871.mp3">
+                <img class="film-poster" src="https://source.unsplash.com/Qsjm7o3J7Gg" alt="Le Ombre del Bosco">
+                <div class="audio-visualizer">
+                    <div class="audio-bar"></div>
+                    <div class="audio-bar"></div>
+                    <div class="audio-bar"></div>
+                    <div class="audio-bar"></div>
+                    <div class="audio-bar"></div>
+                    <div class="audio-bar"></div>
+                    <div class="audio-bar"></div>
+                    <div class="audio-bar"></div>
+                    <div class="audio-bar"></div>
+                    <div class="audio-bar"></div>
+                    <div class="audio-bar"></div>
+                    <div class="audio-bar"></div>
+                </div>
+                <div class="film-info">
+                    <h3 class="film-title">Le Ombre del Bosco</h3>
+                    <div class="film-details">
+                        <span>Andrea Neri</span>
+                        <span>2020</span>
+                    </div>
                 </div>
             </div>
-        </div>
-        
-        <!-- ============================================
-             CARD FILM 5
-        ============================================ -->
-        <div class="film-card" data-audio="https://assets.mixkit.co/sfx/preview/mixkit-futuristic-bass-hit-2303.mp3">
-            <img class="film-poster" src="https://source.unsplash.com/GnvurwJsKaY" alt="Aurora 2077">
-            <div class="audio-visualizer">
-                <div class="audio-bar"></div>
-                <div class="audio-bar"></div>
-                <div class="audio-bar"></div>
-                <div class="audio-bar"></div>
-                <div class="audio-bar"></div>
-                <div class="audio-bar"></div>
-                <div class="audio-bar"></div>
-                <div class="audio-bar"></div>
-                <div class="audio-bar"></div>
-                <div class="audio-bar"></div>
-                <div class="audio-bar"></div>
-                <div class="audio-bar"></div>
-            </div>
-            <div class="film-info">
-                <h3 class="film-title">Aurora 2077</h3>
-                <div class="film-details">
-                    <span>Sofia Romano</span>
-                    <span>2022</span>
+            
+            <!-- ============================================
+                 CARD FILM 4
+            ============================================ -->
+            <div class="film-card" data-audio="https://assets.mixkit.co/sfx/preview/mixkit-tense-cinematic-background-heartbeat-490.mp3">
+                <img class="film-poster" src="https://source.unsplash.com/c1Jp-fo53U8" alt="Ultima Corsa">
+                <div class="audio-visualizer">
+                    <div class="audio-bar"></div>
+                    <div class="audio-bar"></div>
+                    <div class="audio-bar"></div>
+                    <div class="audio-bar"></div>
+                    <div class="audio-bar"></div>
+                    <div class="audio-bar"></div>
+                    <div class="audio-bar"></div>
+                    <div class="audio-bar"></div>
+                    <div class="audio-bar"></div>
+                    <div class="audio-bar"></div>
+                    <div class="audio-bar"></div>
+                    <div class="audio-bar"></div>
+                </div>
+                <div class="film-info">
+                    <h3 class="film-title">Ultima Corsa</h3>
+                    <div class="film-details">
+                        <span>Gianni Moretti</span>
+                        <span>2021</span>
+                    </div>
                 </div>
             </div>
-        </div>
-        
-        <!-- ============================================
-             CARD FILM 6
-        ============================================ -->
-        <div class="film-card" data-audio="https://assets.mixkit.co/sfx/preview/mixkit-game-show-suspense-waiting-667.mp3">
-            <img class="film-poster" src="https://source.unsplash.com/g1Kr4Ozfoac" alt="Tempo Sospeso">
-            <div class="audio-visualizer">
-                <div class="audio-bar"></div>
-                <div class="audio-bar"></div>
-                <div class="audio-bar"></div>
-                <div class="audio-bar"></div>
-                <div class="audio-bar"></div>
-                <div class="audio-bar"></div>
-                <div class="audio-bar"></div>
-                <div class="audio-bar"></div>
-                <div class="audio-bar"></div>
-                <div class="audio-bar"></div>
-                <div class="audio-bar"></div>
-                <div class="audio-bar"></div>
-            </div>
-            <div class="film-info">
-                <h3 class="film-title">Tempo Sospeso</h3>
-                <div class="film-details">
-                    <span>Luca Verdi</span>
-                    <span>2023</span>
+            
+            <!-- ============================================
+                 CARD FILM 5
+            ============================================ -->
+            <div class="film-card" data-audio="https://assets.mixkit.co/sfx/preview/mixkit-futuristic-bass-hit-2303.mp3">
+                <img class="film-poster" src="https://source.unsplash.com/GnvurwJsKaY" alt="Aurora 2077">
+                <div class="audio-visualizer">
+                    <div class="audio-bar"></div>
+                    <div class="audio-bar"></div>
+                    <div class="audio-bar"></div>
+                    <div class="audio-bar"></div>
+                    <div class="audio-bar"></div>
+                    <div class="audio-bar"></div>
+                    <div class="audio-bar"></div>
+                    <div class="audio-bar"></div>
+                    <div class="audio-bar"></div>
+                    <div class="audio-bar"></div>
+                    <div class="audio-bar"></div>
+                    <div class="audio-bar"></div>
+                </div>
+                <div class="film-info">
+                    <h3 class="film-title">Aurora 2077</h3>
+                    <div class="film-details">
+                        <span>Sofia Romano</span>
+                        <span>2022</span>
+                    </div>
                 </div>
             </div>
-        </div>
-    </main>
+            
+            <!-- ============================================
+                 CARD FILM 6
+            ============================================ -->
+            <div class="film-card" data-audio="https://assets.mixkit.co/sfx/preview/mixkit-game-show-suspense-waiting-667.mp3">
+                <img class="film-poster" src="https://source.unsplash.com/g1Kr4Ozfoac" alt="Tempo Sospeso">
+                <div class="audio-visualizer">
+                    <div class="audio-bar"></div>
+                    <div class="audio-bar"></div>
+                    <div class="audio-bar"></div>
+                    <div class="audio-bar"></div>
+                    <div class="audio-bar"></div>
+                    <div class="audio-bar"></div>
+                    <div class="audio-bar"></div>
+                    <div class="audio-bar"></div>
+                    <div class="audio-bar"></div>
+                    <div class="audio-bar"></div>
+                    <div class="audio-bar"></div>
+                    <div class="audio-bar"></div>
+                </div>
+                <div class="film-info">
+                    <h3 class="film-title">Tempo Sospeso</h3>
+                    <div class="film-details">
+                        <span>Luca Verdi</span>
+                        <span>2023</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div><!-- Fine web-area -->
     
     <script>
         /* ============================================
-           INIZIALIZZAZIONE AL CARICAMENTO PAGINA
-           Esegue il codice quando il DOM è pronto
-        ============================================ */
-        document.addEventListener('DOMContentLoaded', () => {
-            /* ============================================
-               SETUP WEB AUDIO API
-               Inizializza sistema per analisi audio
-            ============================================ */
-            let audioContext;
-            let analyser;
-            let dataArray;
-            
-            // Inizializza AudioContext con compatibilità cross-browser
-            try {
-                const AudioContext = window.AudioContext || window.webkitAudioContext;
-                audioContext = new AudioContext();
-            } catch (e) {
-                console.warn('Web Audio API non supportata in questo browser');
-            }
-            
-            // Se AudioContext è disponibile, configura analyzer
-            if (audioContext) {
-                analyser = audioContext.createAnalyser();
-                analyser.fftSize = 32;  // Dimensione FFT (deve essere potenza di 2)
-                const bufferLength = analyser.frequencyBinCount; // Metà dell'fftSize
-                dataArray = new Uint8Array(bufferLength); // Array per dati frequenza
-            }
-            
-            /* ============================================
-               RIFERIMENTI E VARIABILI GLOBALI
-               Elementi DOM e stato corrente
-            ============================================ */
-            const filmCards = document.querySelectorAll('.film-card');
-            let currentAudio = null;  // Riferimento all'audio attualmente in riproduzione
-            let currentCard = null;   // Riferimento alla card attualmente attiva
-            let visualizationFrame;   // ID frame per cancelAnimationFrame
-            
-            /* ============================================
-               FUNZIONE VISUALIZZAZIONE AUDIO
-               Aggiorna altezza barre in base all'audio
-            ============================================ */
-            function visualizeAudio(card) {
-                const bars = card.querySelectorAll('.audio-bar');
-                
-                // Ottiene dati di frequenza attuali
-                analyser.getByteFrequencyData(dataArray);
-                
-                // Calcola quanti bin di frequenza per barra
-                const step = Math.floor(dataArray.length / bars.length);
-                
-                // Aggiorna altezza di ogni barra
-                for (let i = 0; i < bars.length; i++) {
-                    // Scala valore da 0-255 a 5-35px
-                    const barHeight = dataArray[i * step] / 255 * 30 + 5;
-                    bars[i].style.height = `${barHeight}px`;
-                }
-                
-                // Richiama se stessa per il prossimo frame
-                visualizationFrame = requestAnimationFrame(() => visualizeAudio(card));
-            }
-            
-            /* ============================================
-               SETUP INTERAZIONE CARDS
-               Gestisce eventi per ogni card film
-            ============================================ */
-            filmCards.forEach(card => {
-                const audioPath = card.getAttribute('data-audio');
-                const audio = new Audio(audioPath);
-                
-                // Event listener per dispositivi touch
-                card.addEventListener('touchstart', handleInteraction);
-                
-                // Event listener per mouse
-                card.addEventListener('click', handleInteraction);
-                
-                /* ============================================
-                   GESTORE INTERAZIONE
-                   Funzione per click e touch su card
-                ============================================ */
-                function handleInteraction(e) {
-                    e.preventDefault();  // Previene azioni predefinite
-                    
-                    // Ferma audio precedente se esiste
-                    if (currentAudio) {
-                        currentAudio.pause();
-                        currentAudio.currentTime = 0;
-                        currentCard.classList.remove('active');
-                        
+           INIZIALIZZAZIONE AL CARICAMENTO PAG
