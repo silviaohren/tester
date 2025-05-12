@@ -897,6 +897,215 @@
             const filmCards = document.querySelectorAll('.film-card');
 
 
-
+            const filmCards = document.querySelectorAll('.film-card');
+            let currentAudio = null;   // Riferimento all'audio attualmente in riproduzione
+            let currentCard = null;    // Riferimento alla card attualmente attiva
+            let visualizationFrame;    // ID frame per cancelAnimationFrame
+            
+            /* ============================================
+               GESTIONE MENU E NAVIGAZIONE
+               Cambia pagina quando si clicca sul menu
+            ============================================ */
+            const navLinks = document.querySelectorAll('.nav-menu a');
+            const pages = document.querySelectorAll('.page');
+            
+            // Aggiunge event listener per ogni link del menu
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Cambia URL con hashtag ma previene scroll
+                    window.history.pushState(null, null, this.getAttribute('href'));
+                    
+                    // Rimuove class active da tutti i link e lo aggiunge solo al link cliccato
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Ottiene id della pagina da mostrare
+                    const targetPageId = this.getAttribute('data-page');
+                    
+                    // Nasconde tutte le pagine e mostra solo quella target
+                    pages.forEach(page => {
+                        page.classList.remove('active');
+                        if (page.id === targetPageId) {
+                            page.classList.add('active');
+                        }
+                    });
+                    
+                    // Ferma qualsiasi audio in riproduzione quando si cambia pagina
+                    if (currentAudio) {
+                        currentAudio.pause();
+                        currentAudio.currentTime = 0;
+                        if (currentCard) currentCard.classList.remove('active');
+                        cancelAnimationFrame(visualizationFrame);
+                        currentAudio = null;
+                        currentCard = null;
+                    }
+                });
+            });
+            
+            /* ============================================
+               FUNZIONE VISUALIZZAZIONE AUDIO
+               Aggiorna altezza barre in base all'audio
+            ============================================ */
+            function visualizeAudio(card) {
+                const bars = card.querySelectorAll('.audio-bar');
+                
+                // Ottiene dati di frequenza attuali
+                analyser.getByteFrequencyData(dataArray);
+                
+                // Calcola quanti bin di frequenza per barra
+                const step = Math.floor(dataArray.length / bars.length);
+                
+                // Aggiorna altezza di ogni barra
+                for (let i = 0; i < bars.length; i++) {
+                    // Scala valore da 0-255 a 5-35px
+                    const barHeight = dataArray[i * step] / 255 * 30 + 5;
+                    bars[i].style.height = `${barHeight}px`;
+                }
+                
+                // Richiama se stessa per il prossimo frame
+                visualizationFrame = requestAnimationFrame(() => visualizeAudio(card));
+            }
+            
+            /* ============================================
+               SETUP INTERAZIONE CARDS
+               Gestisce eventi per ogni card film
+            ============================================ */
+            filmCards.forEach(card => {
+                const audioPath = card.getAttribute('data-audio');
+                const audio = new Audio(audioPath);
+                
+                // Event listener per dispositivi touch
+                card.addEventListener('touchstart', handleInteraction);
+                
+                // Event listener per mouse
+                card.addEventListener('click', handleInteraction);
+                
+                /* ============================================
+                   GESTORE INTERAZIONE
+                   Funzione per click e touch su card
+                ============================================ */
+                function handleInteraction(e) {
+                    e.preventDefault();  // Previene azioni predefinite
+                    
+                    // Ferma audio precedente se esiste
+                    if (currentAudio) {
+                        currentAudio.pause();
+                        currentAudio.currentTime = 0;
+                        currentCard.classList.remove('active');
+                        cancelAnimationFrame(visualizationFrame);
+                    }
+                    
+                    // Se stessa card è già attiva, disattivala e esci
+                    if (currentCard === card) {
+                        currentCard = null;
+                        currentAudio = null;
+                        return;
+                    }
+                    
+                    // Avvia l'AudioContext se sospeso (necessario per autoplay policy)
+                    if (audioContext && audioContext.state === 'suspended') {
+                        audioContext.resume();
+                    }
+                    
+                    // Imposta la nuova card come attiva
+                    audio.volume = 0.7; // Volume al 70%
+                    audio.play();
+                    card.classList.add('active');
+                    currentAudio = audio;
+                    currentCard = card;
+                    
+                    // Configura visualizzazione audio
+                    if (audioContext) {
+                        // Crea MediaElementSource solo se non esiste già
+                        let source;
+                        try {
+                            source = audioContext.createMediaElementSource(audio);
+                            source.connect(analyser);
+                            analyser.connect(audioContext.destination);
+                        } catch (e) {
+                            // Se abbiamo già connesso questo elemento, ignora l'errore
+                            console.log("Media element already connected");
+                        }
+                        
+                        // Avvia visualizzazione
+                        visualizeAudio(card);
+                        
+                        // Gestisce la fine dell'audio
+                        audio.addEventListener('ended', () => {
+                            card.classList.remove('active');
+                            cancelAnimationFrame(visualizationFrame);
+                            currentCard = null;
+                            currentAudio = null;
+                        });
+                    }
+                }
+            });
+            
+            /* ============================================
+               FALLBACK PER BROWSER SENZA WEB AUDIO API
+               Animazione semplice per browser non supportati
+            ============================================ */
+            if (!audioContext) {
+                filmCards.forEach(card => {
+                    const bars = card.querySelectorAll('.audio-bar');
+                    
+                    card.addEventListener('click', () => {
+                        if (card.classList.contains('active')) {
+                            card.classList.remove('active');
+                            bars.forEach(bar => {
+                                bar.style.animation = 'none';
+                            });
+                            return;
+                        }
+                        
+                        // Rimuove active da tutte le cards
+                        filmCards.forEach(c => c.classList.remove('active'));
+                        
+                        // Aggiunge active alla card corrente
+                        card.classList.add('active');
+                        
+                        // Anima le barre
+                        bars.forEach((bar, index) => {
+                            bar.style.animation = `barAnimation ${0.5 + Math.random() * 0.5}s ease-in-out infinite alternate`;
+                            bar.style.animationDelay = `${index * 0.05}s`;
+                        });
+                    });
+                });
+                
+                // Aggiunge animazione keyframe per fallback
+                const styleSheet = document.createElement('style');
+                styleSheet.innerHTML = `
+                    @keyframes barAnimation {
+                        0% { height: 5px; }
+                        100% { height: 30px; }
+                    }
+                `;
+                document.head.appendChild(styleSheet);
+            }
+            
+            /* ============================================
+               CHECK HASH INIZIALE
+               Controlla se l'URL ha un hash all'avvio
+            ============================================ */
+            function checkInitialHash() {
+                const hash = window.location.hash;
+                if (hash) {
+                    // Trova il link del menu corrispondente all'hash
+                    const targetLink = document.querySelector(`.nav-menu a[href="${hash}"]`);
+                    if (targetLink) {
+                        // Simula un click sul link
+                        targetLink.click();
+                    }
+                }
+            }
+            
+            // Controlla hash iniziale
+            checkInitialHash();
+        });
+    </script>
+</body>
+</html>
 
 
