@@ -214,7 +214,7 @@
             object-fit: cover;
             transition: transform 0.5s ease;
         }
-         /* ============================================    
+        
         .poster-texture {
             position: absolute;
             top: 0;
@@ -227,7 +227,7 @@
             opacity: 0.7;
             pointer-events: none;
         }
-              ============================================ */
+        
         .torn-edge {
             position: absolute;
             bottom: 0;
@@ -790,9 +790,20 @@
         object-fit: cover;
         transition: transform 0.5s ease;
     }
- 
-
-
+    
+    .poster-texture {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-size: cover;
+        background-position: center;
+        mix-blend-mode: overlay;
+        opacity: 0.7;
+        pointer-events: none;
+    }
+    
     .torn-edge {
         position: absolute;
         bottom: 0;
@@ -1131,7 +1142,8 @@
                     <div class="poster-container">
                         <!-- Immagine poster base dal link diretto -->
                         <img class="poster-base" src="https://www.ivanagloria.com/wp-content/uploads/2025/05/so_2020_LA-BELVA.jpg" alt="LA BELVA">
-
+                        <!-- Overlay con texture -->
+                        <div class="poster-texture"></div>
                     </div>
                     <div class="torn-edge"></div>
                     <div class="torn-info-container">
@@ -1178,6 +1190,7 @@
                 <div class="scheda torn-poster">
                     <div class="poster-container">
                         <img class="poster-base" src="https://source.unsplash.com/Qsjm7o3J7Gg" alt="Echi del Silenzio">
+                        <div class="poster-texture"></div>
                     </div>
                     <div class="torn-edge"></div>
                     <div class="torn-info-container">
@@ -1197,6 +1210,7 @@
                 <div class="scheda torn-poster">
                     <div class="poster-container">
                         <img class="poster-base" src="https://source.unsplash.com/c1Jp-fo53U8" alt="Corsa Finale">
+                        <div class="poster-texture"></div>
                     </div>
                     <div class="torn-edge"></div>
                     <div class="torn-info-container">
@@ -1234,6 +1248,7 @@
                 <div class="scheda torn-poster">
                     <div class="poster-container">
                         <img class="poster-base" src="https://source.unsplash.com/IH7wPsjwomc" alt="Ruggiti della Savana">
+                        <div class="poster-texture"></div>
                     </div>
                     <div class="torn-edge"></div>
                     <div class="torn-info-container">
@@ -1253,6 +1268,7 @@
                 <div class="scheda torn-poster">
                     <div class="poster-container">
                         <img class="poster-base" src="https://source.unsplash.com/y8TMoCzw87E" alt="Barriera Corallina">
+                        <div class="poster-texture"></div>
                     </div>
                     <div class="torn-edge"></div>
                     <div class="torn-info-container">
@@ -1290,6 +1306,7 @@
                 <div class="scheda torn-poster">
                     <div class="poster-container">
                         <img class="poster-base" src="https://source.unsplash.com/dUV3oohJzE8" alt="Innovazione Sonora">
+                        <div class="poster-texture"></div>
                     </div>
                     <div class="torn-edge"></div>
                     <div class="torn-info-container">
@@ -1305,6 +1322,26 @@
                     </div>
                 </div>
                 
+                <!-- SCHEDA 2 -->
+                <div class="scheda torn-poster">
+                    <div class="poster-container">
+                        <img class="poster-base" src="https://source.unsplash.com/_H0fjILH5Vw" alt="Armonia Naturale">
+                        <div class="poster-texture"></div>
+                    </div>
+                    <div class="torn-edge"></div>
+                    <div class="torn-info-container">
+                        <h3 class="scheda-titolo">ARMONIA NATURALE</h3>
+                        <p><strong>DIRECTOR:</strong> Laura Verde</p>
+                        <p><strong>PROD:</strong> NatureCare</p>
+                        <p><strong>YEAR:</strong> 2021</p>
+                        <p><strong>GENRE:</strong> Cosmetics</p>
+                        <p><strong>TRAILER:</strong> <a href="https://www.youtube.com/watch?v=example" target="_blank" class="trailer-link">Watch here</a></p>
+                    </div>
+                    <div class="scheda-info">
+                        <h3 class="scheda-titolo">COMPOSER / MIXER</h3>
+                    </div>
+                </div>
+            </main>
             
             <!-- Footer (in ogni pagina) -->
             <footer class="site-footer">
@@ -1327,6 +1364,7 @@
                 <div class="scheda torn-poster">
                     <div class="poster-container">
                         <img class="poster-base" src="https://source.unsplash.com/pVoEPpLw818" alt="Atmosfere Futuristiche">
+                        <div class="poster-texture"></div>
                     </div>
                     <div class="torn-edge"></div>
                     <div class="torn-info-container">
@@ -1352,6 +1390,7 @@
                 <div class="scheda torn-poster">
                     <div class="poster-container">
                         <img class="poster-base" src="https://source.unsplash.com/1Pgq9ZpIatI" alt="Inquietudini Sonore">
+                        <div class="poster-texture"></div>
                     </div>
                     <div class="torn-edge"></div>
                     <div class="torn-info-container">
@@ -1744,7 +1783,25 @@
         }
     }
     
-
+    // Funzione per inizializzare tutti i poster strappati
+    function initTornPosters() {
+        // Seleziona tutti gli elementi con poster texture
+        var textureElements = document.querySelectorAll('.poster-texture');
+        
+        // Array con i percorsi delle texture dal server WordPress
+        var textures = [
+            'https://www.ivanagloria.com/wp-content/uploads/2025/05/so_TEXTR1.jpg',
+            'https://www.ivanagloria.com/wp-content/uploads/2025/05/so_TEXTR2.png'
+        ];
+        
+        // Applica texture a ciascun elemento
+        textureElements.forEach(function(element) {
+            // Seleziona casualmente una texture
+            var randomTexture = textures[Math.floor(Math.random() * textures.length)];
+            
+            // Applica la texture come background
+            element.style.backgroundImage = 'url(' + randomTexture + ')';
+        });
         
         // Aggiungi interazione di click per ogni poster strappato
         var tornPosters = document.querySelectorAll('.torn-poster');
