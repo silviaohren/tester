@@ -1909,6 +1909,28 @@
             newCardForm.addEventListener('submit', createNewCard);
         }
     });
+
+// Codice per inserire dinamicamente l'alieno
+document.addEventListener('DOMContentLoaded', function() {
+    // Rimuovi eventuali alien button esistenti
+    var existingButtons = document.querySelectorAll('.alien-button, #alien-button-container');
+    existingButtons.forEach(function(btn) {
+        btn.parentNode.removeChild(btn);
+    });
+    
+    // Crea nuovo elemento
+    var alien = document.createElement('div');
+    alien.id = 'alien-button-container';
+    alien.innerHTML = '👽';
+    alien.addEventListener('click', function() {
+        showPage('upload-page', null);
+        return false;
+    });
+    
+    // Aggiungi direttamente al body
+    document.body.appendChild(alien);
+});
 </script>
+
 </body>
 </html>
