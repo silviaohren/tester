@@ -192,7 +192,25 @@
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
             filter: grayscale(0%);
         }
-                
+
+         .schedasquare {
+            position: relative;
+            aspect-ratio: 1/1;
+            border-radius: 12px;
+            overflow: hidden;
+            cursor: pointer;
+            filter: grayscale(100%);
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            background-color: rgba(0, 0, 0, 0.3); /* Sfondo base per schede vuote */
+        }
+        
+        /* Effetto hover sulla scheda quadrata */
+        .schedasquare:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+            filter: grayscale(0%);
+        }
+                            
         /* ============================================
            STILE POSTER STRAPPATO
         ============================================ */
@@ -1361,7 +1379,7 @@
         <section id="libraries-page" class="page">
             <main class="grid-container">
                 <!-- SCHEDA 1 -->
-                <div class="scheda torn-poster">
+                <div class="schedasquare torn-poster">
                     <div class="poster-container">
                         <img class="poster-base" src="https://source.unsplash.com/pVoEPpLw818" alt="Atmosfere Futuristiche">
                         <div class="poster-texture"></div>
@@ -1369,11 +1387,7 @@
                     <div class="torn-edge"></div>
                     <div class="torn-info-container">
                         <h3 class="scheda-titolo">ATMOSFERE FUTURISTICHE</h3>
-                        <p><strong>DIRECTOR:</strong> Sound Library</p>
-                        <p><strong>PROD:</strong> SoundStash</p>
-                        <p><strong>YEAR:</strong> 2020</p>
-                        <p><strong>GENRE:</strong> Sci-Fi / Ambient</p>
-                        <p><strong>TRAILER:</strong> <a href="#" target="_blank" class="trailer-link">Ascolta</a></p>
+                        <p><strong>TAGS:</strong> Sci-Fi / Ambient</p>
                         <div class="audio-preview">
                             <audio controls>
                                 <source src="#" type="audio/mpeg">
@@ -1381,8 +1395,8 @@
                             </audio>
                         </div>
                     </div>
-                    <div class="scheda-info">
-                        <h3 class="scheda-titolo">SOUND DESIGNER / COMPOSER</h3>
+                    <div class="schedasquare-info">
+                        <h3 class="schedasquare-titolo">LOCATION SOUND</h3>
                     </div>
                 </div>
                 
