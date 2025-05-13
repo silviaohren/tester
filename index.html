@@ -599,28 +599,6 @@
                 grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
                 gap: 1rem;
             }
-               /* ============================================
-           ALIEN BUTTON
-        ============================================ */
-        .alien-button {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            z-index: 1000;
-            font-size: 2.5rem;
-            cursor: pointer;
-            transition: transform 0.3s ease, text-shadow 0.3s ease;
-            text-shadow: 0 0 10px rgba(255, 77, 109, 0.5);
-            background: none;
-            border: none;
-            padding: 0;
-            color: var(--text-color);
-        }
-        
-        .alien-button:hover {
-            transform: scale(1.2);
-            text-shadow: 0 0 20px rgba(255, 77, 109, 0.8);
-        }
 
         /* ============================================
            WEB-AREA (CONTENITORE PRINCIPALE)
@@ -712,6 +690,28 @@
         
         .nav-menu a.menu-green.active::after {
             background-color: #10b981 !important; /* Verde smeraldo */
+        }
+        /* ============================================
+           ALIEN BUTTON
+        ============================================ */
+        .alien-button {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+            font-size: 2.5rem;
+            cursor: pointer;
+            transition: transform 0.3s ease, text-shadow 0.3s ease;
+            text-shadow: 0 0 10px rgba(255, 77, 109, 0.5);
+            background: none;
+            border: none;
+            padding: 0;
+            color: var(--text-color);
+        }
+        
+        .alien-button:hover {
+            transform: scale(1.2);
+            text-shadow: 0 0 20px rgba(255, 77, 109, 0.8);
         }
     </style>
 </head>
