@@ -917,10 +917,10 @@
         ============================================ -->
         <section id="contact-page" class="page">
             <div class="contact-container">
-                <h2>Contact Me</h2>
+                <h2 class="contact-heading">Contact Me</h2>
                 <p class="contact-intro">For collaborations or information, drop me a line at siorengo19@gmail.com or fill out the form below:</p>
                 
-                <form id="contact-form" action="https://api.web3forms.com/submit" method="POST">
+                <form id="contact-form" action="https://api.web3forms.com/submit" method="POST" class="contact-form-wrapper">
                     <!-- Chiave API di Web3Forms -->
                     <input type="hidden" name="access_key" value="5a0361fa-4845-411c-b03d-1cec2e59091b">
                     
@@ -930,30 +930,113 @@
                     <!-- Email di destinazione nascosta (opzionale) -->
                     <input type="hidden" name="to" value="siorengo19@gmail.com">
                     
-                    <div class="form-group">
+                    <div class="form-group contact-form-group">
                         <input type="email" name="email" placeholder="Your email" required class="contact-input">
                     </div>
                     
-                    <div class="form-group">
+                    <div class="form-group contact-form-group">
                         <input type="text" name="subject" placeholder="Subject" required class="contact-input">
                     </div>
                     
-                    <div class="form-group">
-                        <textarea name="message" placeholder="Your message" required class="contact-input"></textarea>
+                    <div class="form-group contact-form-group">
+                        <textarea name="message" placeholder="Your message" required class="contact-input contact-textarea"></textarea>
                     </div>
                     
-                    <button type="submit" class="submit-btn">Send</button>
+                    <button type="submit" class="submit-btn contact-submit">Send</button>
                 </form>
             </div>
             
-            <!-- Footer (in ogni pagina) -->
-            <footer class="site-footer">
+            <footer class="site-footer contact-footer-single">
                 <div class="copyright">
                     © 2025 silviaohrenwebdesign | <a href="#privacy">Privacy Policy</a>
                 </div>
             </footer>
         </section>
         
+        <style>
+        /* ============================================
+           STILI ISOLATI PER LA PAGINA CONTATTI
+        ============================================ */
+        #contact-page .contact-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 2rem 0;
+            text-align: center;
+        }
+        
+        #contact-page .contact-heading {
+            font-family: var(--heading-font);
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-color);
+        }
+        
+        #contact-page .contact-intro {
+            margin-bottom: 2rem;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+        
+        #contact-page .contact-form-wrapper {
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        #contact-page .contact-form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        #contact-page .contact-input {
+            width: 100%;
+            padding: 1rem;
+            border: none;
+            border-radius: 5px;
+            background-color: rgba(255, 77, 109, 0.15);
+            color: var(--text-color);
+            font-family: var(--body-font);
+            transition: background-color 0.3s ease;
+            font-size: 1rem;
+        }
+        
+        #contact-page .contact-input:focus {
+            outline: none;
+            background-color: rgba(255, 77, 109, 0.25);
+        }
+        
+        #contact-page .contact-textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        #contact-page .contact-submit {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 5px;
+            font-family: var(--heading-font);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        #contact-page .contact-submit:hover {
+            background-color: #e04463;
+            transform: translateY(-2px);
+        }
+        
+        #contact-page .contact-footer-single {
+            margin-top: 4rem;
+            padding-top: 0.2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+        }
+        </style>
+                
     
     <!-- ============================================
          PAGINA UPLOAD (CON PROTEZIONE PASSWORD)
