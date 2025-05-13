@@ -212,7 +212,106 @@
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
             filter: grayscale(0%);
         }
+                
+        /* ============================================
+           STILE POSTER STRAPPATO
+        ============================================ */
+        .torn-poster {
+            position: relative;
+            overflow: hidden;
+        }
         
+        .poster-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        .poster-base {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .poster-texture {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            mix-blend-mode: overlay;
+            opacity: 0.7;
+            pointer-events: none;
+        }
+        
+        .torn-edge {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            clip-path: polygon(0% 100%, 4% 60%, 10% 90%, 16% 40%, 22% 100%, 30% 50%, 36% 100%, 44% 30%, 52% 100%, 62% 40%, 70% 90%, 76% 30%, 84% 100%, 92% 50%, 96% 100%, 100% 10%, 100% 100%);
+            z-index: 3;
+            transform: translateY(100%);
+            transition: transform 0.3s ease 0.5s;
+        }
+        
+        .torn-poster.active .torn-edge {
+            transform: translateY(0);
+            transition: transform 0.3s ease;
+        }
+        
+        .torn-info-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #f5f5f5;
+            background-image: linear-gradient(to bottom, rgba(255,255,255,0.8), rgba(210,210,210,0.5)), url('https://www.transparenttextures.com/patterns/paper.png');
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            z-index: 1;
+            color: #333;
+            transform: translateY(100%);
+            transition: transform 0.5s ease;
+        }
+        
+        .torn-poster.active .poster-container {
+            transform: translateY(-100%);
+            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .torn-poster.active .torn-info-container {
+            transform: translateY(0);
+        }
+        
+        .torn-info-container p {
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+        
+        .audio-preview {
+            margin-top: 1rem;
+        }
+        
+        .audio-preview audio {
+            width: 100%;
+            height: 30px;
+        }
+        
+        /* Override per hover sulla scheda con poster strappato */
+        .torn-poster:hover .poster-base {
+            transform: scale(1.05);
+        }
+
         /* ============================================
            STILE POSTER FILM
         ============================================ */
@@ -584,18 +683,35 @@
         ============================================ -->
         <section id="film-page" class="page active">
             <main class="grid-container">
-                <!-- SCHEDA 1 -->
-                <div class="scheda">
-                    <img class="poster" src="https://source.unsplash.com/nKO_1QyFh9o" alt="Sussurri Notturni">
+                <!-- SCHEDA 1 - Con effetto poster -->
+                <div class="scheda torn-poster">
+                    <div class="poster-container">
+                        <!-- Immagine poster base dal link diretto -->
+                        <img class="poster-base" src="https://drive.google.com/uc?export=view&id=1LI5KYVqRTq6jvpW2kmAHStZooDa750Pg" alt="BBB">
+                        <!-- Overlay con texture -->
+                        <div class="poster-texture"></div>
+                    </div>
+                    <div class="torn-edge"></div>
+                    <div class="torn-info-container">
+                        <h3 class="scheda-titolo">BBB - Dettagli</h3>
+                        <p>Regista: Nome Regista</p>
+                        <p>Anno: 2022</p>
+                        <p>Genere: Drammatico</p>
+                        <div class="audio-preview">
+                            <audio controls>
+                                <source src="#" type="audio/mpeg">
+                                Il tuo browser non supporta l'elemento audio.
+                            </audio>
+                        </div>
+                    </div>
                     <div class="scheda-info">
-                        <h3 class="scheda-titolo">Sussurri Notturni</h3>
+                        <h3 class="scheda-titolo">BBB</h3>
                         <div class="scheda-dettagli">
-                            <span>Marco Rossi</span>
-                            <span>2018</span>
+                            <span>Direttore XYZ</span>
+                            <span>2022</span>
                         </div>
                     </div>
                 </div>
-                
                 <!-- SCHEDA 2 -->
                 <div class="scheda">
                     <img class="poster" src="https://source.unsplash.com/CiUR8zISX60" alt="Abissi Profondi">
@@ -1084,6 +1200,33 @@
             }
         });
     </script>
+
+        <!-- Script per l'effetto poster strappato -->
+        <script>
+            // Funzione per applicare casualmente una delle texture
+            document.addEventListener('DOMContentLoaded', function() {
+                // Seleziona l'elemento texture
+                var textureElement = document.querySelector('.poster-texture');
+                
+                // Array con i percorsi delle texture da Google Drive
+                var textures = [
+                    'https://drive.google.com/uc?export=view&id=1pMvvWX1iaVUEMH97racghUoqFpDqm3ix',
+                    'https://drive.google.com/uc?export=view&id=1bmA099glzaYK1cxcungO4Mc3jSmhgDVC'
+                ];
+                
+                // Seleziona casualmente una texture
+                var randomTexture = textures[Math.floor(Math.random() * textures.length)];
+                
+                // Applica la texture come background
+                textureElement.style.backgroundImage = 'url(' + randomTexture + ')';
+                
+                // Aggiungi interazione di click per l'effetto strappo
+                var tornPoster = document.querySelector('.torn-poster');
+                tornPoster.addEventListener('click', function() {
+                    this.classList.toggle('active');
+                });
+            });
+        </script>
 
 </body>
 </html>
