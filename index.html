@@ -167,7 +167,21 @@
             margin: 0 0.2rem;
             color: rgba(255, 255, 255, 0.3);
         }
-                /* ============================================
+
+        /* Verde smeraldo per link specifici del menu */
+        .nav-menu a.menu-green:hover {
+            color: #10b981 !important; /* Verde smeraldo */
+        }
+        
+        .nav-menu a.menu-green.active {
+            color: #10b981 !important; /* Verde smeraldo */
+        }
+        
+        .nav-menu a.menu-green.active::after {
+            background-color: #10b981 !important; /* Verde smeraldo */
+        }
+
+        /* ============================================
            LAYOUT GRIGLIA
         ============================================ */
         .grid-container {
@@ -558,11 +572,11 @@
             <span class="nav-separator">-</span>
             <a href="#commercial" onclick="showPage('commercial-page', this); return false;">COMMERCIAL</a>
             <span class="nav-separator">-</span>
-            <a href="#libraries" onclick="showPage('libraries-page', this); return false;">LIBRARIES</a>
+            <a href="#libraries" class="menu-green" onclick="showPage('libraries-page', this); return false;">LIBRARIES</a>
             <span class="nav-separator">-</span>
-            <a href="#bio" onclick="showPage('bio-page', this); return false;">BIO</a>
+            <a href="#bio" class="menu-green" onclick="showPage('bio-page', this); return false;">BIO</a>
             <span class="nav-separator">-</span>
-            <a href="#contact" onclick="showPage('contact-page', this); return false;">CONTACT</a>
+            <a href="#contact" class="menu-green" onclick="showPage('contact-page', this); return false;">CONTACT</a>
         </nav>
                         
         <!-- ============================================
@@ -992,6 +1006,7 @@
     
     <!-- Script di navigazione incorporato direttamente -->
     <script>
+
         // Funzione per cambiare pagina
         function showPage(pageId, clickedLink) {
             // Nascondi tutte le pagine
@@ -1005,10 +1020,15 @@
             
             // Se è stato passato un link (non per il bottone alieno)
             if (clickedLink) {
-                // Rimuovi classe active da tutti i link
+                // Rimuovi classe active da tutti i link ma preserva menu-green
                 var links = document.querySelectorAll('.nav-menu a');
                 for (var i = 0; i < links.length; i++) {
+                    var isGreen = links[i].classList.contains('menu-green');
                     links[i].classList.remove('active');
+                    // Ripristina la classe menu-green se necessario
+                    if (isGreen && !links[i].classList.contains('menu-green')) {
+                        links[i].classList.add('menu-green');
+                    }
                 }
                 
                 // Aggiungi classe active al link cliccato
