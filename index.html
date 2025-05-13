@@ -691,6 +691,8 @@
         .nav-menu a.menu-green.active::after {
             background-color: #10b981 !important; /* Verde smeraldo */
         }
+
+        
         /* ============================================
            ALIEN BUTTON
         ============================================ */
@@ -713,6 +715,25 @@
             transform: scale(1.2);
             text-shadow: 0 0 20px rgba(255, 77, 109, 0.8);
         }
+
+/* Metti questo alla fine del blocco <style> */
+        #alien-button-container {
+            position: fixed !important;
+            bottom: 30px !important;
+            right: 30px !important;
+            z-index: 9999 !important;
+            font-size: 2.5rem !important;
+            cursor: pointer !important;
+            color: var(--text-color) !important;
+            text-shadow: 0 0 10px rgba(255, 77, 109, 0.5) !important;
+            transition: all 0.3s ease !important;
+        }
+        
+        #alien-button-container:hover {
+            transform: scale(1.2) !important;
+            text-shadow: 0 0 20px rgba(255, 77, 109, 0.8) !important;
+        }
+
     </style>
 </head>
 
@@ -1081,7 +1102,7 @@
 </style>
 <body>
     <!-- Bottone Alieno -->
-    <div class="alien-button" onclick="showPage('upload-page', null); return false;">👽</div>
+    <div id="alien-button-container" class="alien-button-fixed">👽</div>
     
     <!-- ============================================
          WEB-AREA (CONTENITORE PRINCIPALE)
