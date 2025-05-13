@@ -56,6 +56,30 @@
         }
         
         /* ============================================
+           ALIEN BUTTON FIXED
+        ============================================ */
+        .alien-button {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 100;
+            font-size: 2.5rem;
+            cursor: pointer;
+            transition: transform 0.3s ease, text-shadow 0.3s ease;
+            text-shadow: 0 0 10px rgba(255, 77, 109, 0.5);
+            background: none;
+            border: none;
+            padding: 0;
+            color: var(--text-color);
+        }
+
+        .alien-button:hover {
+            transform: scale(1.2);
+            text-shadow: 0 0 20px rgba(255, 77, 109, 0.8);
+        }
+
+
+        /* ============================================
            LAYOUT PRINCIPALE
         ============================================ */
         body {
@@ -69,6 +93,10 @@
             justify-content: center;
         }
         
+            <!-- Bottone Alieno -->
+            <div class="alien-button" onclick="showPage('upload-page', null); return false;">👽</div>
+            
+
         /* ============================================
            WEB-AREA (CONTENITORE PRINCIPALE)
         ============================================ */
