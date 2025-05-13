@@ -160,477 +160,372 @@
         .nav-menu a.menu-green.active::after {
             background-color: #10b981 !important; /* Verde smeraldo */
         }
-
-        /* ============================================
-           LAYOUT GRIGLIA
-        ============================================ */
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 2rem;
-            width: 100%;
-            margin: 3rem auto 0;
-        }
-        /* ============================================
-           STILE SCHEDA (CARD FILM)
-        ============================================ */
-        .scheda {
-            position: relative;
-            aspect-ratio: 2/3;
-            border-radius: 12px;
-            overflow: hidden;
-            cursor: pointer;
-            filter: grayscale(100%);
-            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-            background-color: rgba(0, 0, 0, 0.3); /* Sfondo base per schede vuote */
-        }
-        
-        /* Effetto hover sulla scheda */
-        .scheda:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
-            filter: grayscale(0%);
-        }
-                
-        /* ============================================
-           STILE POSTER STRAPPATO
-        ============================================ */
-        .torn-poster {
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .poster-container {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-        }
-        
-        .poster-base {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-        
-        .poster-texture {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-size: cover;
-            background-position: center;
-            mix-blend-mode: overlay;
-            opacity: 0.7;
-            pointer-events: none;
-        }
-        
-        .torn-edge {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 20px;
-            background-color: rgba(255, 255, 255, 0.8);
-            clip-path: polygon(0% 100%, 4% 60%, 10% 90%, 16% 40%, 22% 100%, 30% 50%, 36% 100%, 44% 30%, 52% 100%, 62% 40%, 70% 90%, 76% 30%, 84% 100%, 92% 50%, 96% 100%, 100% 10%, 100% 100%);
-            z-index: 3;
-            transform: translateY(100%);
-            transition: transform 0.3s ease 0.5s;
-        }
-        
-        .torn-poster.active .torn-edge {
-            transform: translateY(0);
-            transition: transform 0.3s ease;
-        }
-        
-        .torn-info-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: #f5f5f5;
-            background-image: linear-gradient(to bottom, rgba(255,255,255,0.8), rgba(210,210,210,0.5)), url('https://www.transparenttextures.com/patterns/paper.png');
-            padding: 1.5rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            z-index: 1;
-            color: #333;
-            transform: translateY(100%);
-            transition: transform 0.5s ease;
-        }
-        
-        .torn-poster.active .poster-container {
-            transform: translateY(-100%);
-            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        
-        .torn-poster.active .torn-info-container {
-            transform: translateY(0);
-        }
-        
-        .torn-info-container p {
-            margin-bottom: 0.8rem;
-            font-size: 0.9rem;
-        }
-        
-        .torn-info-container a {
-            color: var(--accent-color);
-            text-decoration: none;
-            transition: opacity 0.3s ease;
-        }
-        
-        .torn-info-container a:hover {
-            opacity: 0.8;
-        }
-        
-        .audio-preview {
-            margin-top: 1rem;
-        }
-        
-        .audio-preview audio {
-            width: 100%;
-            height: 30px;
-        }
-        
-        /* Override per hover sulla scheda con poster strappato */
-        .torn-poster:hover .poster-base {
-            transform: scale(1.05);
-        }
-        /* ============================================
-           STILE POSTER FILM
-        ============================================ */
-        .poster {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-        
-        .scheda:hover .poster {
-            transform: scale(1.05);
-        }
-        
-        /* ============================================
-           INFORMAZIONI SCHEDA
-        ============================================ */
-        .scheda-info {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            padding: 1.5rem;
-            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
-            transform: translateY(20px);
-            opacity: 0;
-            transition: all 0.3s ease;
-        }
-        
-        .scheda:hover .scheda-info {
-            transform: translateY(0);
-            opacity: 1;
-        }
-        
-        .scheda-titolo {
-            font-family: var(--heading-font);
-            font-size: 1.2rem;
-            font-weight: 600;
-            margin-bottom: 0.3rem;
-        }
-        
-        .scheda-dettagli {
-            font-family: var(--body-font);
-            font-size: 0.8rem;
-            color: rgba(255, 255, 255, 0.7);
-            display: flex;
-            justify-content: center;
-        }
-        
-        /* ============================================
-           GESTIONE PAGINE
-        ============================================ */
-        .page {
-            display: none; /* Tutte le pagine sono nascoste di default */
-        }
-        
-        .page.active {
-            display: block; /* Solo la pagina attiva viene mostrata */
-        }
-        
-        /* ============================================
-           STILE FOOTER
-        ============================================ */
-        .site-footer {
-            margin-top: 4rem;
-            padding-top: 0.2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            text-align: center;
-        }
-        
-        .contact-footer {
-            margin-top: 4rem;       
-            margin-bottom: 4rem;    
-            padding-bottom: 4rem;     
-            padding-top: 0;         
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05); 
-        }
-
-        .contact-footer a {
-            font-family: var(--heading-font);
-            font-size: 1.5rem;
-            color: var(--text-color);
-            text-decoration: none;
-            transition: color 0.3s ease;
-            letter-spacing: 0.05em;
-            padding: 0.5rem 0;
-            display: inline-block;
-        }
-
-        .contact-footer a:hover {
-            color: var(--accent-color);
-        }
-
-        .copyright {
-            font-size: 0.8rem;
-            color: rgba(255, 255, 255, 0.6);
-            margin-bottom: 1rem;
-        }
-
-        .copyright a {
-            color: rgba(255, 255, 255, 0.6);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .copyright a:hover {
-            color: var(--accent-color);
-        }
-        /* ============================================
-           BIO PAGE STYLING
-        ============================================ */
-        .bio-container {
-            display: flex;
-            flex-direction: row;
-            gap: 3rem;
-            margin: 3rem auto;
-            max-width: 900px;
-        }
-        
-        .bio-photo-container {
-            flex: 0 0 300px;
-        }
-        
-        .bio-photo {
-            width: 100%;
-            aspect-ratio: 3/4;
-            object-fit: cover;
-            border-radius: 12px;
-            filter: grayscale(50%);
-            transition: filter 0.3s ease;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-        }
-        
-        .bio-photo:hover {
-            filter: grayscale(0%);
-        }
-        
-        .bio-text-container {
-            flex: 1;
-        }
-        
-        .bio-text {
-            line-height: 1.7;
-            margin-bottom: 2rem;
-            color: rgba(255, 255, 255, 0.9);
-        }
-        
-        .bio-links {
-            display: flex;
-            gap: 1rem;
-            margin-top: 2rem;
-            flex-wrap: wrap;
-        }
-        
-        .bio-button {
-            padding: 0.7rem 1.5rem;
-            background-color: var(--bg-color);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 6px;
-            color: var(--text-color);
-            font-family: var(--body-font);
-            font-size: 0.9rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        
-        .bio-button:hover {
-            background-color: rgba(255, 77, 109, 0.1);
-            border-color: var(--accent-color);
-            transform: translateY(-3px);
-        }
-        
-        .bio-button img {
-            height: 20px;
-            width: auto;
-        }
-        
-        /* Responsive design per la pagina bio */
-        @media (max-width: 768px) {
-            .bio-container {
-                flex-direction: column;
-                gap: 2rem;
-            }
-            
-            .bio-photo-container {
-                flex: 0 0 auto;
-                max-width: 250px;
-                margin: 0 auto;
-            }
-        }
-        /* ============================================
-           STILE FORM CONTATTO
-        ============================================ */
-        .contact-container {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 2rem 0;
-        }
-
-        .contact-intro {
-            margin-bottom: 2rem;
-            color: rgba(255, 255, 255, 0.8);
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .contact-input {
-            width: 100%;
-            padding: 1rem;
-            border: none;
-            border-radius: 5px;
-            background-color: rgba(255, 77, 109, 0.15);
-            color: var(--text-color);
-            font-family: var(--body-font);
-            transition: background-color 0.3s ease;
-        }
-
-        .contact-input:focus {
-            outline: none;
-            background-color: rgba(255, 77, 109, 0.25);
-        }
-
-        textarea.contact-input {
-            min-height: 150px;
-            resize: vertical;
-        }
-
-        .submit-btn {
-            background-color: var(--accent-color);
-            color: white;
-            border: none;
-            padding: 0.8rem 2rem;
-            border-radius: 5px;
-            font-family: var(--heading-font);
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .submit-btn:hover {
-            background-color: #e04463;
-            transform: translateY(-2px);
-        }
-        
-        /* ============================================
-           ALIEN BUTTON
-        ============================================ */
-        .alien-button {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            z-index: 100;
-            font-size: 2.5rem;
-            cursor: pointer;
-            transition: transform 0.3s ease, text-shadow 0.3s ease;
-            text-shadow: 0 0 10px rgba(255, 77, 109, 0.5);
-        }
-        
-        .alien-button:hover {
-            transform: scale(1.2);
-            text-shadow: 0 0 20px rgba(255, 77, 109, 0.8);
-        }
-        
-        /* ============================================
-           UPLOAD PAGE STYLING
-        ============================================ */
-        .upload-container {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 2rem 0;
-        }
-
-        .upload-intro {
-            margin-bottom: 2rem;
-            color: rgba(255, 255, 255, 0.8);
-        }
-
-        #password-form-container {
-            text-align: center;
-            max-width: 300px;
-            margin: 0 auto;
-        }
-
-        #upload-content {
-            text-align: center;
-            margin-top: 2rem;
-        }
-        
-        /* ============================================
-           RESPONSIVE DESIGN
-        ============================================ */
-        @media (max-width: 768px) {
-            .grid-container {
-                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-                gap: 1rem;
-            }
-            
-            .scheda-titolo {
-                font-size: 1rem;
-            }
-            
-            .scheda-dettagli {
-                font-size: 0.7rem;
-            }
-            
-            .web-area {
-                padding: 1rem;
-            }
-            
-            .nav-menu {
-                flex-wrap: wrap;
-                font-size: 0.8rem;
-            }
-            
-            h1 {
-                font-size: 2rem;
-            }
-            
-            .alien-button {
-                bottom: 20px;
-                right: 20px;
-                font-size: 2rem;
-            }
-        }
     </style>
 </head>
+
+<style>
+    /* ============================================
+       LAYOUT GRIGLIA
+    ============================================ */
+    .grid-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 2rem;
+        width: 100%;
+        margin: 3rem auto 0;
+    }
+    /* ============================================
+       STILE SCHEDA (CARD FILM)
+    ============================================ */
+    .scheda {
+        position: relative;
+        aspect-ratio: 2/3;
+        border-radius: 12px;
+        overflow: hidden;
+        cursor: pointer;
+        filter: grayscale(100%);
+        transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        background-color: rgba(0, 0, 0, 0.3); /* Sfondo base per schede vuote */
+    }
+    
+    /* Effetto hover sulla scheda */
+    .scheda:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+        filter: grayscale(0%);
+    }
+            
+    /* ============================================
+       STILE POSTER STRAPPATO
+    ============================================ */
+    .torn-poster {
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .poster-container {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+    }
+    
+    .poster-base {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+    }
+    
+    .poster-texture {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-size: cover;
+        background-position: center;
+        mix-blend-mode: overlay;
+        opacity: 0.7;
+        pointer-events: none;
+    }
+    
+    .torn-edge {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 20px;
+        background-color: rgba(255, 255, 255, 0.8);
+        clip-path: polygon(0% 100%, 4% 60%, 10% 90%, 16% 40%, 22% 100%, 30% 50%, 36% 100%, 44% 30%, 52% 100%, 62% 40%, 70% 90%, 76% 30%, 84% 100%, 92% 50%, 96% 100%, 100% 10%, 100% 100%);
+        z-index: 3;
+        transform: translateY(100%);
+        transition: transform 0.3s ease 0.5s;
+    }
+    
+    .torn-poster.active .torn-edge {
+        transform: translateY(0);
+        transition: transform 0.3s ease;
+    }
+    
+    .torn-info-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #f5f5f5;
+        background-image: linear-gradient(to bottom, rgba(255,255,255,0.8), rgba(210,210,210,0.5)), url('https://www.transparenttextures.com/patterns/paper.png');
+        padding: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        z-index: 1;
+        color: #333;
+        transform: translateY(100%);
+        transition: transform 0.5s ease;
+    }
+    
+    .torn-poster.active .poster-container {
+        transform: translateY(-100%);
+        transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    
+    .torn-poster.active .torn-info-container {
+        transform: translateY(0);
+    }
+    
+    .torn-info-container p {
+        margin-bottom: 0.8rem;
+        font-size: 0.9rem;
+    }
+    
+    .torn-info-container a {
+        color: var(--accent-color);
+        text-decoration: none;
+        transition: opacity 0.3s ease;
+    }
+    
+    .torn-info-container a:hover {
+        opacity: 0.8;
+    }
+
+    /* Stile per il link del trailer in rosso */
+    .trailer-link {
+        color: #ff0000 !important;
+        font-weight: bold;
+    }
+    
+    .audio-preview {
+        margin-top: 1rem;
+    }
+    
+    .audio-preview audio {
+        width: 100%;
+        height: 30px;
+    }
+    
+    /* Override per hover sulla scheda con poster strappato */
+    .torn-poster:hover .poster-base {
+        transform: scale(1.05);
+    }
+</style>
+
+<style>
+    /* ============================================
+       STILE POSTER FILM
+    ============================================ */
+    .poster {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+    }
+    
+    .scheda:hover .poster {
+        transform: scale(1.05);
+    }
+    
+    /* ============================================
+       INFORMAZIONI SCHEDA
+    ============================================ */
+    .scheda-info {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 1.5rem;
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+        transform: translateY(20px);
+        opacity: 0;
+        transition: all 0.3s ease;
+    }
+    
+    .scheda:hover .scheda-info {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    
+    .scheda-titolo {
+        font-family: var(--heading-font);
+        font-size: 1.2rem;
+        font-weight: 600;
+        margin-bottom: 0.3rem;
+    }
+    
+    .scheda-dettagli {
+        font-family: var(--body-font);
+        font-size: 0.8rem;
+        color: rgba(255, 255, 255, 0.7);
+        display: flex;
+        justify-content: center;
+    }
+    
+    /* ============================================
+       GESTIONE PAGINE
+    ============================================ */
+    .page {
+        display: none; /* Tutte le pagine sono nascoste di default */
+    }
+    
+    .page.active {
+        display: block; /* Solo la pagina attiva viene mostrata */
+    }
+    
+    /* ============================================
+       STILE FOOTER
+    ============================================ */
+    .site-footer {
+        margin-top: 4rem;
+        padding-top: 0.2rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        text-align: center;
+    }
+    
+    .contact-footer {
+        margin-top: 4rem;       
+        margin-bottom: 4rem;    
+        padding-bottom: 4rem;     
+        padding-top: 0;         
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05); 
+    }
+
+    .contact-footer a {
+        font-family: var(--heading-font);
+        font-size: 1.5rem;
+        color: var(--text-color);
+        text-decoration: none;
+        transition: color 0.3s ease;
+        letter-spacing: 0.05em;
+        padding: 0.5rem 0;
+        display: inline-block;
+    }
+
+    .contact-footer a:hover {
+        color: var(--accent-color);
+    }
+
+    .copyright {
+        font-size: 0.8rem;
+        color: rgba(255, 255, 255, 0.6);
+        margin-bottom: 1rem;
+    }
+
+    .copyright a {
+        color: rgba(255, 255, 255, 0.6);
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+    .copyright a:hover {
+        color: var(--accent-color);
+    }
+    
+    /* ============================================
+       BIO PAGE STYLING
+    ============================================ */
+    .bio-container {
+        display: flex;
+        flex-direction: row;
+        gap: 3rem;
+        margin: 3rem auto;
+        max-width: 900px;
+    }
+    
+    .bio-photo-container {
+        flex: 0 0 300px;
+    }
+    
+    .bio-photo {
+        width: 100%;
+        aspect-ratio: 3/4;
+        object-fit: cover;
+        border-radius: 12px;
+        filter: grayscale(50%);
+        transition: filter 0.3s ease;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    }
+    
+    .bio-photo:hover {
+        filter: grayscale(0%);
+    }
+    
+    .bio-text-container {
+        flex: 1;
+    }
+    
+    .bio-text {
+        line-height: 1.7;
+        margin-bottom: 2rem;
+        color: rgba(255, 255, 255, 0.9);
+    }
+    
+    .bio-links {
+        display: flex;
+        gap: 1rem;
+        margin-top: 2rem;
+        flex-wrap: wrap;
+    }
+    
+    .bio-button {
+        padding: 0.7rem 1.5rem;
+        background-color: var(--bg-color);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 6px;
+        color: var(--text-color);
+        font-family: var(--body-font);
+        font-size: 0.9rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    
+    .bio-button:hover {
+        background-color: rgba(255, 77, 109, 0.1);
+        border-color: var(--accent-color);
+        transform: translateY(-3px);
+    }
+    
+    .bio-button img {
+        height: 20px;
+        width: auto;
+    }
+    
+    /* ============================================
+       STILE FORM CREAZIONE SCHEDA
+    ============================================ */
+    .card-creation-form {
+        max-width: 600px;
+        margin: 2rem auto;
+        padding: 2rem;
+        background-color: rgba(0, 0, 0, 0.2);
+        border-radius: 10px;
+    }
+
+    .card-creation-form h3 {
+        margin-bottom: 1.5rem;
+        text-align: center;
+        font-family: var(--heading-font);
+    }
+
+    .card-creation-form label {
+        display: block;
+        margin-bottom: 0.5rem;
+        color: rgba(255, 255, 255, 0.8);
+    }
+
+    .card-creation-form .form-group {
+        margin-bottom: 1.2rem;
+    }
+
+    .card-creation-form .submit-btn {
+        width: 100%;
+        margin-top: 1rem;
+    }
+</style>
 <body>
     <!-- Bottone Alieno -->
     <div class="alien-button" onclick="showPage('upload-page', null); return false;">👽</div>
@@ -663,7 +558,6 @@
             <span class="nav-separator">-</span>
             <a href="#contact" class="menu-green" onclick="showPage('contact-page', this); return false;">CONTACT</a>
         </nav>
-                        
         <!-- ============================================
              PAGINA FILM (ATTIVA DI DEFAULT)
         ============================================ -->
@@ -680,12 +574,12 @@
                     <div class="torn-edge"></div>
                     <div class="torn-info-container">
                         <h3 class="scheda-titolo">LA BELVA</h3>
-                        <p><strong>TITLE:</strong> La Belva</p>
+                        <!-- Rimosso titolo ripetuto -->
                         <p><strong>DIRECTOR:</strong> Ludovico Di Martino</p>
-                        <p><strong>PRODUCTION:</strong> Groenlandia</p>
+                        <p><strong>PROD:</strong> Groenlandia</p>
                         <p><strong>YEAR:</strong> 2020</p>
                         <p><strong>GENRE:</strong> Thriller/Azione</p>
-                        <p><strong>TRAILER:</strong> <a href="https://www.youtube.com/watch?v=example" target="_blank">Trailer</a></p>
+                        <p><strong>TRAILER:</strong> <a href="https://www.youtube.com/watch?v=example" target="_blank" class="trailer-link">Guarda</a></p>
                         <div class="audio-preview">
                             <audio controls>
                                 <source src="#" type="audio/mpeg">
@@ -707,12 +601,11 @@
                     <div class="torn-edge"></div>
                     <div class="torn-info-container">
                         <h3 class="scheda-titolo">ABISSI PROFONDI</h3>
-                        <p><strong>TITLE:</strong> Abissi Profondi</p>
                         <p><strong>DIRECTOR:</strong> Laura Bianchi</p>
-                        <p><strong>PRODUCTION:</strong> Deep Studios</p>
+                        <p><strong>PROD:</strong> Deep Studios</p>
                         <p><strong>YEAR:</strong> 2019</p>
                         <p><strong>GENRE:</strong> Thriller/Drama</p>
-                        <p><strong>TRAILER:</strong> <a href="https://www.youtube.com/watch?v=example" target="_blank">Trailer</a></p>
+                        <p><strong>TRAILER:</strong> <a href="https://www.youtube.com/watch?v=example" target="_blank" class="trailer-link">Guarda</a></p>
                     </div>
                     <div class="scheda-info">
                         <h3 class="scheda-titolo">SOUND DESIGNER</h3>
@@ -728,19 +621,18 @@
                     <div class="torn-edge"></div>
                     <div class="torn-info-container">
                         <h3 class="scheda-titolo">ECHI DEL SILENZIO</h3>
-                        <p><strong>TITLE:</strong> Echi del Silenzio</p>
                         <p><strong>DIRECTOR:</strong> Andrea Neri</p>
-                        <p><strong>PRODUCTION:</strong> Echo Films</p>
+                        <p><strong>PROD:</strong> Echo Films</p>
                         <p><strong>YEAR:</strong> 2020</p>
                         <p><strong>GENRE:</strong> Drama</p>
-                        <p><strong>TRAILER:</strong> <a href="https://www.youtube.com/watch?v=example" target="_blank">Trailer</a></p>
+                        <p><strong>TRAILER:</strong> <a href="https://www.youtube.com/watch?v=example" target="_blank" class="trailer-link">Guarda</a></p>
                     </div>
                     <div class="scheda-info">
                         <h3 class="scheda-titolo">SOUND EDITOR</h3>
                     </div>
                 </div>
                 
-                <!-- SCHEDA 4 -->
+                <!-- Altre schede - struttura uguale con dati diversi -->
                 <div class="scheda torn-poster">
                     <div class="poster-container">
                         <img class="poster-base" src="https://source.unsplash.com/c1Jp-fo53U8" alt="Corsa Finale">
@@ -749,57 +641,14 @@
                     <div class="torn-edge"></div>
                     <div class="torn-info-container">
                         <h3 class="scheda-titolo">CORSA FINALE</h3>
-                        <p><strong>TITLE:</strong> Corsa Finale</p>
                         <p><strong>DIRECTOR:</strong> Gianni Moretti</p>
-                        <p><strong>PRODUCTION:</strong> Race Productions</p>
+                        <p><strong>PROD:</strong> Race Productions</p>
                         <p><strong>YEAR:</strong> 2021</p>
                         <p><strong>GENRE:</strong> Action/Thriller</p>
-                        <p><strong>TRAILER:</strong> <a href="https://www.youtube.com/watch?v=example" target="_blank">Trailer</a></p>
+                        <p><strong>TRAILER:</strong> <a href="https://www.youtube.com/watch?v=example" target="_blank" class="trailer-link">Guarda</a></p>
                     </div>
                     <div class="scheda-info">
                         <h3 class="scheda-titolo">SOUND DESIGNER / MIXER</h3>
-                    </div>
-                </div>
-                
-                <!-- SCHEDA 5 -->
-                <div class="scheda torn-poster">
-                    <div class="poster-container">
-                        <img class="poster-base" src="https://source.unsplash.com/GnvurwJsKaY" alt="Frequenze Future">
-                        <div class="poster-texture"></div>
-                    </div>
-                    <div class="torn-edge"></div>
-                    <div class="torn-info-container">
-                        <h3 class="scheda-titolo">FREQUENZE FUTURE</h3>
-                        <p><strong>TITLE:</strong> Frequenze Future</p>
-                        <p><strong>DIRECTOR:</strong> Sofia Romano</p>
-                        <p><strong>PRODUCTION:</strong> Waveline Studios</p>
-                        <p><strong>YEAR:</strong> 2022</p>
-                        <p><strong>GENRE:</strong> Sci-Fi</p>
-                        <p><strong>TRAILER:</strong> <a href="https://www.youtube.com/watch?v=example" target="_blank">Trailer</a></p>
-                    </div>
-                    <div class="scheda-info">
-                        <h3 class="scheda-titolo">SOUND EDITOR / COMPOSER</h3>
-                    </div>
-                </div>
-                
-                <!-- SCHEDA 6 -->
-                <div class="scheda torn-poster">
-                    <div class="poster-container">
-                        <img class="poster-base" src="https://source.unsplash.com/g1Kr4Ozfoac" alt="Attimo Sospeso">
-                        <div class="poster-texture"></div>
-                    </div>
-                    <div class="torn-edge"></div>
-                    <div class="torn-info-container">
-                        <h3 class="scheda-titolo">ATTIMO SOSPESO</h3>
-                        <p><strong>TITLE:</strong> Attimo Sospeso</p>
-                        <p><strong>DIRECTOR:</strong> Luca Verdi</p>
-                        <p><strong>PRODUCTION:</strong> Moment Pictures</p>
-                        <p><strong>YEAR:</strong> 2023</p>
-                        <p><strong>GENRE:</strong> Drama/Romance</p>
-                        <p><strong>TRAILER:</strong> <a href="https://www.youtube.com/watch?v=example" target="_blank">Trailer</a></p>
-                    </div>
-                    <div class="scheda-info">
-                        <h3 class="scheda-titolo">DIALOGUE EDITOR</h3>
                     </div>
                 </div>
             </main>
@@ -817,7 +666,7 @@
         </section>
         
         <!-- ============================================
-             PAGINA DOCUMENTARY
+             PAGINA DOCUMENTARY 
         ============================================ -->
         <section id="documentary-page" class="page">
             <main class="grid-container">
@@ -830,12 +679,11 @@
                     <div class="torn-edge"></div>
                     <div class="torn-info-container">
                         <h3 class="scheda-titolo">RUGGITI DELLA SAVANA</h3>
-                        <p><strong>TITLE:</strong> Ruggiti della Savana</p>
                         <p><strong>DIRECTOR:</strong> Paolo Serra</p>
-                        <p><strong>PRODUCTION:</strong> Wild Nature Films</p>
+                        <p><strong>PROD:</strong> Wild Nature Films</p>
                         <p><strong>YEAR:</strong> 2019</p>
                         <p><strong>GENRE:</strong> Nature Documentary</p>
-                        <p><strong>TRAILER:</strong> <a href="https://www.youtube.com/watch?v=example" target="_blank">Trailer</a></p>
+                        <p><strong>TRAILER:</strong> <a href="https://www.youtube.com/watch?v=example" target="_blank" class="trailer-link">Guarda</a></p>
                     </div>
                     <div class="scheda-info">
                         <h3 class="scheda-titolo">SOUND DESIGNER</h3>
@@ -851,57 +699,14 @@
                     <div class="torn-edge"></div>
                     <div class="torn-info-container">
                         <h3 class="scheda-titolo">BARRIERA CORALLINA</h3>
-                        <p><strong>TITLE:</strong> Barriera Corallina</p>
                         <p><strong>DIRECTOR:</strong> Marina Costa</p>
-                        <p><strong>PRODUCTION:</strong> Ocean Depths</p>
+                        <p><strong>PROD:</strong> Ocean Depths</p>
                         <p><strong>YEAR:</strong> 2020</p>
                         <p><strong>GENRE:</strong> Marine Documentary</p>
-                        <p><strong>TRAILER:</strong> <a href="https://www.youtube.com/watch?v=example" target="_blank">Trailer</a></p>
+                        <p><strong>TRAILER:</strong> <a href="https://www.youtube.com/watch?v=example" target="_blank" class="trailer-link">Guarda</a></p>
                     </div>
                     <div class="scheda-info">
                         <h3 class="scheda-titolo">SOUND EDITOR / MIXER</h3>
-                    </div>
-                </div>
-                
-                <!-- SCHEDA 3 -->
-                <div class="scheda torn-poster">
-                    <div class="poster-container">
-                        <img class="poster-base" src="https://source.unsplash.com/FV3GConVSss" alt="Connessioni Digitali">
-                        <div class="poster-texture"></div>
-                    </div>
-                    <div class="torn-edge"></div>
-                    <div class="torn-info-container">
-                        <h3 class="scheda-titolo">CONNESSIONI DIGITALI</h3>
-                        <p><strong>TITLE:</strong> Connessioni Digitali</p>
-                        <p><strong>DIRECTOR:</strong> Roberto Neri</p>
-                        <p><strong>PRODUCTION:</strong> Tech Docs</p>
-                        <p><strong>YEAR:</strong> 2021</p>
-                        <p><strong>GENRE:</strong> Technology Documentary</p>
-                        <p><strong>TRAILER:</strong> <a href="https://www.youtube.com/watch?v=example" target="_blank">Trailer</a></p>
-                    </div>
-                    <div class="scheda-info">
-                        <h3 class="scheda-titolo">DIALOGUE EDITOR</h3>
-                    </div>
-                </div>
-                
-                <!-- SCHEDA 4 -->
-                <div class="scheda torn-poster">
-                    <div class="poster-container">
-                        <img class="poster-base" src="https://source.unsplash.com/Nyvq2juw4_o" alt="Voci della Città">
-                        <div class="poster-texture"></div>
-                    </div>
-                    <div class="torn-edge"></div>
-                    <div class="torn-info-container">
-                        <h3 class="scheda-titolo">VOCI DELLA CITTÀ</h3>
-                        <p><strong>TITLE:</strong> Voci della Città</p>
-                        <p><strong>DIRECTOR:</strong> Carla Bianchi</p>
-                        <p><strong>PRODUCTION:</strong> Urban Stories</p>
-                        <p><strong>YEAR:</strong> 2022</p>
-                        <p><strong>GENRE:</strong> Urban Documentary</p>
-                        <p><strong>TRAILER:</strong> <a href="https://www.youtube.com/watch?v=example" target="_blank">Trailer</a></p>
-                    </div>
-                    <div class="scheda-info">
-                        <h3 class="scheda-titolo">SOUND DESIGNER / RECORDIST</h3>
                     </div>
                 </div>
             </main>
@@ -932,12 +737,11 @@
                     <div class="torn-edge"></div>
                     <div class="torn-info-container">
                         <h3 class="scheda-titolo">INNOVAZIONE SONORA</h3>
-                        <p><strong>TITLE:</strong> Innovazione Sonora</p>
                         <p><strong>DIRECTOR:</strong> Marco Rossi</p>
-                        <p><strong>PRODUCTION:</strong> TechSound Inc.</p>
+                        <p><strong>PROD:</strong> TechSound Inc.</p>
                         <p><strong>YEAR:</strong> 2020</p>
                         <p><strong>GENRE:</strong> Technology</p>
-                        <p><strong>TRAILER:</strong> <a href="https://www.youtube.com/watch?v=example" target="_blank">Trailer</a></p>
+                        <p><strong>TRAILER:</strong> <a href="https://www.youtube.com/watch?v=example" target="_blank" class="trailer-link">Guarda</a></p>
                     </div>
                     <div class="scheda-info">
                         <h3 class="scheda-titolo">SOUND DESIGNER</h3>
@@ -953,57 +757,14 @@
                     <div class="torn-edge"></div>
                     <div class="torn-info-container">
                         <h3 class="scheda-titolo">ARMONIA NATURALE</h3>
-                        <p><strong>TITLE:</strong> Armonia Naturale</p>
                         <p><strong>DIRECTOR:</strong> Laura Verde</p>
-                        <p><strong>PRODUCTION:</strong> NatureCare</p>
+                        <p><strong>PROD:</strong> NatureCare</p>
                         <p><strong>YEAR:</strong> 2021</p>
                         <p><strong>GENRE:</strong> Cosmetics</p>
-                        <p><strong>TRAILER:</strong> <a href="https://www.youtube.com/watch?v=example" target="_blank">Trailer</a></p>
+                        <p><strong>TRAILER:</strong> <a href="https://www.youtube.com/watch?v=example" target="_blank" class="trailer-link">Guarda</a></p>
                     </div>
                     <div class="scheda-info">
                         <h3 class="scheda-titolo">COMPOSER / MIXER</h3>
-                    </div>
-                </div>
-                
-                <!-- SCHEDA 3 -->
-                <div class="scheda torn-poster">
-                    <div class="poster-container">
-                        <img class="poster-base" src="https://source.unsplash.com/BtbjCFUvBXs" alt="Velocità Acustica">
-                        <div class="poster-texture"></div>
-                    </div>
-                    <div class="torn-edge"></div>
-                    <div class="torn-info-container">
-                        <h3 class="scheda-titolo">VELOCITÀ ACUSTICA</h3>
-                        <p><strong>TITLE:</strong> Velocità Acustica</p>
-                        <p><strong>DIRECTOR:</strong> Piero Ferrari</p>
-                        <p><strong>PRODUCTION:</strong> SonicMotors</p>
-                        <p><strong>YEAR:</strong> 2022</p>
-                        <p><strong>GENRE:</strong> Automotive</p>
-                        <p><strong>TRAILER:</strong> <a href="https://www.youtube.com/watch?v=example" target="_blank">Trailer</a></p>
-                    </div>
-                    <div class="scheda-info">
-                        <h3 class="scheda-titolo">SOUND DESIGNER / RECORDIST</h3>
-                    </div>
-                </div>
-                
-                <!-- SCHEDA 4 -->
-                <div class="scheda torn-poster">
-                    <div class="poster-container">
-                        <img class="poster-base" src="https://source.unsplash.com/tA90pRfL2gM" alt="Freschezza Sonora">
-                        <div class="poster-texture"></div>
-                    </div>
-                    <div class="torn-edge"></div>
-                    <div class="torn-info-container">
-                        <h3 class="scheda-titolo">FRESCHEZZA SONORA</h3>
-                        <p><strong>TITLE:</strong> Freschezza Sonora</p>
-                        <p><strong>DIRECTOR:</strong> Gaia Marino</p>
-                        <p><strong>PRODUCTION:</strong> BeverageStudio</p>
-                        <p><strong>YEAR:</strong> 2023</p>
-                        <p><strong>GENRE:</strong> Beverage</p>
-                        <p><strong>TRAILER:</strong> <a href="https://www.youtube.com/watch?v=example" target="_blank">Trailer</a></p>
-                    </div>
-                    <div class="scheda-info">
-                        <h3 class="scheda-titolo">COMPOSER</h3>
                     </div>
                 </div>
             </main>
@@ -1034,12 +795,11 @@
                     <div class="torn-edge"></div>
                     <div class="torn-info-container">
                         <h3 class="scheda-titolo">ATMOSFERE FUTURISTICHE</h3>
-                        <p><strong>TITLE:</strong> Atmosfere Futuristiche</p>
-                        <p><strong>TYPE:</strong> Sound Library</p>
-                        <p><strong>PUBLISHED:</strong> 2020</p>
-                        <p><strong>PUBLISHER:</strong> SoundStash</p>
+                        <p><strong>DIRECTOR:</strong> Sound Library</p>
+                        <p><strong>PROD:</strong> SoundStash</p>
+                        <p><strong>YEAR:</strong> 2020</p>
                         <p><strong>GENRE:</strong> Sci-Fi / Ambient</p>
-                        <p><strong>SAMPLE:</strong> <a href="#" target="_blank">Listen</a></p>
+                        <p><strong>TRAILER:</strong> <a href="#" target="_blank" class="trailer-link">Ascolta</a></p>
                         <div class="audio-preview">
                             <audio controls>
                                 <source src="#" type="audio/mpeg">
@@ -1061,12 +821,11 @@
                     <div class="torn-edge"></div>
                     <div class="torn-info-container">
                         <h3 class="scheda-titolo">INQUIETUDINI SONORE</h3>
-                        <p><strong>TITLE:</strong> Inquietudini Sonore</p>
-                        <p><strong>TYPE:</strong> Sound Library</p>
-                        <p><strong>PUBLISHED:</strong> 2021</p>
-                        <p><strong>PUBLISHER:</strong> Horror Soundscapes</p>
+                        <p><strong>DIRECTOR:</strong> Sound Library</p>
+                        <p><strong>PROD:</strong> Horror Soundscapes</p>
+                        <p><strong>YEAR:</strong> 2021</p>
                         <p><strong>GENRE:</strong> Horror / Suspense</p>
-                        <p><strong>SAMPLE:</strong> <a href="#" target="_blank">Listen</a></p>
+                        <p><strong>TRAILER:</strong> <a href="#" target="_blank" class="trailer-link">Ascolta</a></p>
                         <div class="audio-preview">
                             <audio controls>
                                 <source src="#" type="audio/mpeg">
@@ -1076,60 +835,6 @@
                     </div>
                     <div class="scheda-info">
                         <h3 class="scheda-titolo">SOUND DESIGNER</h3>
-                    </div>
-                </div>
-                
-                <!-- SCHEDA 3 -->
-                <div class="scheda torn-poster">
-                    <div class="poster-container">
-                        <img class="poster-base" src="https://source.unsplash.com/nDd3dIkkOLo" alt="Paesaggi Urbani">
-                        <div class="poster-texture"></div>
-                    </div>
-                    <div class="torn-edge"></div>
-                    <div class="torn-info-container">
-                        <h3 class="scheda-titolo">PAESAGGI URBANI</h3>
-                        <p><strong>TITLE:</strong> Paesaggi Urbani</p>
-                        <p><strong>TYPE:</strong> Field Recordings</p>
-                        <p><strong>PUBLISHED:</strong> 2022</p>
-                        <p><strong>PUBLISHER:</strong> Urban Audio</p>
-                        <p><strong>GENRE:</strong> Ambient / Documentary</p>
-                        <p><strong>SAMPLE:</strong> <a href="#" target="_blank">Listen</a></p>
-                        <div class="audio-preview">
-                            <audio controls>
-                                <source src="#" type="audio/mpeg">
-                                Il tuo browser non supporta l'elemento audio.
-                            </audio>
-                        </div>
-                    </div>
-                    <div class="scheda-info">
-                        <h3 class="scheda-titolo">FIELD RECORDIST</h3>
-                    </div>
-                </div>
-                
-                <!-- SCHEDA 4 -->
-                <div class="scheda torn-poster">
-                    <div class="poster-container">
-                        <img class="poster-base" src="https://source.unsplash.com/iQSAuTAKfNo" alt="Sinfonie Orchestrali">
-                        <div class="poster-texture"></div>
-                    </div>
-                    <div class="torn-edge"></div>
-                    <div class="torn-info-container">
-                        <h3 class="scheda-titolo">SINFONIE ORCHESTRALI</h3>
-                        <p><strong>TITLE:</strong> Sinfonie Orchestrali</p>
-                        <p><strong>TYPE:</strong> Orchestral Library</p>
-                        <p><strong>PUBLISHED:</strong> 2023</p>
-                        <p><strong>PUBLISHER:</strong> Classical Elements</p>
-                        <p><strong>GENRE:</strong> Orchestral / Cinematic</p>
-                        <p><strong>SAMPLE:</strong> <a href="#" target="_blank">Listen</a></p>
-                        <div class="audio-preview">
-                            <audio controls>
-                                <source src="#" type="audio/mpeg">
-                                Il tuo browser non supporta l'elemento audio.
-                            </audio>
-                        </div>
-                    </div>
-                    <div class="scheda-info">
-                        <h3 class="scheda-titolo">COMPOSER / PRODUCER</h3>
                     </div>
                 </div>
             </main>
@@ -1196,203 +901,357 @@
             </div>
             
             <!-- Footer (in ogni pagina) -->
-            <footer class="site-footer">
-                <div class="contact-footer">
-                    <a href="#contact" onclick="showPage('contact-page', document.querySelector('.nav-menu a[href=\'#contact\']')); return false;">- CONTACT ME -</a>
-                </div>
-                
-                <div class="copyright">
-                    © 2025 silviaohrenwebdesign | <a href="#privacy">Privacy Policy</a>
-                </div>
-            </footer>
-        </section>
-                
-        <!-- ============================================
-             PAGINA CONTACT ME
-        ============================================ -->
-        <section id="contact-page" class="page">
-            <div class="contact-container">
-                <h2>Contact Me</h2>
-                <p class="contact-intro">For collaborations or information, drop me a line at siorengo19@gmail.com or fill out the form below:</p>
-                
-                <form id="contact-form" action="https://api.web3forms.com/submit" method="POST">
-                    <!-- Chiave API di Web3Forms -->
-                    <input type="hidden" name="access_key" value="5a0361fa-4845-411c-b03d-1cec2e59091b">
-                    
-                    <!-- URL di redirect dopo invio -->
-                    <input type="hidden" name="redirect" value="https://web3forms.com/success">
-                    
-                    <!-- Email di destinazione nascosta (opzionale) -->
-                    <input type="hidden" name="to" value="siorengo19@gmail.com">
-                    
-                    <div class="form-group">
-                        <input type="email" name="email" placeholder="Your email" required class="contact-input">
-                    </div>
-                    
-                    <div class="form-group">
-                        <input type="text" name="subject" placeholder="Subject" required class="contact-input">
-                    </div>
-                    
-                    <div class="form-group">
-                        <textarea name="message" placeholder="Your message" required class="contact-input"></textarea>
-                    </div>
-                    
-                    <button type="submit" class="submit-btn">Send</button>
-                </form>
+        <footer class="site-footer">
+            <div class="contact-footer">
+                <a href="#contact" onclick="showPage('contact-page', document.querySelector('.nav-menu a[href=\'#contact\']')); return false;">- CONTACT ME -</a>
             </div>
             
-            <!-- Footer (in ogni pagina) -->
-            <footer class="site-footer">
-                <div class="copyright">
-                    © 2025 silviaohrenwebdesign | <a href="#privacy">Privacy Policy</a>
+            <div class="copyright">
+                © 2025 silviaohrenwebdesign | <a href="#privacy">Privacy Policy</a>
+            </div>
+        </footer>
+    </section>
+            
+    <!-- ============================================
+         PAGINA CONTACT ME
+    ============================================ -->
+    <section id="contact-page" class="page">
+        <div class="contact-container">
+            <h2>Contact Me</h2>
+            <p class="contact-intro">For collaborations or information, drop me a line at siorengo19@gmail.com or fill out the form below:</p>
+            
+            <form id="contact-form" action="https://api.web3forms.com/submit" method="POST">
+                <!-- Chiave API di Web3Forms -->
+                <input type="hidden" name="access_key" value="5a0361fa-4845-411c-b03d-1cec2e59091b">
+                
+                <!-- URL di redirect dopo invio -->
+                <input type="hidden" name="redirect" value="https://web3forms.com/success">
+                
+                <!-- Email di destinazione nascosta (opzionale) -->
+                <input type="hidden" name="to" value="siorengo19@gmail.com">
+                
+                <div class="form-group">
+                    <input type="email" name="email" placeholder="Your email" required class="contact-input">
                 </div>
-            </footer>
-        </section>
+                
+                <div class="form-group">
+                    <input type="text" name="subject" placeholder="Subject" required class="contact-input">
+                </div>
+                
+                <div class="form-group">
+                    <textarea name="message" placeholder="Your message" required class="contact-input"></textarea>
+                </div>
+                
+                <button type="submit" class="submit-btn">Send</button>
+            </form>
+        </div>
         
-        <!-- ============================================
-             PAGINA UPLOAD (CON PROTEZIONE PASSWORD)
-        ============================================ -->
-        <section id="upload-page" class="page">
-            <div class="upload-container">
-                <h2>Area Riservata</h2>
-                
-                <!-- Form di accesso con password -->
-                <div id="password-form-container">
-                    <p class="upload-intro">Inserisci la password per accedere all'area di upload</p>
-                    <div class="form-group">
-                        <input type="password" id="access-password" placeholder="Password" class="contact-input">
-                    </div>
-                    <button onclick="checkPassword()" class="submit-btn">Accedi</button>
-                </div>
-                
-                <!-- Contenuto protetto (invisibile fino all'autenticazione) -->
-                <div id="upload-content" style="display: none;">
-                    <h3>UPLOAD</h3>
-                    <p class="upload-intro">Area di caricamento contenuti</p>
-                    <!-- Qui inseriremo il contenuto dell'area riservata -->
-                </div>
+        <!-- Footer (in ogni pagina) -->
+        <footer class="site-footer">
+            <div class="copyright">
+                © 2025 silviaohrenwebdesign | <a href="#privacy">Privacy Policy</a>
             </div>
-            
-            <!-- Footer (in ogni pagina) -->
-            <footer class="site-footer">
-                <div class="contact-footer">
-                    <a href="#contact" onclick="showPage('contact-page', document.querySelector('.nav-menu a[href=\'#contact\']')); return false;">- CONTACT ME -</a>
-                </div>
-                
-                <div class="copyright">
-                    © 2025 silviaohrenwebdesign | <a href="#privacy">Privacy Policy</a>
-                </div>
-            </footer>
-        </section>
-    </div><!-- Fine web-area -->
+        </footer>
+    </section>
     
-    <!-- Script di navigazione e altro -->
-    <script>
-        // Funzione per cambiare pagina
-        function showPage(pageId, clickedLink) {
-            // Nascondi tutte le pagine
-            var pages = document.querySelectorAll('.page');
-            for (var i = 0; i < pages.length; i++) {
-                pages[i].classList.remove('active');
-            }
+    <!-- ============================================
+         PAGINA UPLOAD (CON PROTEZIONE PASSWORD)
+    ============================================ -->
+    <section id="upload-page" class="page">
+        <div class="upload-container">
+            <h2>Area Riservata</h2>
             
-            // Mostra la pagina selezionata
-            document.getElementById(pageId).classList.add('active');
+            <!-- Form di accesso con password -->
+            <div id="password-form-container">
+                <p class="upload-intro">Inserisci la password per accedere all'area di upload</p>
+                <div class="form-group">
+                    <input type="password" id="access-password" placeholder="Password" class="contact-input">
+                </div>
+                <button onclick="checkPassword()" class="submit-btn">Accedi</button>
+            </div>
             
-            // Se è stato passato un link (non per il bottone alieno)
-            if (clickedLink) {
-                // Rimuovi classe active da tutti i link ma preserva menu-green
-                var links = document.querySelectorAll('.nav-menu a');
-                for (var i = 0; i < links.length; i++) {
-                    var isGreen = links[i].classList.contains('menu-green');
-                    links[i].classList.remove('active');
-                    // Ripristina la classe menu-green se necessario
-                    if (isGreen && !links[i].classList.contains('menu-green')) {
-                        links[i].classList.add('menu-green');
-                    }
-                }
+            <!-- Contenuto protetto (invisibile fino all'autenticazione) -->
+            <div id="upload-content" style="display: none;">
+                <h3>UPLOAD</h3>
+                <p class="upload-intro">Area di caricamento contenuti</p>
                 
-                // Aggiungi classe active al link cliccato
-                clickedLink.classList.add('active');
-                
-                // Aggiorna URL senza causare refresh della pagina
-                history.pushState(null, null, clickedLink.getAttribute('href'));
-            }
-            
-            return false; // Previene l'azione predefinita del link
+                <!-- Form di creazione nuova scheda -->
+                <div class="card-creation-form">
+                    <h3>Crea Nuova Scheda</h3>
+                    <form id="new-card-form">
+                        <div class="form-group">
+                            <label for="card-category">Categoria</label>
+                            <select id="card-category" class="contact-input" required>
+                                <option value="">-- Seleziona categoria --</option>
+                                <option value="FILM">FILM</option>
+                                <option value="DOCUMENTARY">DOCUMENTARY</option>
+                                <option value="COMMERCIAL">COMMERCIAL</option>
+                                <option value="LIBRARY">LIBRARY</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="card-title">Titolo</label>
+                            <input type="text" id="card-title" class="contact-input" placeholder="Inserisci il titolo" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="card-job">Job</label>
+                            <input type="text" id="card-job" class="contact-input" placeholder="Inserisci il ruolo (es. SOUND EDITOR)" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="card-director">Director</label>
+                            <input type="text" id="card-director" class="contact-input" placeholder="Inserisci il regista" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="card-prod">Production</label>
+                            <input type="text" id="card-prod" class="contact-input" placeholder="Inserisci la produzione" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="card-year">Year</label>
+                            <input type="text" id="card-year" class="contact-input" placeholder="Inserisci l'anno" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="card-genre">Genre</label>
+                            <input type="text" id="card-genre" class="contact-input" placeholder="Inserisci il genere" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="card-trailer">Link Trailer</label>
+                            <input type="url" id="card-trailer" class="contact-input" placeholder="Inserisci URL del trailer">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="card-poster">Link Immagine Poster</label>
+                            <input type="url" id="card-poster" class="contact-input" placeholder="Inserisci URL dell'immagine poster" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="card-audio">Link Audio (opzionale)</label>
+                            <input type="url" id="card-audio" class="contact-input" placeholder="Inserisci URL del file audio">
+                        </div>
+                        
+                        <button type="submit" class="submit-btn">Crea Scheda</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Footer (in ogni pagina) -->
+        <footer class="site-footer">
+            <div class="copyright">
+                © 2025 silviaohrenwebdesign | <a href="#privacy">Privacy Policy</a>
+            </div>
+        </footer>
+    </section>
+</div><!-- Fine web-area -->
+
+<!-- Script di navigazione e funzionalità -->
+<script>
+    // Funzione per cambiare pagina
+    function showPage(pageId, clickedLink) {
+        // Nascondi tutte le pagine
+        var pages = document.querySelectorAll('.page');
+        for (var i = 0; i < pages.length; i++) {
+            pages[i].classList.remove('active');
         }
         
-        // Controlla URL all'avvio
-        document.addEventListener('DOMContentLoaded', function() {
-            var hash = window.location.hash;
-            if (hash) {
-                var targetLink = document.querySelector('.nav-menu a[href="' + hash + '"]');
-                if (targetLink) {
-                    showPage(targetLink.getAttribute('href').replace('#', '') + '-page', targetLink);
+        // Mostra la pagina selezionata
+        document.getElementById(pageId).classList.add('active');
+        
+        // Se è stato passato un link (non per il bottone alieno)
+        if (clickedLink) {
+            // Rimuovi classe active da tutti i link ma preserva menu-green
+            var links = document.querySelectorAll('.nav-menu a');
+            for (var i = 0; i < links.length; i++) {
+                var isGreen = links[i].classList.contains('menu-green');
+                links[i].classList.remove('active');
+                // Ripristina la classe menu-green se necessario
+                if (isGreen && !links[i].classList.contains('menu-green')) {
+                    links[i].classList.add('menu-green');
                 }
             }
             
-            // Inizializza texture per tutti i poster strappati
-            initTornPosters();
+            // Aggiungi classe active al link cliccato
+            clickedLink.classList.add('active');
+            
+            // Aggiorna URL senza causare refresh della pagina
+            history.pushState(null, null, clickedLink.getAttribute('href'));
+        }
+        
+        return false; // Previene l'azione predefinita del link
+    }
+    
+    // Controlla URL all'avvio
+    document.addEventListener('DOMContentLoaded', function() {
+        var hash = window.location.hash;
+        if (hash) {
+            var targetLink = document.querySelector('.nav-menu a[href="' + hash + '"]');
+            if (targetLink) {
+                showPage(targetLink.getAttribute('href').replace('#', '') + '-page', targetLink);
+            }
+        }
+        
+        // Inizializza texture per tutti i poster strappati
+        initTornPosters();
+        
+        // Aggiungi event listener al form quando la pagina è caricata
+        const newCardForm = document.getElementById('new-card-form');
+        if (newCardForm) {
+            newCardForm.addEventListener('submit', createNewCard);
+        }
+    });
+    
+    // Sistema di verifica password per area upload
+    function checkPassword() {
+        var password = document.getElementById('access-password').value;
+        var correctPassword = 'bastacinema42';
+        
+        if (password === correctPassword) {
+            // Nascondi il form di accesso
+            document.getElementById('password-form-container').style.display = 'none';
+            
+            // Mostra il contenuto protetto
+            document.getElementById('upload-content').style.display = 'block';
+            
+            // Opzionale: salva un flag in sessionStorage
+            sessionStorage.setItem('authenticated', 'true');
+        } else {
+            alert('Password non corretta. Riprova.');
+        }
+    }
+    
+    // Funzione per inizializzare tutti i poster strappati
+    function initTornPosters() {
+        // Seleziona tutti gli elementi con poster texture
+        var textureElements = document.querySelectorAll('.poster-texture');
+        
+        // Array con i percorsi delle texture dal server WordPress
+        var textures = [
+            'https://www.ivanagloria.com/wp-content/uploads/2025/05/so_TEXTR1.jpg',
+            'https://www.ivanagloria.com/wp-content/uploads/2025/05/so_TEXTR2.png'
+        ];
+        
+        // Applica texture a ciascun elemento
+        textureElements.forEach(function(element) {
+            // Seleziona casualmente una texture
+            var randomTexture = textures[Math.floor(Math.random() * textures.length)];
+            
+            // Applica la texture come background
+            element.style.backgroundImage = 'url(' + randomTexture + ')';
         });
         
-        // Sistema di verifica password per area upload
-        function checkPassword() {
-            var password = document.getElementById('access-password').value;
-            var correctPassword = 'bastacinema42';
-            
-            if (password === correctPassword) {
-                // Nascondi il form di accesso
+        // Aggiungi interazione di click per ogni poster strappato
+        var tornPosters = document.querySelectorAll('.torn-poster');
+        tornPosters.forEach(function(poster) {
+            poster.addEventListener('click', function() {
+                this.classList.toggle('active');
+            });
+        });
+    }
+    
+    // Funzione per creare una nuova scheda
+    function createNewCard(event) {
+        event.preventDefault();
+        
+        // Raccogli i dati dal form
+        const category = document.getElementById('card-category').value;
+        const title = document.getElementById('card-title').value;
+        const job = document.getElementById('card-job').value;
+        const director = document.getElementById('card-director').value;
+        const prod = document.getElementById('card-prod').value;
+        const year = document.getElementById('card-year').value;
+        const genre = document.getElementById('card-genre').value;
+        const trailerLink = document.getElementById('card-trailer').value;
+        const posterImage = document.getElementById('card-poster').value;
+        const audioLink = document.getElementById('card-audio').value;
+        
+        // Crea HTML per la nuova scheda
+        const newCardHTML = `
+            <div class="scheda torn-poster">
+                <div class="poster-container">
+                    <img class="poster-base" src="${posterImage}" alt="${title}">
+                    <div class="poster-texture"></div>
+                </div>
+                <div class="torn-edge"></div>
+                <div class="torn-info-container">
+                    <h3 class="scheda-titolo">${title}</h3>
+                    <p><strong>DIRECTOR:</strong> ${director}</p>
+                    <p><strong>PROD:</strong> ${prod}</p>
+                    <p><strong>YEAR:</strong> ${year}</p>
+                    <p><strong>GENRE:</strong> ${genre}</p>
+                    <p><strong>TRAILER:</strong> <a href="${trailerLink}" target="_blank" class="trailer-link">Guarda</a></p>
+                    ${audioLink ? `
+                    <div class="audio-preview">
+                        <audio controls>
+                            <source src="${audioLink}" type="audio/mpeg">
+                            Il tuo browser non supporta l'elemento audio.
+                        </audio>
+                    </div>
+                    ` : ''}
+                </div>
+                <div class="scheda-info">
+                    <h3 class="scheda-titolo">${job}</h3>
+                </div>
+            </div>
+        `;
+        
+        // Aggiungi la scheda alla pagina corretta in base alla categoria
+        let targetPageId;
+        if (category === "LIBRARY") {
+            targetPageId = "libraries-page";
+        } else {
+            targetPageId = category.toLowerCase() + "-page";
+        }
+        
+        const targetPage = document.getElementById(targetPageId);
+        const gridContainer = targetPage.querySelector('.grid-container');
+        
+        // Inserisci la scheda all'inizio della griglia
+        gridContainer.insertAdjacentHTML('afterbegin', newCardHTML);
+        
+        // Inizializza la texture e gli eventi della nuova scheda
+        initTornPosters();
+        
+        // Resetta il form
+        document.getElementById('new-card-form').reset();
+        
+        // Feedback all'utente
+        alert('Scheda creata con successo!');
+    }
+    
+    // Controlla se l'utente è già autenticato all'apertura della pagina
+    document.addEventListener('DOMContentLoaded', function() {
+        if (sessionStorage.getItem('authenticated') === 'true') {
+            if (document.getElementById('password-form-container')) {
                 document.getElementById('password-form-container').style.display = 'none';
-                
-                // Mostra il contenuto protetto
                 document.getElementById('upload-content').style.display = 'block';
-                
-                // Opzionale: salva un flag in sessionStorage
-                sessionStorage.setItem('authenticated', 'true');
-            } else {
-                alert('Password non corretta. Riprova.');
             }
         }
         
-        // Funzione per inizializzare tutti i poster strappati
-        function initTornPosters() {
-            // Seleziona tutti gli elementi con poster texture
-            var textureElements = document.querySelectorAll('.poster-texture');
-            
-            // Array con i percorsi delle texture dal server WordPress
-            var textures = [
-                'https://www.ivanagloria.com/wp-content/uploads/2025/05/so_TEXTR1.jpg',
-                'https://www.ivanagloria.com/wp-content/uploads/2025/05/so_TEXTR2.png'
-            ];
-            
-            // Applica texture a ciascun elemento
-            textureElements.forEach(function(element) {
-                // Seleziona casualmente una texture
-                var randomTexture = textures[Math.floor(Math.random() * textures.length)];
-                
-                // Applica la texture come background
-                element.style.backgroundImage = 'url(' + randomTexture + ')';
-            });
-            
-            // Aggiungi interazione di click per ogni poster strappato
-            var tornPosters = document.querySelectorAll('.torn-poster');
-            tornPosters.forEach(function(poster) {
-                poster.addEventListener('click', function() {
-                    this.classList.toggle('active');
-                });
-            });
+        // Verifica URL hash all'avvio
+        var hash = window.location.hash;
+        if (hash) {
+            var targetLink = document.querySelector('.nav-menu a[href="' + hash + '"]');
+            if (targetLink) {
+                showPage(targetLink.getAttribute('href').replace('#', '') + '-page', targetLink);
+            }
         }
         
-        // Controlla se l'utente è già autenticato all'apertura della pagina
-        document.addEventListener('DOMContentLoaded', function() {
-            if (sessionStorage.getItem('authenticated') === 'true') {
-                if (document.getElementById('password-form-container')) {
-                    document.getElementById('password-form-container').style.display = 'none';
-                    document.getElementById('upload-content').style.display = 'block';
-                }
-            }
-        });
-    </script>
+        // Inizializza texture per tutti i poster strappati
+        initTornPosters();
+        
+        // Aggiungi event listener al form di creazione scheda
+        const newCardForm = document.getElementById('new-card-form');
+        if (newCardForm) {
+            newCardForm.addEventListener('submit', createNewCard);
+        }
+    });
+</script>
 </body>
 </html>
+
