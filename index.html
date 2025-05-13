@@ -311,7 +311,6 @@
         .torn-poster:hover .poster-base {
             transform: scale(1.05);
         }
-
         /* ============================================
            STILE POSTER FILM
         ============================================ */
@@ -683,35 +682,35 @@
         ============================================ -->
         <section id="film-page" class="page active">
             <main class="grid-container">
-                <!-- SCHEDA 1 - Con effetto poster -->
-                <div class="scheda torn-poster">
-                    <div class="poster-container">
-                        <!-- Immagine poster base dal link diretto -->
-                        <img class="poster-base" src="https://drive.google.com/uc?export=view&id=1LI5KYVqRTq6jvpW2kmAHStZooDa750Pg">
-                        <!-- Overlay con texture -->
-                        <div class="poster-texture"></div>
-                    </div>
-                    <div class="torn-edge"></div>
-                    <div class="torn-info-container">
-                        <h3 class="scheda-titolo">BBB - Dettagli</h3>
-                        <p>Regista: Nome Regista</p>
-                        <p>Anno: 2022</p>
-                        <p>Genere: Drammatico</p>
-                        <div class="audio-preview">
-                            <audio controls>
-                                <source src="#" type="audio/mpeg">
-                                Il tuo browser non supporta l'elemento audio.
-                            </audio>
-                        </div>
-                    </div>
-                    <div class="scheda-info">
-                        <h3 class="scheda-titolo">BBB</h3>
-                        <div class="scheda-dettagli">
-                            <span>Direttore XYZ</span>
-                            <span>2022</span>
-                        </div>
-                    </div>
+        <!-- SCHEDA 1 - Con effetto poster strappato -->
+        <div class="scheda torn-poster">
+            <div class="poster-container">
+                <!-- Immagine poster base dal link diretto -->
+                <img class="poster-base" src="https://www.ivanagloria.com/wp-content/uploads/2025/05/so_2020_LA-BELVA.jpg" alt="LA BELVA">
+                <!-- Overlay con texture -->
+                <div class="poster-texture"></div>
+            </div>
+            <div class="torn-edge"></div>
+            <div class="torn-info-container">
+                <h3 class="scheda-titolo">LA BELVA - Dettagli</h3>
+                <p>Regista: Ludovico Di Martino</p>
+                <p>Anno: 2020</p>
+                <p>Genere: Thriller/Azione</p>
+                <div class="audio-preview">
+                    <audio controls>
+                        <source src="#" type="audio/mpeg">
+                        Il tuo browser non supporta l'elemento audio.
+                    </audio>
                 </div>
+            </div>
+            <div class="scheda-info">
+                <h3 class="scheda-titolo">LA BELVA</h3>
+                <div class="scheda-dettagli">
+                    <span>Ludovico Di Martino</span>
+                    <span>2020</span>
+                </div>
+            </div>
+        </div>
                 <!-- SCHEDA 2 -->
                 <div class="scheda">
                     <img class="poster" src="https://source.unsplash.com/CiUR8zISX60" alt="Abissi Profondi">
@@ -1202,29 +1201,29 @@
 
         <!-- Script per l'effetto poster strappato -->
         <script>
-            // Funzione per applicare casualmente una delle texture
-            document.addEventListener('DOMContentLoaded', function() {
-                // Seleziona l'elemento texture
-                var textureElement = document.querySelector('.poster-texture');
-                
-                // Array con i percorsi delle texture da Google Drive
-                var textures = [
-                    'https://drive.google.com/uc?export=view&id=1pMvvWX1iaVUEMH97racghUoqFpDqm3ix',
-                    'https://drive.google.com/uc?export=view&id=1bmA099glzaYK1cxcungO4Mc3jSmhgDVC'
-                ];
-                
-                // Seleziona casualmente una texture
-                var randomTexture = textures[Math.floor(Math.random() * textures.length)];
-                
-                // Applica la texture come background
-                textureElement.style.backgroundImage = 'url(' + randomTexture + ')';
-                
-                // Aggiungi interazione di click per l'effetto strappo
-                var tornPoster = document.querySelector('.torn-poster');
-                tornPoster.addEventListener('click', function() {
-                    this.classList.toggle('active');
-                });
+        // Funzione per applicare casualmente una delle texture
+        document.addEventListener('DOMContentLoaded', function() {
+            // Seleziona l'elemento texture
+            var textureElement = document.querySelector('.poster-texture');
+            
+            // Array con i percorsi delle texture dal server WordPress
+            var textures = [
+                'https://www.ivanagloria.com/wp-content/uploads/2025/05/so_TEXTR1.jpg',
+                'https://www.ivanagloria.com/wp-content/uploads/2025/05/so_TEXTR2.png'
+            ];
+            
+            // Seleziona casualmente una texture
+            var randomTexture = textures[Math.floor(Math.random() * textures.length)];
+            
+            // Applica la texture come background
+            textureElement.style.backgroundImage = 'url(' + randomTexture + ')';
+            
+            // Aggiungi interazione di click per l'effetto strappo
+            var tornPoster = document.querySelector('.torn-poster');
+            tornPoster.addEventListener('click', function() {
+                this.classList.toggle('active');
             });
+        });
         </script>
 
 </body>
