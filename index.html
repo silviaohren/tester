@@ -1909,7 +1909,6 @@
             newCardForm.addEventListener('submit', createNewCard);
         }
     });
-
 // Codice per inserire dinamicamente l'alieno
 document.addEventListener('DOMContentLoaded', function() {
     // Rimuovi eventuali alien button esistenti
@@ -1922,6 +1921,30 @@ document.addEventListener('DOMContentLoaded', function() {
     var alien = document.createElement('div');
     alien.id = 'alien-button-container';
     alien.innerHTML = '👽';
+    
+    // Aggiungi stili inline per essere sicuro che funzionino
+    alien.style.position = 'fixed';
+    alien.style.bottom = '30px';
+    alien.style.right = '30px';
+    alien.style.zIndex = '9999';
+    alien.style.fontSize = '2.5rem';
+    alien.style.cursor = 'pointer';
+    alien.style.color = 'white'; // o var(--text-color) se accessibile
+    alien.style.textShadow = '0 0 10px rgba(255, 77, 109, 0.5)';
+    alien.style.transition = 'transform 0.3s ease, text-shadow 0.3s ease';
+    
+    // Aggiungi anche l'effetto hover
+    alien.addEventListener('mouseenter', function() {
+        this.style.transform = 'scale(1.2)';
+        this.style.textShadow = '0 0 20px rgba(255, 77, 109, 0.8)';
+    });
+    
+    alien.addEventListener('mouseleave', function() {
+        this.style.transform = 'scale(1)';
+        this.style.textShadow = '0 0 10px rgba(255, 77, 109, 0.5)';
+    });
+    
+    // Aggiungi il click handler
     alien.addEventListener('click', function() {
         showPage('upload-page', null);
         return false;
