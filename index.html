@@ -2007,35 +2007,6 @@ document.addEventListener('DOMContentLoaded', function() {
     document.body.appendChild(alien);
 });
 
-// Rimuovi createLibraryCard da DOMContentLoaded e manda direttamente l'evento a createLibraryCard
-
-document.addEventListener('DOMContentLoaded', function() {
-    // ... codice esistente ...
-    
-    // Gestione form di upload - CORRETTO
-    const newCardForm = document.getElementById('new-card-form');
-    if (newCardForm) {
-        // Rimuovi tutti i listener precedenti
-        const newForm = newCardForm.cloneNode(true);
-        newCardForm.parentNode.replaceChild(newForm, newCardForm);
-        
-        // Aggiungi nuovo listener unico
-        newForm.addEventListener('submit', function(event) {
-            event.preventDefault();
-            
-            const category = document.getElementById('card-category').value;
-            
-            if (category === "LIBRARY") {
-                createLibraryCard(event); // Passa l'evento!
-            } else {
-                createNewCard(event);
-            }
-        });
-    }
-    
-    // ... resto del codice ...
-});
-
 // Modifica la funzione createLibraryCard per accettare l'evento
 function createLibraryCard(event) {
     try {
