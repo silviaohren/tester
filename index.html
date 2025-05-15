@@ -1930,21 +1930,21 @@ document.addEventListener('DOMContentLoaded', function() {
     // Inizializza texture per tutti i poster strappati
     initTornPosters();
     
-    // Gestione form di upload con soluzione separata per LIBRARY
+   // Gestione form di upload - CORRETTO
     const newCardForm = document.getElementById('new-card-form');
     if (newCardForm) {
-        // Rimuovi eventuali listener esistenti per evitare duplicati
-        newCardForm.removeEventListener('submit', createNewCard);
+        // Rimuovi tutti i listener precedenti
+        const newForm = newCardForm.cloneNode(true);
+        newCardForm.parentNode.replaceChild(newForm, newCardForm);
         
-        // Aggiungi il listener che gestirà entrambi i casi
-        newCardForm.addEventListener('submit', function(event) {
+        // Aggiungi nuovo listener unico
+        newForm.addEventListener('submit', function(event) {
             event.preventDefault();
             
             const category = document.getElementById('card-category').value;
             
-            // Usa funzioni separate per LIBRARY e altre categorie
             if (category === "LIBRARY") {
-                createLibraryCard();
+                createLibraryCard(event); // Passa l'evento!
             } else {
                 createNewCard(event);
             }
@@ -2007,9 +2007,41 @@ document.addEventListener('DOMContentLoaded', function() {
     document.body.appendChild(alien);
 });
 
-// Funzione specifica per creare schede LIBRARY
-function createLibraryCard() {
+// Rimuovi createLibraryCard da DOMContentLoaded e manda direttamente l'evento a createLibraryCard
+
+document.addEventListener('DOMContentLoaded', function() {
+    // ... codice esistente ...
+    
+    // Gestione form di upload - CORRETTO
+    const newCardForm = document.getElementById('new-card-form');
+    if (newCardForm) {
+        // Rimuovi tutti i listener precedenti
+        const newForm = newCardForm.cloneNode(true);
+        newCardForm.parentNode.replaceChild(newForm, newCardForm);
+        
+        // Aggiungi nuovo listener unico
+        newForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            const category = document.getElementById('card-category').value;
+            
+            if (category === "LIBRARY") {
+                createLibraryCard(event); // Passa l'evento!
+            } else {
+                createNewCard(event);
+            }
+        });
+    }
+    
+    // ... resto del codice ...
+});
+
+// Modifica la funzione createLibraryCard per accettare l'evento
+function createLibraryCard(event) {
     try {
+        // Debug - verifica chiamata funzione
+        console.log("🔥 Creazione LIBRARY - funzione dedicata");
+        
         // Raccogli dati dal form
         const title = document.getElementById('card-title').value || 'Untitled';
         const location = document.getElementById('card-director').value || '';
@@ -2017,8 +2049,11 @@ function createLibraryCard() {
         const audioLink = document.getElementById('card-audio').value || '';
         const posterImage = document.getElementById('card-poster').value || 'https://via.placeholder.com/300x450?text=No+Image';
         
+        console.log("📊 Dati raccolti:", { title, location, tags, audioLink, posterImage });
+        
         // Trova la pagina LIBRARY
         const librariesPage = document.getElementById('libraries-page');
+        console.log("🔍 Pagina libraries trovata:", !!librariesPage);
         
         if (!librariesPage) {
             throw new Error("Pagina libraries-page non trovata");
@@ -2026,14 +2061,17 @@ function createLibraryCard() {
         
         // Trova il container per le schede
         const container = librariesPage.querySelector('.grid-container');
+        console.log("🔍 Container trovato:", !!container);
         
         if (!container) {
             throw new Error("Container .grid-container non trovato nella pagina libraries");
         }
         
-        // Crea la scheda con la classe CORRETTA "schedasquare torn-poster"
+        // Crea la scheda con la classe CORRETTA
         const scheda = document.createElement('div');
         scheda.className = 'schedasquare torn-poster';
+        console.log("🏗️ Creando elemento con classe:", scheda.className);
+        
         scheda.innerHTML = `
             <div class="poster-container">
                 <img class="poster-base" src="${posterImage}" alt="${title}">
@@ -2060,10 +2098,12 @@ function createLibraryCard() {
         
         // Inserisci la scheda all'inizio del container
         container.insertBefore(scheda, container.firstChild);
+        console.log("✅ Scheda inserita nel DOM");
         
         // Inizializza texture
         if (typeof initTornPosters === 'function') {
             initTornPosters();
+            console.log("🎨 Texture inizializzate");
         }
         
         // Resetta il form
@@ -2071,9 +2111,10 @@ function createLibraryCard() {
         
         // Feedback utente
         alert('Scheda LIBRARY creata con successo!');
+        console.log("🎉 Processo completato");
         
     } catch (error) {
-        console.error("Errore durante la creazione della scheda LIBRARY:", error);
+        console.error("❌ ERRORE:", error);
         alert("Errore durante la creazione della scheda LIBRARY: " + error.message);
     }
 }
