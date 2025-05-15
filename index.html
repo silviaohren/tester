@@ -2065,9 +2065,9 @@ function updateFormFields(category) {
         
     } else if (category === "LIBRARY") {
         // Modifica etichette per progetti Library
-        if (directorLabel) directorLabel.textContent = "Creator:";
-        if (prodLabel) prodLabel.textContent = "Company:";
-        if (genreLabel) genreLabel.textContent = "Type:";
+        if (directorLabel) directorLabel.textContent = "Location:";
+        if (prodLabel) prodLabel.textContent = "Tags:";
+        if (genreLabel) genreLabel.style.display = 'none'; // Nascondiamo questo campo
         if (trailerLabel) trailerLabel.textContent = "Library Link:";
         
         // Mostra il campo Audio per Library
@@ -2078,7 +2078,10 @@ function updateFormFields(category) {
         // Default per Film, Documentary, ecc.
         if (directorLabel) directorLabel.textContent = "Director:";
         if (prodLabel) prodLabel.textContent = "Production:";
-        if (genreLabel) genreLabel.textContent = "Genre:";
+        if (genreLabel) {
+            genreLabel.textContent = "Genre:";
+            genreLabel.style.display = 'block'; // Rimostriamo il campo se era stato nascosto
+        }
         if (trailerLabel) trailerLabel.textContent = "Trailer Link:";
         
         // Nascondi il campo Audio per non-Library
