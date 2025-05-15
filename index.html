@@ -1874,38 +1874,38 @@ function createNewCard(event) {
         // Inserisci la scheda all'inizio del container commercial
         const commercialContainer = targetPage.querySelector('.commercial-container');
         commercialContainer.insertAdjacentHTML('afterbegin', newCardHTML);
-    } else if (category === "LIBRARY") {
-        // Gestione per LIBRARY (con player audio)
-        const newCardHTML = `
-            <div class="scheda torn-poster">
-                <div class="poster-container">
-                    <img class="poster-base" src="${posterImage}" alt="${title}">
-                    <div class="poster-texture"></div>
-                </div>
-                <div class="torn-edge"></div>
-                <div class="torn-info-container">
-                    <h3 class="scheda-titolo">${title}</h3>
-                    <p><strong>COMPANY:</strong> ${prod}</p>
-                    <p><strong>TYPE:</strong> ${genre}</p>
-                    <p><strong>YEAR:</strong> ${year}</p>
-                    ${audioLink ? `
-                    <div class="audio-preview">
-                        <audio controls>
-                            <source src="${audioLink}" type="audio/mpeg">
-                            Il tuo browser non supporta l'elemento audio.
-                        </audio>
-                    </div>
-                    ` : ''}
-                </div>
-                <div class="scheda-info">
-                    <h3 class="scheda-titolo">${job}</h3>
-                </div>
+} else if (category === "LIBRARY") {
+    // Gestione per LIBRARY con i nuovi campi
+    const newCardHTML = `
+        <div class="scheda torn-poster">
+            <div class="poster-container">
+                <img class="poster-base" src="${posterImage}" alt="${title}">
+                <div class="poster-texture"></div>
             </div>
-        `;
-        
-        // Inserisci la scheda all'inizio della griglia
-        const gridContainer = targetPage.querySelector('.grid-container');
-        gridContainer.insertAdjacentHTML('afterbegin', newCardHTML);
+            <div class="torn-edge"></div>
+            <div class="torn-info-container">
+                <h3 class="scheda-titolo">${title}</h3>
+                <p><strong>LOCATION:</strong> ${director}</p>
+                <p><strong>KIND:</strong> ${prod}</p>
+                <p><strong>YEAR:</strong> ${year}</p>
+                ${audioLink ? `
+                <div class="audio-preview">
+                    <audio controls>
+                        <source src="${audioLink}" type="audio/mpeg">
+                        Il tuo browser non supporta l'elemento audio.
+                    </audio>
+                </div>
+                ` : ''}
+            </div>
+            <div class="scheda-info">
+                <h3 class="scheda-titolo">${title}</h3>
+            </div>
+        </div>
+    `;
+    
+    // Inserisci la scheda all'inizio della griglia
+    const gridContainer = targetPage.querySelector('.grid-container');
+    gridContainer.insertAdjacentHTML('afterbegin', newCardHTML);
     } else {
         // Per tutte le altre categorie (formato scheda standard)
         const newCardHTML = `
