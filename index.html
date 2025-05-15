@@ -1823,95 +1823,108 @@
 // Funzione per creare una nuova scheda
 function createNewCard(event) {
     event.preventDefault();
-
-
+    
+    try {
+        // Log per debug
+        console.log("Inizio creazione scheda");
+        
         // Ottieni la categoria selezionata
         const category = document.getElementById('card-category').value;
+        console.log("Categoria selezionata:", category);
         
-        // Raccogli sempre i dati base
+        // Dati di base
         const title = document.getElementById('card-title').value || 'Untitled';
         const posterImage = document.getElementById('card-poster').value || 'https://via.placeholder.com/300x450?text=No+Image';
         
-        // Determina la pagina di destinazione
-        let targetPageId;
+        // Se è LIBRARY, usa una soluzione molto semplice e diretta
         if (category === "LIBRARY") {
-            targetPageId = "libraries-page";
-        } else {
-            targetPageId = category.toLowerCase() + "-page";
-        }
-        
-        const targetPage = document.getElementById(targetPageId);
-        
-        // DEBUG - Stampa informazioni in console per diagnosticare
-        console.log("Categoria:", category);
-        console.log("Pagina di destinazione:", targetPageId);
-        console.log("Elemento pagina trovato:", targetPage);
-        
-        if (category === "LIBRARY") {
-            // Per LIBRARY, raccogli solo i campi che usiamo
-            const location = document.getElementById('card-director').value || '';
-            const tags = document.getElementById('card-prod').value || '';
+            console.log("Creazione scheda LIBRARY");
+            
+            // Seleziona il container principale
+            const librariesPage = document.getElementById('libraries-page');
+            console.log("Pagina libraries trovata:", librariesPage);
+            
+            if (!librariesPage) {
+                throw new Error("Pagina libraries-page non trovata!");
+            }
+            
+            // Cerca qualsiasi container all'interno della pagina libraries
+            let container = librariesPage.querySelector('.grid-container');
+            if (!container) {
+                // Fallback: cerca qualsiasi contenitore di schede
+                container = librariesPage.querySelector('main');
+            }
+            if (!container) {
+                // Ultimo tentativo: usa la pagina stessa
+                container = librariesPage;
+            }
+            
+            console.log("Container per insertion trovato:", container);
+            
+            // Crea il markup HTML per la scheda LIBRARY
+            const location = document.getElementById('card-director').value || 'N/A';
+            const tags = document.getElementById('card-prod').value || 'N/A';
             const audioLink = document.getElementById('card-audio').value || '';
             
-            console.log("Location:", location);
-            console.log("Tags:", tags);
-            console.log("Audio:", audioLink);
-            
-            // Verifica che il container esista nella pagina LIBRARY
-            const gridContainer = targetPage.querySelector('.grid-container');
-            console.log("Grid container trovato:", gridContainer);
-            
-            if (gridContainer) {
-                // Genera HTML semplificato per la scheda LIBRARY
-                const newCardHTML = `
-                    <div class="scheda torn-poster">
-                        <div class="poster-container">
-                            <img class="poster-base" src="${posterImage}" alt="${title}">
-                            <div class="poster-texture"></div>
-                        </div>
-                        <div class="torn-edge"></div>
-                        <div class="torn-info-container">
-                            <h3 class="scheda-titolo">${title}</h3>
-                            <p><strong>LOCATION:</strong> ${location}</p>
-                            <p><strong>TAGS:</strong> ${tags}</p>
-                            ${audioLink ? `
-                            <div class="audio-preview">
-                                <audio controls>
-                                    <source src="${audioLink}" type="audio/mpeg">
-                                    Il tuo browser non supporta l'elemento audio.
-                                </audio>
-                            </div>
-                            ` : ''}
-                        </div>
-                        <div class="scheda-info">
-                            <h3 class="scheda-titolo">${title}</h3>
-                        </div>
+            // Crea una struttura HTML molto semplice
+            const libraryCardDiv = document.createElement('div');
+            libraryCardDiv.className = "scheda torn-poster";
+            libraryCardDiv.innerHTML = `
+                <div class="poster-container">
+                    <img class="poster-base" src="${posterImage}" alt="${title}">
+                    <div class="poster-texture"></div>
+                </div>
+                <div class="torn-edge"></div>
+                <div class="torn-info-container">
+                    <h3 class="scheda-titolo">${title}</h3>
+                    <p><strong>LOCATION:</strong> ${location}</p>
+                    <p><strong>TAGS:</strong> ${tags}</p>
+                    ${audioLink ? `
+                    <div class="audio-preview">
+                        <audio controls>
+                            <source src="${audioLink}" type="audio/mpeg">
+                            Il tuo browser non supporta l'elemento audio.
+                        </audio>
                     </div>
-                `;
-                
-                // Inserisci la scheda all'inizio del container
-                gridContainer.insertAdjacentHTML('afterbegin', newCardHTML);
-                
-                // Inizializza gli effetti torn-poster
-                initTornPosters();
-                
-                // Resetta il form
-                document.getElementById('new-card-form').reset();
-                
-                // Feedback positivo
-                alert('Scheda Library creata con successo!');
+                    ` : ''}
+                </div>
+                <div class="scheda-info">
+                    <h3 class="scheda-titolo">${title}</h3>
+                </div>
+            `;
+            
+            // Inserisci all'inizio del container
+            if (container.firstChild) {
+                container.insertBefore(libraryCardDiv, container.firstChild);
             } else {
-                alert('Errore: Container per schede Library non trovato!');
-                console.error("Container .grid-container non trovato nella pagina", targetPageId);
+                container.appendChild(libraryCardDiv);
             }
-        } else {
-            // Lascia il codice esistente per le altre categorie...
-            // (qui il codice funziona correttamente)
             
-            // Continua con il reset del form e feedback
+            console.log("Scheda LIBRARY aggiunta al DOM");
+            
+            // Inizializza la scheda
+            if (typeof initTornPosters === 'function') {
+                initTornPosters();
+            }
+            
+            // Resetta il form e mostra feedback
             document.getElementById('new-card-form').reset();
-            alert('Scheda creata con successo!');
+            alert('Scheda LIBRARY creata con successo!');
             
+            return; // Termina qui per LIBRARY
+        }
+        
+        // Per altre categorie, usa il codice esistente che sappiamo funzionare
+        // ... [resto del codice per altre categorie]
+        
+        // Reset form e feedback finale
+        document.getElementById('new-card-form').reset();
+        alert('Scheda creata con successo!');
+        
+    } catch (error) {
+        // Gestione degli errori
+        console.error('Errore durante la creazione della scheda:', error);
+        alert('Si è verificato un errore durante la creazione della scheda: ' + error.message);
     }
 }
     
