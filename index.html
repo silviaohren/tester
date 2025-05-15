@@ -1928,90 +1928,50 @@ function createNewCard(event) {
     }
 }
     
-    // Inizializzazione al caricamento della pagina
-    document.addEventListener('DOMContentLoaded', function() {
-        // Controlla se l'utente è già autenticato
-        if (sessionStorage.getItem('authenticated') === 'true') {
-            if (document.getElementById('password-form-container')) {
-                document.getElementById('password-form-container').style.display = 'none';
-                document.getElementById('upload-content').style.display = 'block';
-            }
-        }
-        
-        // Verifica URL hash all'avvio
-        var hash = window.location.hash;
-        if (hash) {
-            var targetLink = document.querySelector('.nav-menu a[href="' + hash + '"]');
-            if (targetLink) {
-                showPage(targetLink.getAttribute('href').replace('#', '') + '-page', targetLink);
-            }
-        }
-        
-        // Inizializza texture per tutti i poster strappati
-        initTornPosters();
-        
-        // Aggiungi event listener al form di creazione scheda
-        const newCardForm = document.getElementById('new-card-form');
-        if (newCardForm) {
-            newCardForm.addEventListener('submit', createNewCard);
-        }
-        
-        // Codice per inserire dinamicamente l'alieno
-        // Rimuovi eventuali alien button esistenti
-        var existingButtons = document.querySelectorAll('.alien-button, #alien-button-container');
-        existingButtons.forEach(function(btn) {
-            btn.parentNode.removeChild(btn);
-        });
-        
-        // Crea nuovo elemento
-        var alien = document.createElement('div');
-        alien.id = 'alien-button-container';
-        alien.innerHTML = '👽';
-        
-        // Aggiungi stili inline per essere sicuro che funzionino
-        alien.style.position = 'fixed';
-        alien.style.bottom = '30px';
-        alien.style.right = '30px';
-        alien.style.zIndex = '9999';
-        alien.style.fontSize = '2.5rem';
-        alien.style.cursor = 'pointer';
-        alien.style.color = 'white'; // o var(--text-color) se accessibile
-        alien.style.textShadow = '0 0 10px rgba(255, 77, 109, 0.5)';
-        alien.style.transition = 'transform 0.3s ease, text-shadow 0.3s ease';
-        
-        // Aggiungi anche l'effetto hover
-        alien.addEventListener('mouseenter', function() {
-            this.style.transform = 'scale(1.2)';
-            this.style.textShadow = '0 0 20px rgba(255, 77, 109, 0.8)';
-        });
-        
-        alien.addEventListener('mouseleave', function() {
-            this.style.transform = 'scale(1)';
-            this.style.textShadow = '0 0 10px rgba(255, 77, 109, 0.5)';
-        });
-        
-        // Aggiungi il click handler
-        alien.addEventListener('click', function() {
-            showPage('upload-page', null);
-            return false;
-        });
-        
-        // Aggiungi direttamente al body
-        document.body.appendChild(alien);
-    });
-// Codice per inserire dinamicamente l'alieno
+// Inizializzazione al caricamento della pagina
 document.addEventListener('DOMContentLoaded', function() {
-    // [... codice alieno esistente ...]
+    // Controlla se l'utente è già autenticato
+    if (sessionStorage.getItem('authenticated') === 'true') {
+        if (document.getElementById('password-form-container')) {
+            document.getElementById('password-form-container').style.display = 'none';
+            document.getElementById('upload-content').style.display = 'block';
+        }
+    }
     
-    // Aggiungi direttamente al body
-    document.body.appendChild(alien);
-});
-
-// INSERISCI IL NUOVO BLOCCO QUI SOTTO
-
-// Codice per adattare il form in base alla categoria selezionata
-document.addEventListener('DOMContentLoaded', function() {
-    // Trova il menu a tendina della categoria
+    // Verifica URL hash all'avvio
+    var hash = window.location.hash;
+    if (hash) {
+        var targetLink = document.querySelector('.nav-menu a[href="' + hash + '"]');
+        if (targetLink) {
+            showPage(targetLink.getAttribute('href').replace('#', '') + '-page', targetLink);
+        }
+    }
+    
+    // Inizializza texture per tutti i poster strappati
+    initTornPosters();
+    
+    // Gestione form di upload con soluzione separata per LIBRARY
+    const newCardForm = document.getElementById('new-card-form');
+    if (newCardForm) {
+        // Rimuovi eventuali listener esistenti per evitare duplicati
+        newCardForm.removeEventListener('submit', createNewCard);
+        
+        // Aggiungi il listener che gestirà entrambi i casi
+        newCardForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            const category = document.getElementById('card-category').value;
+            
+            // Usa funzioni separate per LIBRARY e altre categorie
+            if (category === "LIBRARY") {
+                createLibraryCard();
+            } else {
+                createNewCard(event);
+            }
+        });
+    }
+    
+    // Trova il menu a tendina della categoria per aggiornare i campi del form
     const categorySelect = document.getElementById('card-category');
     if (categorySelect) {
         // Aggiungi un event listener per i cambiamenti di selezione
@@ -2022,8 +1982,145 @@ document.addEventListener('DOMContentLoaded', function() {
         // Esegui una volta all'inizio per impostare lo stato corretto
         updateFormFields(categorySelect.value);
     }
+    
+    // Codice per inserire dinamicamente l'alieno
+    // Rimuovi eventuali alien button esistenti
+    var existingButtons = document.querySelectorAll('.alien-button, #alien-button-container');
+    existingButtons.forEach(function(btn) {
+        btn.parentNode.removeChild(btn);
+    });
+    
+    // Crea nuovo elemento
+    var alien = document.createElement('div');
+    alien.id = 'alien-button-container';
+    alien.innerHTML = '👽';
+    
+    // Aggiungi stili inline per essere sicuro che funzionino
+    alien.style.position = 'fixed';
+    alien.style.bottom = '30px';
+    alien.style.right = '30px';
+    alien.style.zIndex = '9999';
+    alien.style.fontSize = '2.5rem';
+    alien.style.cursor = 'pointer';
+    alien.style.color = 'white'; // o var(--text-color) se accessibile
+    alien.style.textShadow = '0 0 10px rgba(255, 77, 109, 0.5)';
+    alien.style.transition = 'transform 0.3s ease, text-shadow 0.3s ease';
+    
+    // Aggiungi anche l'effetto hover
+    alien.addEventListener('mouseenter', function() {
+        this.style.transform = 'scale(1.2)';
+        this.style.textShadow = '0 0 20px rgba(255, 77, 109, 0.8)';
+    });
+    
+    alien.addEventListener('mouseleave', function() {
+        this.style.transform = 'scale(1)';
+        this.style.textShadow = '0 0 10px rgba(255, 77, 109, 0.5)';
+    });
+    
+    // Aggiungi il click handler
+    alien.addEventListener('click', function() {
+        showPage('upload-page', null);
+        return false;
+    });
+    
+    // Aggiungi direttamente al body
+    document.body.appendChild(alien);
 });
 
+// Funzione specifica per creare schede LIBRARY
+function createLibraryCard() {
+    try {
+        console.log("Creazione scheda LIBRARY");
+        
+        // Raccogli dati dal form
+        const title = document.getElementById('card-title').value || 'Untitled';
+        const location = document.getElementById('card-director').value || '';
+        const tags = document.getElementById('card-prod').value || '';
+        const audioLink = document.getElementById('card-audio').value || '';
+        const posterImage = document.getElementById('card-poster').value || 'https://via.placeholder.com/300x450?text=No+Image';
+        
+        console.log("Dati raccolti:", { title, location, tags, audioLink, posterImage });
+        
+        // Trova la pagina LIBRARY
+        const librariesPage = document.getElementById('libraries-page');
+        console.log("Pagina libraries trovata:", !!librariesPage);
+        
+        if (!librariesPage) {
+            throw new Error("Pagina libraries-page non trovata");
+        }
+        
+        // Trova il container per le schede
+        let container = librariesPage.querySelector('.grid-container');
+        console.log("Container grid trovato:", !!container);
+        
+        // Se non c'è .grid-container, prova con main
+        if (!container) {
+            container = librariesPage.querySelector('main');
+            console.log("Container main trovato:", !!container);
+        }
+        
+        // Ultimo tentativo: usa la pagina stessa
+        if (!container) {
+            container = librariesPage;
+            console.log("Usando la pagina stessa come container");
+        }
+        
+        // Crea l'HTML della scheda
+        const scheda = document.createElement('div');
+        scheda.className = 'scheda torn-poster';
+        scheda.innerHTML = `
+            <div class="poster-container">
+                <img class="poster-base" src="${posterImage}" alt="${title}">
+                <div class="poster-texture"></div>
+            </div>
+            <div class="torn-edge"></div>
+            <div class="torn-info-container">
+                <h3 class="scheda-titolo">${title}</h3>
+                <p><strong>LOCATION:</strong> ${location}</p>
+                <p><strong>TAGS:</strong> ${tags}</p>
+                ${audioLink ? `
+                <div class="audio-preview">
+                    <audio controls>
+                        <source src="${audioLink}" type="audio/mpeg">
+                        Il tuo browser non supporta l'elemento audio.
+                    </audio>
+                </div>
+                ` : ''}
+            </div>
+            <div class="scheda-info">
+                <h3 class="scheda-titolo">${title}</h3>
+            </div>
+        `;
+        
+        // Inserisci la scheda nel container
+        if (container.firstChild) {
+            console.log("Inserendo prima del primo figlio");
+            container.insertBefore(scheda, container.firstChild);
+        } else {
+            console.log("Aggiungendo come figlio");
+            container.appendChild(scheda);
+        }
+        
+        console.log("Scheda inserita nel DOM");
+        
+        // Inizializza le texture
+        if (typeof initTornPosters === 'function') {
+            initTornPosters();
+            console.log("Texture initializzate");
+        }
+        
+        // Resetta il form
+        document.getElementById('new-card-form').reset();
+        
+        // Feedback utente
+        alert('Scheda LIBRARY creata con successo!');
+        console.log("Creazione scheda LIBRARY completata con successo");
+        
+    } catch (error) {
+        console.error("Errore durante la creazione della scheda LIBRARY:", error);
+        alert("Errore durante la creazione della scheda LIBRARY: " + error.message);
+    }
+}
 // Funzione per aggiornare i campi del form in base alla categoria
 function updateFormFields(category) {
     // Riferimenti ai contenitori di campi (i div.form-group che contengono sia label che input)
