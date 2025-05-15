@@ -1886,8 +1886,7 @@ function createNewCard(event) {
             <div class="torn-info-container">
                 <h3 class="scheda-titolo">${title}</h3>
                 <p><strong>LOCATION:</strong> ${director}</p>
-                <p><strong>KIND:</strong> ${prod}</p>
-                <p><strong>YEAR:</strong> ${year}</p>
+                <p><strong>TAGS:</strong> ${prod}</p>
                 ${audioLink ? `
                 <div class="audio-preview">
                     <audio controls>
@@ -2042,91 +2041,98 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-    // Funzione per aggiornare i campi del form in base alla categoria
-    function updateFormFields(category) {
-        // Riferimenti ai contenitori di campi (i div.form-group che contengono sia label che input)
-        const directorGroup = document.querySelector('label[for="card-director"]').closest('.form-group');
-        const prodGroup = document.querySelector('label[for="card-prod"]').closest('.form-group');
-        const genreGroup = document.querySelector('label[for="card-genre"]').closest('.form-group');
-        const trailerGroup = document.querySelector('label[for="card-trailer"]').closest('.form-group');
-        const audioGroup = document.querySelector('label[for="card-audio"]').closest('.form-group');
+// Funzione per aggiornare i campi del form in base alla categoria
+function updateFormFields(category) {
+    // Riferimenti ai contenitori di campi (i div.form-group che contengono sia label che input)
+    const jobGroup = document.querySelector('label[for="card-job"]').closest('.form-group');
+    const directorGroup = document.querySelector('label[for="card-director"]').closest('.form-group');
+    const prodGroup = document.querySelector('label[for="card-prod"]').closest('.form-group');
+    const genreGroup = document.querySelector('label[for="card-genre"]').closest('.form-group');
+    const yearGroup = document.querySelector('label[for="card-year"]').closest('.form-group');
+    const trailerGroup = document.querySelector('label[for="card-trailer"]').closest('.form-group');
+    const audioGroup = document.querySelector('label[for="card-audio"]').closest('.form-group');
+    
+    // Riferimenti ai campi di input per modificare i placeholder
+    const directorInput = document.getElementById('card-director');
+    const prodInput = document.getElementById('card-prod');
+    const genreInput = document.getElementById('card-genre');
+    const trailerInput = document.getElementById('card-trailer');
+    const audioInput = document.getElementById('card-audio');
+    
+    // Riferimenti alle label
+    const prodLabel = document.querySelector('label[for="card-prod"]');
+    const directorLabel = document.querySelector('label[for="card-director"]');
+    const genreLabel = document.querySelector('label[for="card-genre"]');
+    const trailerLabel = document.querySelector('label[for="card-trailer"]');
+    const audioLabel = document.querySelector('label[for="card-audio"]');
+    
+    // Prima mostra tutti i gruppi (in caso fossero stati nascosti)
+    if (jobGroup) jobGroup.style.display = 'block';
+    if (directorGroup) directorGroup.style.display = 'block';
+    if (prodGroup) prodGroup.style.display = 'block';
+    if (genreGroup) genreGroup.style.display = 'block';
+    if (yearGroup) yearGroup.style.display = 'block';
+    if (trailerGroup) trailerGroup.style.display = 'block';
+    
+    if (category === "COMMERCIAL") {
+        // Modifica etichette e placeholder per progetti Commercial
+        if (directorLabel) directorLabel.textContent = "Director:";
+        if (directorInput) directorInput.placeholder = "Inserisci il regista";
         
-        // Riferimenti ai campi di input per modificare i placeholder
-        const directorInput = document.getElementById('card-director');
-        const prodInput = document.getElementById('card-prod');
-        const genreInput = document.getElementById('card-genre');
-        const trailerInput = document.getElementById('card-trailer');
-        const audioInput = document.getElementById('card-audio');
+        if (prodLabel) prodLabel.textContent = "Client:";
+        if (prodInput) prodInput.placeholder = "Inserisci il cliente";
         
-        // Riferimenti alle label
-        const directorLabel = document.querySelector('label[for="card-director"]');
-        const prodLabel = document.querySelector('label[for="card-prod"]');
-        const genreLabel = document.querySelector('label[for="card-genre"]');
-        const trailerLabel = document.querySelector('label[for="card-trailer"]');
-        const audioLabel = document.querySelector('label[for="card-audio"]');
+        if (genreLabel) genreLabel.textContent = "Agency:";
+        if (genreInput) genreInput.placeholder = "Inserisci l'agenzia";
         
-        // Prima mostra tutti i gruppi (in caso fossero stati nascosti)
-        if (directorGroup) directorGroup.style.display = 'block';
-        if (prodGroup) prodGroup.style.display = 'block';
-        if (genreGroup) genreGroup.style.display = 'block';
-        if (trailerGroup) trailerGroup.style.display = 'block';
+        if (trailerLabel) trailerLabel.textContent = "Commercial Link:";
+        if (trailerInput) trailerInput.placeholder = "Inserisci URL dello spot";
         
-        if (category === "COMMERCIAL") {
-            // Modifica etichette e placeholder per progetti Commercial
-            if (directorLabel) directorLabel.textContent = "Director:";
-            if (directorInput) directorInput.placeholder = "Inserisci il regista";
-            
-            if (prodLabel) prodLabel.textContent = "Client:";
-            if (prodInput) prodInput.placeholder = "Inserisci il cliente";
-            
-            if (genreLabel) genreLabel.textContent = "Agency:";
-            if (genreInput) genreInput.placeholder = "Inserisci l'agenzia";
-            
-            if (trailerLabel) trailerLabel.textContent = "Commercial Link:";
-            if (trailerInput) trailerInput.placeholder = "Inserisci URL dello spot";
-            
-            // Nascondi il campo Audio per Commercial
-            if (audioGroup) audioGroup.style.display = 'none';
-            
-        } else if (category === "LIBRARY") {
-            // Modifica etichette e placeholder per progetti Library
-            if (directorLabel) directorLabel.textContent = "Location:";
-            if (directorInput) directorInput.placeholder = "Dove hai registrato?";
-            
-            if (prodLabel) prodLabel.textContent = "Kind:";
-            if (prodInput) prodInput.placeholder = "Che suoni sono?";
-            
-            // Nascondi il campo Genre per Library
-            if (genreGroup) genreGroup.style.display = 'none';
-            
-            if (trailerLabel) trailerLabel.textContent = "Library Link:";
-            if (trailerInput) trailerInput.placeholder = "Link alla libreria (opzionale)";
-            
-            // Mostra il campo Audio per Library
-            if (audioGroup) audioGroup.style.display = 'block';
-            if (audioLabel) audioLabel.textContent = "Audio Preview:";
-            if (audioInput) audioInput.placeholder = "Inserisci URL del file audio";
-            
-        } else {
-            // Default per Film, Documentary, ecc.
-            if (directorLabel) directorLabel.textContent = "Director:";
-            if (directorInput) directorInput.placeholder = "Inserisci il regista";
-            
-            if (prodLabel) prodLabel.textContent = "Production:";
-            if (prodInput) prodInput.placeholder = "Inserisci la produzione";
-            
-            if (genreLabel) genreLabel.textContent = "Genre:";
-            if (genreInput) genreInput.placeholder = "Inserisci il genere";
-            
-            if (trailerLabel) trailerLabel.textContent = "Trailer Link:";
-            if (trailerInput) trailerInput.placeholder = "Inserisci URL del trailer";
-            
-            // Nascondi il campo Audio per non-Library
-            if (audioGroup) audioGroup.style.display = 'none';
-        }
+        // Nascondi il campo Audio per Commercial
+        if (audioGroup) audioGroup.style.display = 'none';
+        
+    } else if (category === "LIBRARY") {
+        // Modifica etichette e placeholder per progetti Library
+        
+        // Nascondi i campi Job e Year per Library
+        if (jobGroup) jobGroup.style.display = 'none';
+        if (yearGroup) yearGroup.style.display = 'none';
+        
+        if (directorLabel) directorLabel.textContent = "Location:";
+        if (directorInput) directorInput.placeholder = "Dove hai registrato?";
+        
+        if (prodLabel) prodLabel.textContent = "Tags:";
+        if (prodInput) prodInput.placeholder = "Che suoni sono?";
+        
+        // Nascondi il campo Genre per Library
+        if (genreGroup) genreGroup.style.display = 'none';
+        
+        if (trailerLabel) trailerLabel.textContent = "Library Link:";
+        if (trailerInput) trailerInput.placeholder = "Link alla libreria (opzionale)";
+        
+        // Mostra il campo Audio per Library
+        if (audioGroup) audioGroup.style.display = 'block';
+        if (audioLabel) audioLabel.textContent = "Audio Preview:";
+        if (audioInput) audioInput.placeholder = "Inserisci URL del file audio";
+        
+    } else {
+        // Default per Film, Documentary, ecc.
+        if (directorLabel) directorLabel.textContent = "Director:";
+        if (directorInput) directorInput.placeholder = "Inserisci il regista";
+        
+        if (prodLabel) prodLabel.textContent = "Production:";
+        if (prodInput) prodInput.placeholder = "Inserisci la produzione";
+        
+        if (genreLabel) genreLabel.textContent = "Genre:";
+        if (genreInput) genreInput.placeholder = "Inserisci il genere";
+        
+        if (trailerLabel) trailerLabel.textContent = "Trailer Link:";
+        if (trailerInput) trailerInput.placeholder = "Inserisci URL del trailer";
+        
+        // Nascondi il campo Audio per non-Library
+        if (audioGroup) audioGroup.style.display = 'none';
     }
-
-</script>
+}
 
 </script>
 
