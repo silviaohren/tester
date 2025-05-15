@@ -1380,6 +1380,16 @@
                 
                 <!-- Altre schede commercial seguono lo stesso pattern alternato -->
             </main>
+            <!-- Footer (in ogni pagina) -->
+            <footer class="site-footer">
+                <div class="contact-footer">
+                    <a href="#contact" onclick="showPage('contact-page', document.querySelector('.nav-menu a[href=\'#contact\']')); return false;">[ CONTACT ME ]</a>
+                </div>
+                
+                <div class="copyright">
+                   © 2025 silviaorengoDS
+                </div>
+            </footer>
         </section>
         
         <!-- ============================================
@@ -1805,7 +1815,7 @@
         });
     }
     
-   // Funzione per creare una nuova scheda
+// Funzione per creare una nuova scheda
 function createNewCard(event) {
     event.preventDefault();
     
@@ -1821,55 +1831,7 @@ function createNewCard(event) {
     const posterImage = document.getElementById('card-poster').value;
     const audioLink = document.getElementById('card-audio').value;
     
-    // Gestione condizionale dei campi in base alla categoria
-    let infoHTML = '';
-    
-    if (category === "LIBRARY") {
-        // Per LIBRARY, mostra i campi relativi alle librerie audio e includi il player
-        infoHTML = `
-            <h3 class="scheda-titolo">${title}</h3>
-            <p><strong>COMPANY:</strong> ${prod}</p>
-            <p><strong>TYPE:</strong> ${genre}</p>
-            <p><strong>YEAR:</strong> ${year}</p>
-            ${audioLink ? `
-            <div class="audio-preview">
-                <audio controls>
-                    <source src="${audioLink}" type="audio/mpeg">
-                    Il tuo browser non supporta l'elemento audio.
-                </audio>
-            </div>
-            ` : ''}
-        `;
-    } else {
-        // Per altre categorie, mostra i campi standard ma senza player audio
-        infoHTML = `
-            <h3 class="scheda-titolo">${title}</h3>
-            <p><strong>DIRECTOR:</strong> ${director}</p>
-            <p><strong>PROD:</strong> ${prod}</p>
-            <p><strong>YEAR:</strong> ${year}</p>
-            <p><strong>GENRE:</strong> ${genre}</p>
-            <p><strong>TRAILER:</strong> <a href="${trailerLink}" target="_blank" class="trailer-link">Watch here</a></p>
-        `;
-    }
-    
-    // Crea HTML per la nuova scheda
-    const newCardHTML = `
-        <div class="scheda torn-poster">
-            <div class="poster-container">
-                <img class="poster-base" src="${posterImage}" alt="${title}">
-                <div class="poster-texture"></div>
-            </div>
-            <div class="torn-edge"></div>
-            <div class="torn-info-container">
-                ${infoHTML}
-            </div>
-            <div class="scheda-info">
-                <h3 class="scheda-titolo">${job}</h3>
-            </div>
-        </div>
-    `;
-    
-    // Aggiungi la scheda alla pagina corretta in base alla categoria
+    // Determina la pagina di destinazione
     let targetPageId;
     if (category === "LIBRARY") {
         targetPageId = "libraries-page";
@@ -1878,13 +1840,99 @@ function createNewCard(event) {
     }
     
     const targetPage = document.getElementById(targetPageId);
-    const gridContainer = targetPage.querySelector('.grid-container');
     
-    // Inserisci la scheda all'inizio della griglia
-    gridContainer.insertAdjacentHTML('afterbegin', newCardHTML);
+    // Gestione speciale per COMMERCIAL (layout alternato)
+    if (category === "COMMERCIAL") {
+        // Conta le schede commercial esistenti per determinare il layout
+        const existingCards = targetPage.querySelectorAll('.commercial-card').length;
+        const isLeftLayout = existingCards % 2 === 0; // Alterna: 0=left, 1=right, 2=left, ecc.
+        const layoutClass = isLeftLayout ? 'card-left' : 'card-right';
+        
+        // Crea HTML per la nuova scheda commercial (layout orizzontale)
+        const newCardHTML = `
+            <div class="commercial-card ${layoutClass}">
+                <div class="commercial-media">
+                    <img src="${posterImage}" alt="${title}">
+                </div>
+                <div class="commercial-info">
+                    <h3>${title}</h3>
+                    <p class="job-title">${job}</p>
+                    <p><strong>CLIENT:</strong> ${prod}</p>
+                    <p><strong>AGENCY:</strong> ${genre}</p>
+                    <p><strong>YEAR:</strong> ${year}</p>
+                    <p><strong>DIRECTOR:</strong> ${director}</p>
+                    ${trailerLink ? `<p><a href="${trailerLink}" class="trailer-link" target="_blank">Watch Commercial</a></p>` : ''}
+                </div>
+            </div>
+        `;
+        
+        // Inserisci la scheda all'inizio del container commercial
+        const commercialContainer = targetPage.querySelector('.commercial-container');
+        commercialContainer.insertAdjacentHTML('afterbegin', newCardHTML);
+    } else if (category === "LIBRARY") {
+        // Gestione per LIBRARY (con player audio)
+        const newCardHTML = `
+            <div class="scheda torn-poster">
+                <div class="poster-container">
+                    <img class="poster-base" src="${posterImage}" alt="${title}">
+                    <div class="poster-texture"></div>
+                </div>
+                <div class="torn-edge"></div>
+                <div class="torn-info-container">
+                    <h3 class="scheda-titolo">${title}</h3>
+                    <p><strong>COMPANY:</strong> ${prod}</p>
+                    <p><strong>TYPE:</strong> ${genre}</p>
+                    <p><strong>YEAR:</strong> ${year}</p>
+                    ${audioLink ? `
+                    <div class="audio-preview">
+                        <audio controls>
+                            <source src="${audioLink}" type="audio/mpeg">
+                            Il tuo browser non supporta l'elemento audio.
+                        </audio>
+                    </div>
+                    ` : ''}
+                </div>
+                <div class="scheda-info">
+                    <h3 class="scheda-titolo">${job}</h3>
+                </div>
+            </div>
+        `;
+        
+        // Inserisci la scheda all'inizio della griglia
+        const gridContainer = targetPage.querySelector('.grid-container');
+        gridContainer.insertAdjacentHTML('afterbegin', newCardHTML);
+    } else {
+        // Per tutte le altre categorie (formato scheda standard)
+        const newCardHTML = `
+            <div class="scheda torn-poster">
+                <div class="poster-container">
+                    <img class="poster-base" src="${posterImage}" alt="${title}">
+                    <div class="poster-texture"></div>
+                </div>
+                <div class="torn-edge"></div>
+                <div class="torn-info-container">
+                    <h3 class="scheda-titolo">${title}</h3>
+                    <p><strong>DIRECTOR:</strong> ${director}</p>
+                    <p><strong>PROD:</strong> ${prod}</p>
+                    <p><strong>YEAR:</strong> ${year}</p>
+                    <p><strong>GENRE:</strong> ${genre}</p>
+                    <p><strong>TRAILER:</strong> <a href="${trailerLink}" target="_blank" class="trailer-link">Watch here</a></p>
+                </div>
+                <div class="scheda-info">
+                    <h3 class="scheda-titolo">${job}</h3>
+                </div>
+            </div>
+        `;
+        
+        // Inserisci la scheda all'inizio della griglia
+        const gridContainer = targetPage.querySelector('.grid-container');
+        gridContainer.insertAdjacentHTML('afterbegin', newCardHTML);
+    }
     
-    // Inizializza la texture e gli eventi della nuova scheda
-    initTornPosters();
+    // Inizializza la texture e gli eventi per poster strappati (solo se non è commercial)
+    if (category !== "COMMERCIAL") {
+        initTornPosters();
+    }
     
     // Resetta il form
     document.getElementById('new-card-form').reset();
