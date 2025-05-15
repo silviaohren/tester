@@ -210,7 +210,102 @@
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
             filter: grayscale(0%);
         }
-                            
+           /* ============================================
+               STILE SCHEDE COMMERCIAL (ORIZZONTALI)
+            ============================================ */
+            .commercial-container {
+                display: flex;
+                flex-direction: column;
+                gap: 2rem;
+                max-width: 90%;
+                margin: 0 auto;
+                padding: 1rem 0;
+            }
+            
+            .commercial-card {
+                display: flex;
+                width: 100%;
+                background-color: var(--card-bg-color);
+                border-radius: 8px;
+                overflow: hidden;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+                margin-bottom: 2rem;
+            }
+            
+            .commercial-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+            }
+            
+            .commercial-media {
+                flex: 0 0 60%;
+                position: relative;
+                overflow: hidden;
+                aspect-ratio: 16/9;
+            }
+            
+            .commercial-media img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                transition: transform 0.5s ease;
+            }
+            
+            .commercial-card:hover .commercial-media img {
+                transform: scale(1.05);
+            }
+            
+            .commercial-info {
+                flex: 0 0 40%;
+                padding: 1.5rem;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            }
+            
+            .commercial-info h3 {
+                margin-top: 0;
+                margin-bottom: 1rem;
+                color: var(--accent-color);
+            }
+            
+            .commercial-info p {
+                margin-bottom: 0.8rem;
+                font-size: 0.9rem;
+            }
+            
+            .commercial-info .job-title {
+                font-weight: bold;
+                color: var(--text-color);
+                margin-bottom: 1.5rem;
+                font-size: 1.1rem;
+            }
+            
+            /* Layout alternato LEFT/RIGHT */
+            .commercial-card.card-left {
+                flex-direction: row;
+            }
+            
+            .commercial-card.card-right {
+                flex-direction: row-reverse;
+            }
+            
+            /* Responsive per schermi piccoli */
+            @media (max-width: 768px) {
+                .commercial-card.card-left,
+                .commercial-card.card-right {
+                    flex-direction: column;
+                }
+                
+                .commercial-media {
+                    flex: 0 0 auto;
+                }
+                
+                .commercial-info {
+                    flex: 0 0 auto;
+                }
+            }                 
         /* ============================================
            STILE POSTER STRAPPATO
         ============================================ */
@@ -1248,38 +1343,43 @@
              PAGINA COMMERCIAL
         ============================================ -->
         <section id="commercial-page" class="page">
-            <main class="grid-container">
-                <!-- SCHEDA 1 -->
-                <div class="scheda torn-poster">
-                    <div class="poster-container">
-                        <img class="poster-base" src="https://source.unsplash.com/dUV3oohJzE8" alt="Innovazione Sonora">
-                        <div class="poster-texture"></div>
+            <main class="commercial-container">
+                <!-- Scheda Commercial 1 (LEFT layout) -->
+                <div class="commercial-card card-left">
+                    <div class="commercial-media">
+                        <img src="https://source.unsplash.com/random/800x450?commercial" alt="Commercial Project 1">
                     </div>
-                    <div class="torn-edge"></div>
-                    <div class="torn-info-container">
-                        <h3 class="scheda-titolo">INNOVAZIONE SONORA</h3>
-                        <p><strong>DIRECTOR:</strong> Marco Rossi</p>
-                        <p><strong>PROD:</strong> TechSound Inc.</p>
-                        <p><strong>YEAR:</strong> 2020</p>
-                        <p><strong>GENRE:</strong> Technology</p>
-                        <p><strong>TRAILER:</strong> <a href="https://www.youtube.com/watch?v=example" target="_blank" class="trailer-link">Watch here</a></p>
+                    <div class="commercial-info">
+                        <h3>BRAND NAME</h3>
+                        <p class="job-title">SOUND DESIGNER</p>
+                        <p><strong>CLIENT:</strong> Client Name</p>
+                        <p><strong>AGENCY:</strong> Agency Name</p>
+                        <p><strong>YEAR:</strong> 2023</p>
+                        <p><strong>DIRECTOR:</strong> Director Name</p>
+                        <p><strong>CAMPAIGN:</strong> Campaign Name</p>
+                        <p><a href="#" class="trailer-link" target="_blank">Watch Commercial</a></p>
                     </div>
-                    <div class="scheda-info">
-                        <h3 class="scheda-titolo">SOUND DESIGNER</h3>
-                    </div>
-                </div>
-            
-            
-            <!-- Footer (in ogni pagina) -->
-            <footer class="site-footer">
-                <div class="contact-footer">
-                    <a href="#contact" onclick="showPage('contact-page', document.querySelector('.nav-menu a[href=\'#contact\']')); return false;">- CONTACT ME -</a>
                 </div>
                 
-                <div class="copyright">
-                    © 2025 silviaorengoDS
+                <!-- Scheda Commercial 2 (RIGHT layout) -->
+                <div class="commercial-card card-right">
+                    <div class="commercial-media">
+                        <img src="https://source.unsplash.com/random/800x450?advertising" alt="Commercial Project 2">
+                    </div>
+                    <div class="commercial-info">
+                        <h3>ANOTHER BRAND</h3>
+                        <p class="job-title">MUSIC SUPERVISOR</p>
+                        <p><strong>CLIENT:</strong> Client Name</p>
+                        <p><strong>AGENCY:</strong> Agency Name</p>
+                        <p><strong>YEAR:</strong> 2022</p>
+                        <p><strong>DIRECTOR:</strong> Director Name</p>
+                        <p><strong>CAMPAIGN:</strong> Campaign Name</p>
+                        <p><a href="#" class="trailer-link" target="_blank">Watch Commercial</a></p>
+                    </div>
                 </div>
-            </footer>
+                
+                <!-- Altre schede commercial seguono lo stesso pattern alternato -->
+            </main>
         </section>
         
         <!-- ============================================
