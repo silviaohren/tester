@@ -2010,8 +2010,6 @@ document.addEventListener('DOMContentLoaded', function() {
 // Funzione specifica per creare schede LIBRARY
 function createLibraryCard() {
     try {
-        console.log("Creazione scheda LIBRARY");
-        
         // Raccogli dati dal form
         const title = document.getElementById('card-title').value || 'Untitled';
         const location = document.getElementById('card-director').value || '';
@@ -2019,35 +2017,23 @@ function createLibraryCard() {
         const audioLink = document.getElementById('card-audio').value || '';
         const posterImage = document.getElementById('card-poster').value || 'https://via.placeholder.com/300x450?text=No+Image';
         
-        console.log("Dati raccolti:", { title, location, tags, audioLink, posterImage });
-        
         // Trova la pagina LIBRARY
         const librariesPage = document.getElementById('libraries-page');
-        console.log("Pagina libraries trovata:", !!librariesPage);
         
         if (!librariesPage) {
             throw new Error("Pagina libraries-page non trovata");
         }
         
         // Trova il container per le schede
-        let container = librariesPage.querySelector('.grid-container');
-        console.log("Container grid trovato:", !!container);
+        const container = librariesPage.querySelector('.grid-container');
         
-        // Se non c'è .grid-container, prova con main
         if (!container) {
-            container = librariesPage.querySelector('main');
-            console.log("Container main trovato:", !!container);
+            throw new Error("Container .grid-container non trovato nella pagina libraries");
         }
         
-        // Ultimo tentativo: usa la pagina stessa
-        if (!container) {
-            container = librariesPage;
-            console.log("Usando la pagina stessa come container");
-        }
-        
-        // Crea l'HTML della scheda
+        // Crea la scheda con la classe CORRETTA "schedasquare torn-poster"
         const scheda = document.createElement('div');
-        scheda.className = 'scheda torn-poster';
+        scheda.className = 'schedasquare torn-poster';
         scheda.innerHTML = `
             <div class="poster-container">
                 <img class="poster-base" src="${posterImage}" alt="${title}">
@@ -2067,26 +2053,17 @@ function createLibraryCard() {
                 </div>
                 ` : ''}
             </div>
-            <div class="scheda-info">
-                <h3 class="scheda-titolo">${title}</h3>
+            <div class="schedasquare-info">
+                <h3 class="schedasquare-titolo">${title}</h3>
             </div>
         `;
         
-        // Inserisci la scheda nel container
-        if (container.firstChild) {
-            console.log("Inserendo prima del primo figlio");
-            container.insertBefore(scheda, container.firstChild);
-        } else {
-            console.log("Aggiungendo come figlio");
-            container.appendChild(scheda);
-        }
+        // Inserisci la scheda all'inizio del container
+        container.insertBefore(scheda, container.firstChild);
         
-        console.log("Scheda inserita nel DOM");
-        
-        // Inizializza le texture
+        // Inizializza texture
         if (typeof initTornPosters === 'function') {
             initTornPosters();
-            console.log("Texture initializzate");
         }
         
         // Resetta il form
@@ -2094,7 +2071,6 @@ function createLibraryCard() {
         
         // Feedback utente
         alert('Scheda LIBRARY creata con successo!');
-        console.log("Creazione scheda LIBRARY completata con successo");
         
     } catch (error) {
         console.error("Errore durante la creazione della scheda LIBRARY:", error);
