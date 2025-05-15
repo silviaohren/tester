@@ -2035,7 +2035,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             const category = document.getElementById('card-category').value;
             
-            if (category === "LIBRARY") {
+            if (category === "LIBRARY" || category === "library") {
                 createLibraryCard(event); // Passa l'evento!
             } else {
                 createNewCard(event);
