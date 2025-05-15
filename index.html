@@ -1641,6 +1641,11 @@
                 </div>
                 <button onclick="checkPassword()" class="submit-btn">Accedi</button>
             </div>
+
+    <button id="test-library-button" style="margin-top: 20px; padding: 10px; background-color: red; color: white; border: none; cursor: pointer;">
+      TEST LIBRARY CARD (EMERGENZA)
+    </button>
+
             
             <!-- Contenuto protetto (invisibile fino all'autenticazione) -->
             <div id="upload-content" style="display: none;">
@@ -1968,9 +1973,45 @@ document.addEventListener('DOMContentLoaded', function() {
             } else {
                 createNewCard(event);
             }
+
+// SOLUZIONE D'EMERGENZA - Funzione di test separata dal form
+document.addEventListener('DOMContentLoaded', function() {
+    // Cerca il pulsante di test
+    const testButton = document.getElementById('test-library-button');
+    if (testButton) {
+        testButton.addEventListener('click', function() {
+            // Trova direttamente la pagina libraries
+            const librariesPage = document.getElementById('libraries-page');
+            
+            if (!librariesPage) {
+                alert("ERROR: libraries-page NOT FOUND! Check HTML structure.");
+                return;
+            }
+            
+            // Debug: mostra la struttura della pagina
+            console.log("LIBRARIES PAGE STRUCTURE:", librariesPage);
+            
+            // Ottieni tutti i container possibili
+            const containers = librariesPage.querySelectorAll('*');
+            console.log("ALL POSSIBLE CONTAINERS:", containers);
+            
+            // Prova a inserire una scheda di test direttamente nella pagina libraries
+            const testCard = document.createElement('div');
+            testCard.className = 'scheda torn-poster';
+            testCard.style.backgroundColor = 'red'; // Per visibilità
+            testCard.innerHTML = `
+                <h3>TEST LIBRARY CARD</h3>
+                <p>This is a test card created by the emergency button</p>
+            `;
+            
+            // Inserisci all'inizio della pagina libraries
+            librariesPage.insertBefore(testCard, librariesPage.firstChild);
+            
+            alert("Test card created. Check libraries page.");
         });
     }
-    
+});
+
     // Trova il menu a tendina della categoria per aggiornare i campi del form
     const categorySelect = document.getElementById('card-category');
     if (categorySelect) {
