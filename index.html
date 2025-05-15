@@ -1262,7 +1262,7 @@
             <span class="nav-separator">-</span>
             <a href="#commercial" onclick="showPage('commercial-page', this); return false;">COMMERCIAL</a>
             <span class="nav-separator">][</span>
-            <a href="#libraries" class="menu-green" onclick="showPage('libraries-page', this); return false;">LIBRARIES</a>
+            <a href="#libraries" class="menu-green" onclick="showPage('library-page', this); return false;">LIBRARIES</a>
             <span class="nav-separator">-</span>
             <a href="#bio" class="menu-green" onclick="showPage('bio-page', this); return false;">BIO</a>
             <span class="nav-separator">-</span>
@@ -1913,11 +1913,11 @@ function createNewCard(event) {
             console.log("Creazione scheda LIBRARY");
             
             // Seleziona il container principale
-            const librariesPage = document.getElementById('libraries-page');
+            const librariesPage = document.getElementById('library-page');
             console.log("Pagina libraries trovata:", librariesPage);
             
             if (!librariesPage) {
-                throw new Error("Pagina libraries-page non trovata!");
+                throw new Error("Pagina library-page non trovata!");
             }
             
             // Cerca qualsiasi container all'interno della pagina libraries
@@ -2115,11 +2115,11 @@ function createLibraryCard(event) {
         console.log("📊 Dati raccolti:", { title, location, tags, audioLink, posterImage });
         
         // Trova la pagina LIBRARY
-        const librariesPage = document.getElementById('libraries-page');
+        const librariesPage = document.getElementById('library-page');
         console.log("🔍 Pagina libraries trovata:", !!librariesPage);
         
         if (!librariesPage) {
-            throw new Error("Pagina libraries-page non trovata");
+            throw new Error("Pagina library-page non trovata");
         }
         
         // Trova il container per le schede
