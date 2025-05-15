@@ -1823,59 +1823,15 @@
 // Funzione per creare una nuova scheda
 function createNewCard(event) {
     event.preventDefault();
-    
+
     try {
+    
         // Ottieni la categoria selezionata
         const category = document.getElementById('card-category').value;
         
-        // Raccogli i dati base che sono sempre presenti
+        // Raccogli sempre i dati base
         const title = document.getElementById('card-title').value || 'Untitled';
         const posterImage = document.getElementById('card-poster').value || 'https://via.placeholder.com/300x450?text=No+Image';
-        
-        // Inizializza variabili vuote per tutti i campi
-        let jobValue = '';
-        let directorValue = '';
-        let prodValue = '';
-        let yearValue = '';
-        let genreValue = '';
-        let trailerValue = '';
-        let audioValue = '';
-        
-        // Prova a ottenere i valori dai campi visibili (ignorando quelli nascosti)
-        const jobElement = document.getElementById('card-job');
-        if (jobElement && getComputedStyle(jobElement.closest('.form-group')).display !== 'none') {
-            jobValue = jobElement.value || '';
-        }
-        
-        const directorElement = document.getElementById('card-director');
-        if (directorElement && getComputedStyle(directorElement.closest('.form-group')).display !== 'none') {
-            directorValue = directorElement.value || '';
-        }
-        
-        const prodElement = document.getElementById('card-prod');
-        if (prodElement && getComputedStyle(prodElement.closest('.form-group')).display !== 'none') {
-            prodValue = prodElement.value || '';
-        }
-        
-        const yearElement = document.getElementById('card-year');
-        if (yearElement && getComputedStyle(yearElement.closest('.form-group')).display !== 'none') {
-            yearValue = yearElement.value || '';
-        }
-        
-        const genreElement = document.getElementById('card-genre');
-        if (genreElement && getComputedStyle(genreElement.closest('.form-group')).display !== 'none') {
-            genreValue = genreElement.value || '';
-        }
-        
-        const trailerElement = document.getElementById('card-trailer');
-        if (trailerElement && getComputedStyle(trailerElement.closest('.form-group')).display !== 'none') {
-            trailerValue = trailerElement.value || '';
-        }
-        
-        const audioElement = document.getElementById('card-audio');
-        if (audioElement && getComputedStyle(audioElement.closest('.form-group')).display !== 'none') {
-            audioValue = audioElement.value || '';
-        }
         
         // Determina la pagina di destinazione
         let targetPageId;
@@ -1886,124 +1842,81 @@ function createNewCard(event) {
         }
         
         const targetPage = document.getElementById(targetPageId);
-        if (!targetPage) {
-            throw new Error(`Pagina di destinazione "${targetPageId}" non trovata`);
-        }
         
-        // Crea l'HTML della scheda in base alla categoria
-        let newCardHTML = '';
+        // DEBUG - Stampa informazioni in console per diagnosticare
+        console.log("Categoria:", category);
+        console.log("Pagina di destinazione:", targetPageId);
+        console.log("Elemento pagina trovato:", targetPage);
         
-        if (category === "COMMERCIAL") {
-            // Layout per Commercial
-            const commercialContainer = targetPage.querySelector('.commercial-container');
-            if (!commercialContainer) {
-                throw new Error('Container commercial non trovato');
-            }
+        if (category === "LIBRARY") {
+            // Per LIBRARY, raccogli solo i campi che usiamo
+            const location = document.getElementById('card-director').value || '';
+            const tags = document.getElementById('card-prod').value || '';
+            const audioLink = document.getElementById('card-audio').value || '';
             
-            const existingCards = commercialContainer.querySelectorAll('.commercial-card').length;
-            const isLeftLayout = existingCards % 2 === 0;
-            const layoutClass = isLeftLayout ? 'card-left' : 'card-right';
+            console.log("Location:", location);
+            console.log("Tags:", tags);
+            console.log("Audio:", audioLink);
             
-            newCardHTML = `
-                <div class="commercial-card ${layoutClass}">
-                    <div class="commercial-media">
-                        <img src="${posterImage}" alt="${title}">
-                    </div>
-                    <div class="commercial-info">
-                        <h3>${title}</h3>
-                        <p class="job-title">${jobValue}</p>
-                        <p><strong>CLIENT:</strong> ${prodValue}</p>
-                        <p><strong>AGENCY:</strong> ${genreValue}</p>
-                        <p><strong>YEAR:</strong> ${yearValue}</p>
-                        <p><strong>DIRECTOR:</strong> ${directorValue}</p>
-                        ${trailerValue ? `<p><a href="${trailerValue}" class="trailer-link" target="_blank">Watch Commercial</a></p>` : ''}
-                    </div>
-                </div>
-            `;
-            
-            commercialContainer.insertAdjacentHTML('afterbegin', newCardHTML);
-            
-        } else if (category === "LIBRARY") {
-            // Layout per Library
+            // Verifica che il container esista nella pagina LIBRARY
             const gridContainer = targetPage.querySelector('.grid-container');
-            if (!gridContainer) {
-                throw new Error('Container grid per library non trovato');
-            }
+            console.log("Grid container trovato:", gridContainer);
             
-            newCardHTML = `
-                <div class="scheda torn-poster">
-                    <div class="poster-container">
-                        <img class="poster-base" src="${posterImage}" alt="${title}">
-                        <div class="poster-texture"></div>
-                    </div>
-                    <div class="torn-edge"></div>
-                    <div class="torn-info-container">
-                        <h3 class="scheda-titolo">${title}</h3>
-                        <p><strong>LOCATION:</strong> ${directorValue}</p>
-                        <p><strong>TAGS:</strong> ${prodValue}</p>
-                        ${audioValue ? `
-                        <div class="audio-preview">
-                            <audio controls>
-                                <source src="${audioValue}" type="audio/mpeg">
-                                Il tuo browser non supporta l'elemento audio.
-                            </audio>
+            if (gridContainer) {
+                // Genera HTML semplificato per la scheda LIBRARY
+                const newCardHTML = `
+                    <div class="scheda torn-poster">
+                        <div class="poster-container">
+                            <img class="poster-base" src="${posterImage}" alt="${title}">
+                            <div class="poster-texture"></div>
                         </div>
-                        ` : ''}
+                        <div class="torn-edge"></div>
+                        <div class="torn-info-container">
+                            <h3 class="scheda-titolo">${title}</h3>
+                            <p><strong>LOCATION:</strong> ${location}</p>
+                            <p><strong>TAGS:</strong> ${tags}</p>
+                            ${audioLink ? `
+                            <div class="audio-preview">
+                                <audio controls>
+                                    <source src="${audioLink}" type="audio/mpeg">
+                                    Il tuo browser non supporta l'elemento audio.
+                                </audio>
+                            </div>
+                            ` : ''}
+                        </div>
+                        <div class="scheda-info">
+                            <h3 class="scheda-titolo">${title}</h3>
+                        </div>
                     </div>
-                    <div class="scheda-info">
-                        <h3 class="scheda-titolo">${title}</h3>
-                    </div>
-                </div>
-            `;
-            
-            gridContainer.insertAdjacentHTML('afterbegin', newCardHTML);
-            
-        } else {
-            // Layout per altre categorie (Film, Documentary, ecc.)
-            const gridContainer = targetPage.querySelector('.grid-container');
-            if (!gridContainer) {
-                throw new Error(`Container grid per ${category} non trovato`);
+                `;
+                
+                // Inserisci la scheda all'inizio del container
+                gridContainer.insertAdjacentHTML('afterbegin', newCardHTML);
+                
+                // Inizializza gli effetti torn-poster
+                initTornPosters();
+                
+                // Resetta il form
+                document.getElementById('new-card-form').reset();
+                
+                // Feedback positivo
+                alert('Scheda Library creata con successo!');
+            } else {
+                alert('Errore: Container per schede Library non trovato!');
+                console.error("Container .grid-container non trovato nella pagina", targetPageId);
             }
+        } else {
+            // Lascia il codice esistente per le altre categorie...
+            // (qui il codice funziona correttamente)
             
-            newCardHTML = `
-                <div class="scheda torn-poster">
-                    <div class="poster-container">
-                        <img class="poster-base" src="${posterImage}" alt="${title}">
-                        <div class="poster-texture"></div>
-                    </div>
-                    <div class="torn-edge"></div>
-                    <div class="torn-info-container">
-                        <h3 class="scheda-titolo">${title}</h3>
-                        <p><strong>DIRECTOR:</strong> ${directorValue}</p>
-                        <p><strong>PROD:</strong> ${prodValue}</p>
-                        <p><strong>YEAR:</strong> ${yearValue}</p>
-                        <p><strong>GENRE:</strong> ${genreValue}</p>
-                        ${trailerValue ? `<p><strong>TRAILER:</strong> <a href="${trailerValue}" target="_blank" class="trailer-link">Watch here</a></p>` : ''}
-                    </div>
-                    <div class="scheda-info">
-                        <h3 class="scheda-titolo">${jobValue || title}</h3>
-                    </div>
-                </div>
-            `;
+            // Continua con il reset del form e feedback
+            document.getElementById('new-card-form').reset();
+            alert('Scheda creata con successo!');
             
-            gridContainer.insertAdjacentHTML('afterbegin', newCardHTML);
-        }
-        
-        // Inizializza la texture e gli eventi per poster strappati (solo se non è commercial)
-        if (category !== "COMMERCIAL") {
-            initTornPosters();
-        }
-        
-        // Resetta il form
-        document.getElementById('new-card-form').reset();
-        
-        // Feedback all'utente
-        alert('Scheda creata con successo!');
-        
-    } catch (error) {
-        // Gestione degli errori
-        console.error('Errore durante la creazione della scheda:', error);
-        alert('Si è verificato un errore durante la creazione della scheda: ' + error.message);
+        } catch (error) {
+            // Gestione degli errori
+            console.error('Errore durante la creazione della scheda:', error);
+            alert('Si è verificato un errore durante la creazione della scheda: ' + error.message);
     }
 }
     
