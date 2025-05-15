@@ -1824,8 +1824,7 @@
 function createNewCard(event) {
     event.preventDefault();
 
-    try {
-    
+
         // Ottieni la categoria selezionata
         const category = document.getElementById('card-category').value;
         
@@ -1913,10 +1912,6 @@ function createNewCard(event) {
             document.getElementById('new-card-form').reset();
             alert('Scheda creata con successo!');
             
-        } catch (error) {
-            // Gestione degli errori
-            console.error('Errore durante la creazione della scheda:', error);
-            alert('Si è verificato un errore durante la creazione della scheda: ' + error.message);
     }
 }
     
