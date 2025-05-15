@@ -2012,6 +2012,76 @@ function createNewCard(event) {
         // Aggiungi direttamente al body
         document.body.appendChild(alien);
     });
+// Codice per inserire dinamicamente l'alieno
+document.addEventListener('DOMContentLoaded', function() {
+    // [... codice alieno esistente ...]
+    
+    // Aggiungi direttamente al body
+    document.body.appendChild(alien);
+});
+
+// INSERISCI IL NUOVO BLOCCO QUI SOTTO
+
+// Codice per adattare il form in base alla categoria selezionata
+document.addEventListener('DOMContentLoaded', function() {
+    // Trova il menu a tendina della categoria
+    const categorySelect = document.getElementById('card-category');
+    if (categorySelect) {
+        // Aggiungi un event listener per i cambiamenti di selezione
+        categorySelect.addEventListener('change', function() {
+            updateFormFields(this.value);
+        });
+        
+        // Esegui una volta all'inizio per impostare lo stato corretto
+        updateFormFields(categorySelect.value);
+    }
+});
+
+// Funzione per aggiornare i campi del form in base alla categoria
+function updateFormFields(category) {
+    // Riferimenti ai label nel form
+    const directorLabel = document.querySelector('label[for="card-director"]');
+    const prodLabel = document.querySelector('label[for="card-prod"]');
+    const genreLabel = document.querySelector('label[for="card-genre"]');
+    const trailerLabel = document.querySelector('label[for="card-trailer"]');
+    const audioLabel = document.querySelector('label[for="card-audio"]');
+    const audioField = document.getElementById('card-audio');
+    const audioContainer = audioField ? audioField.closest('.form-group') : null;
+    
+    if (category === "COMMERCIAL") {
+        // Modifica etichette per progetti Commercial
+        if (directorLabel) directorLabel.textContent = "Director:";
+        if (prodLabel) prodLabel.textContent = "Client:";
+        if (genreLabel) genreLabel.textContent = "Agency:";
+        if (trailerLabel) trailerLabel.textContent = "Commercial Link:";
+        
+        // Nascondi il campo Audio per Commercial
+        if (audioContainer) audioContainer.style.display = 'none';
+        
+    } else if (category === "LIBRARY") {
+        // Modifica etichette per progetti Library
+        if (directorLabel) directorLabel.textContent = "Creator:";
+        if (prodLabel) prodLabel.textContent = "Company:";
+        if (genreLabel) genreLabel.textContent = "Type:";
+        if (trailerLabel) trailerLabel.textContent = "Library Link:";
+        
+        // Mostra il campo Audio per Library
+        if (audioContainer) audioContainer.style.display = 'block';
+        if (audioLabel) audioLabel.textContent = "Audio Preview:";
+        
+    } else {
+        // Default per Film, Documentary, ecc.
+        if (directorLabel) directorLabel.textContent = "Director:";
+        if (prodLabel) prodLabel.textContent = "Production:";
+        if (genreLabel) genreLabel.textContent = "Genre:";
+        if (trailerLabel) trailerLabel.textContent = "Trailer Link:";
+        
+        // Nascondi il campo Audio per non-Library
+        if (audioContainer) audioContainer.style.display = 'none';
+    }
+}
+</script>
+
 </script>
 
 </body>
