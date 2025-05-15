@@ -1654,26 +1654,6 @@
         return false; // Previene l'azione predefinita del link
     }
     
-    // Controlla URL all'avvio
-    document.addEventListener('DOMContentLoaded', function() {
-        var hash = window.location.hash;
-        if (hash) {
-            var targetLink = document.querySelector('.nav-menu a[href="' + hash + '"]');
-            if (targetLink) {
-                showPage(targetLink.getAttribute('href').replace('#', '') + '-page', targetLink);
-            }
-        }
-        
-        // Inizializza texture per tutti i poster strappati
-        initTornPosters();
-        
-        // Aggiungi event listener al form quando la pagina è caricata
-        const newCardForm = document.getElementById('new-card-form');
-        if (newCardForm) {
-            newCardForm.addEventListener('submit', createNewCard);
-        }
-    });
-    
     // Sistema di verifica password per area upload
     function checkPassword() {
         var password = document.getElementById('access-password').value;
@@ -1693,16 +1673,30 @@
         }
     }
     
+    // Funzione per gestire il toggle dell'effetto poster strappato
+    function toggleTornPoster(event) {
+        // Previeni il bubbling se si clicca su link o elementi interattivi all'interno
+        if (event.target.tagName === 'A' || event.target.tagName === 'BUTTON' || 
+            event.target.tagName === 'AUDIO' || event.target.closest('audio')) {
+            return;
+        }
+        
+        // Toggle della classe 'active'
+        this.classList.toggle('active');
+    }
+    
     // Funzione per inizializzare tutti i poster strappati
     function initTornPosters() {
         // Seleziona tutti gli elementi con poster texture
         var textureElements = document.querySelectorAll('.poster-texture');
         
         // Array con i percorsi delle texture dal server WordPress
-     //    var textures = [
-     //        'https://www.ivanagloria.com/wp-content/uploads/2025/05/so_TEXTR1.jpg',
-     //        'https://www.ivanagloria.com/wp-content/uploads/2025/05/so_TEXTR2.png'
-   //      ];
+        var textures = [
+            'https://www.transparenttextures.com/patterns/paper.png'
+            // Quando avrai accesso alle texture, decommenta e usa queste:
+            // 'https://www.ivanagloria.com/wp-content/uploads/2025/05/so_TEXTR1.jpg',
+            // 'https://www.ivanagloria.com/wp-content/uploads/2025/05/so_TEXTR2.png'
+        ];
         
         // Applica texture a ciascun elemento
         textureElements.forEach(function(element) {
@@ -1713,12 +1707,12 @@
             element.style.backgroundImage = 'url(' + randomTexture + ')';
         });
         
-        // Aggiungi interazione di click per ogni poster strappato
+        // Rimuovi prima eventuali event listener esistenti
         var tornPosters = document.querySelectorAll('.torn-poster');
         tornPosters.forEach(function(poster) {
-            poster.addEventListener('click', function() {
-                this.classList.toggle('active');
-            });
+            poster.removeEventListener('click', toggleTornPoster);
+            // Aggiungi il nuovo event listener
+            poster.addEventListener('click', toggleTornPoster);
         });
     }
     
@@ -1792,8 +1786,9 @@
         alert('Scheda creata con successo!');
     }
     
-    // Controlla se l'utente è già autenticato all'apertura della pagina
+    // Inizializzazione al caricamento della pagina
     document.addEventListener('DOMContentLoaded', function() {
+        // Controlla se l'utente è già autenticato
         if (sessionStorage.getItem('authenticated') === 'true') {
             if (document.getElementById('password-form-container')) {
                 document.getElementById('password-form-container').style.display = 'none';
@@ -1818,51 +1813,50 @@
         if (newCardForm) {
             newCardForm.addEventListener('submit', createNewCard);
         }
+        
+        // Codice per inserire dinamicamente l'alieno
+        // Rimuovi eventuali alien button esistenti
+        var existingButtons = document.querySelectorAll('.alien-button, #alien-button-container');
+        existingButtons.forEach(function(btn) {
+            btn.parentNode.removeChild(btn);
+        });
+        
+        // Crea nuovo elemento
+        var alien = document.createElement('div');
+        alien.id = 'alien-button-container';
+        alien.innerHTML = '👽';
+        
+        // Aggiungi stili inline per essere sicuro che funzionino
+        alien.style.position = 'fixed';
+        alien.style.bottom = '30px';
+        alien.style.right = '30px';
+        alien.style.zIndex = '9999';
+        alien.style.fontSize = '2.5rem';
+        alien.style.cursor = 'pointer';
+        alien.style.color = 'white'; // o var(--text-color) se accessibile
+        alien.style.textShadow = '0 0 10px rgba(255, 77, 109, 0.5)';
+        alien.style.transition = 'transform 0.3s ease, text-shadow 0.3s ease';
+        
+        // Aggiungi anche l'effetto hover
+        alien.addEventListener('mouseenter', function() {
+            this.style.transform = 'scale(1.2)';
+            this.style.textShadow = '0 0 20px rgba(255, 77, 109, 0.8)';
+        });
+        
+        alien.addEventListener('mouseleave', function() {
+            this.style.transform = 'scale(1)';
+            this.style.textShadow = '0 0 10px rgba(255, 77, 109, 0.5)';
+        });
+        
+        // Aggiungi il click handler
+        alien.addEventListener('click', function() {
+            showPage('upload-page', null);
+            return false;
+        });
+        
+        // Aggiungi direttamente al body
+        document.body.appendChild(alien);
     });
-// Codice per inserire dinamicamente l'alieno
-document.addEventListener('DOMContentLoaded', function() {
-    // Rimuovi eventuali alien button esistenti
-    var existingButtons = document.querySelectorAll('.alien-button, #alien-button-container');
-    existingButtons.forEach(function(btn) {
-        btn.parentNode.removeChild(btn);
-    });
-    
-    // Crea nuovo elemento
-    var alien = document.createElement('div');
-    alien.id = 'alien-button-container';
-    alien.innerHTML = '👽';
-    
-    // Aggiungi stili inline per essere sicuro che funzionino
-    alien.style.position = 'fixed';
-    alien.style.bottom = '30px';
-    alien.style.right = '30px';
-    alien.style.zIndex = '9999';
-    alien.style.fontSize = '2.5rem';
-    alien.style.cursor = 'pointer';
-    alien.style.color = 'white'; // o var(--text-color) se accessibile
-    alien.style.textShadow = '0 0 10px rgba(255, 77, 109, 0.5)';
-    alien.style.transition = 'transform 0.3s ease, text-shadow 0.3s ease';
-    
-    // Aggiungi anche l'effetto hover
-    alien.addEventListener('mouseenter', function() {
-        this.style.transform = 'scale(1.2)';
-        this.style.textShadow = '0 0 20px rgba(255, 77, 109, 0.8)';
-    });
-    
-    alien.addEventListener('mouseleave', function() {
-        this.style.transform = 'scale(1)';
-        this.style.textShadow = '0 0 10px rgba(255, 77, 109, 0.5)';
-    });
-    
-    // Aggiungi il click handler
-    alien.addEventListener('click', function() {
-        showPage('upload-page', null);
-        return false;
-    });
-    
-    // Aggiungi direttamente al body
-    document.body.appendChild(alien);
-});
 </script>
 
 </body>
