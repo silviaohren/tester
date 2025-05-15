@@ -1827,14 +1827,34 @@ function createNewCard(event) {
     // Raccogli i dati dal form
     const category = document.getElementById('card-category').value;
     const title = document.getElementById('card-title').value;
-    const job = document.getElementById('card-job').value;
-    const director = document.getElementById('card-director').value;
-    const prod = document.getElementById('card-prod').value;
-    const year = document.getElementById('card-year').value;
-    const genre = document.getElementById('card-genre').value;
-    const trailerLink = document.getElementById('card-trailer').value;
-    const posterImage = document.getElementById('card-poster').value;
-    const audioLink = document.getElementById('card-audio').value;
+    
+    // Gestione valori in base alla categoria
+    let job, director, prod, year, genre, trailerLink, posterImage, audioLink;
+    
+    // Raccogli tutti i dati disponibili
+    posterImage = document.getElementById('card-poster').value;
+    
+    if (category === "LIBRARY") {
+        // Per LIBRARY, assegna valori predefiniti ai campi nascosti
+        job = title; // Usa il titolo come job per LIBRARY
+        year = ""; // Anno vuoto per LIBRARY
+        genre = ""; // Genre vuoto per LIBRARY
+        
+        // Raccogli solo i campi rilevanti per LIBRARY
+        director = document.getElementById('card-director').value; // Location
+        prod = document.getElementById('card-prod').value; // Tags
+        trailerLink = document.getElementById('card-trailer').value; // Library Link
+        audioLink = document.getElementById('card-audio').value; // Audio Preview
+    } else {
+        // Per altre categorie, raccogli tutti i campi normalmente
+        job = document.getElementById('card-job').value;
+        director = document.getElementById('card-director').value;
+        prod = document.getElementById('card-prod').value;
+        year = document.getElementById('card-year').value;
+        genre = document.getElementById('card-genre').value;
+        trailerLink = document.getElementById('card-trailer').value;
+        audioLink = document.getElementById('card-audio').value;
+    }
     
     // Determina la pagina di destinazione
     let targetPageId;
@@ -1874,37 +1894,37 @@ function createNewCard(event) {
         // Inserisci la scheda all'inizio del container commercial
         const commercialContainer = targetPage.querySelector('.commercial-container');
         commercialContainer.insertAdjacentHTML('afterbegin', newCardHTML);
-} else if (category === "LIBRARY") {
-    // Gestione per LIBRARY con i nuovi campi
-    const newCardHTML = `
-        <div class="scheda torn-poster">
-            <div class="poster-container">
-                <img class="poster-base" src="${posterImage}" alt="${title}">
-                <div class="poster-texture"></div>
-            </div>
-            <div class="torn-edge"></div>
-            <div class="torn-info-container">
-                <h3 class="scheda-titolo">${title}</h3>
-                <p><strong>LOCATION:</strong> ${director}</p>
-                <p><strong>TAGS:</strong> ${prod}</p>
-                ${audioLink ? `
-                <div class="audio-preview">
-                    <audio controls>
-                        <source src="${audioLink}" type="audio/mpeg">
-                        Il tuo browser non supporta l'elemento audio.
-                    </audio>
+    } else if (category === "LIBRARY") {
+        // Gestione per LIBRARY con i nuovi campi
+        const newCardHTML = `
+            <div class="scheda torn-poster">
+                <div class="poster-container">
+                    <img class="poster-base" src="${posterImage}" alt="${title}">
+                    <div class="poster-texture"></div>
                 </div>
-                ` : ''}
+                <div class="torn-edge"></div>
+                <div class="torn-info-container">
+                    <h3 class="scheda-titolo">${title}</h3>
+                    <p><strong>LOCATION:</strong> ${director}</p>
+                    <p><strong>TAGS:</strong> ${prod}</p>
+                    ${audioLink ? `
+                    <div class="audio-preview">
+                        <audio controls>
+                            <source src="${audioLink}" type="audio/mpeg">
+                            Il tuo browser non supporta l'elemento audio.
+                        </audio>
+                    </div>
+                    ` : ''}
+                </div>
+                <div class="scheda-info">
+                    <h3 class="scheda-titolo">${title}</h3>
+                </div>
             </div>
-            <div class="scheda-info">
-                <h3 class="scheda-titolo">${title}</h3>
-            </div>
-        </div>
-    `;
-    
-    // Inserisci la scheda all'inizio della griglia
-    const gridContainer = targetPage.querySelector('.grid-container');
-    gridContainer.insertAdjacentHTML('afterbegin', newCardHTML);
+        `;
+        
+        // Inserisci la scheda all'inizio della griglia
+        const gridContainer = targetPage.querySelector('.grid-container');
+        gridContainer.insertAdjacentHTML('afterbegin', newCardHTML);
     } else {
         // Per tutte le altre categorie (formato scheda standard)
         const newCardHTML = `
