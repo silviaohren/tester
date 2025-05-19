@@ -1698,100 +1698,100 @@
         </style>
                 
     
-    <!-- ============================================
-         PAGINA UPLOAD (CON PROTEZIONE PASSWORD)
-    ============================================ -->
-    <section id="upload-page" class="page">
-        <div class="upload-container">
-            <h2>Area Riservata</h2>
-            
-            <!-- Form di accesso con password -->
-            <div id="password-form-container">
-                <p class="upload-intro">Inserisci la password per accedere all'area di upload</p>
-                <div class="form-group">
-                    <input type="password" id="access-password" placeholder="Password" class="contact-input">
-                </div>
-                <button onclick="checkPassword()" class="submit-btn">Accedi</button>
+ <!-- ============================================
+     PAGINA UPLOAD (CON PROTEZIONE PASSWORD)
+============================================ -->
+<section id="upload-page" class="page">
+    <div class="upload-container">
+        <h2>Area Riservata</h2>
+        
+        <!-- Form di accesso con password -->
+        <div id="password-form-container">
+            <p class="upload-intro">Inserisci la password per accedere all'area di upload</p>
+            <div class="form-group">
+                <input type="password" id="access-password" placeholder="Password" class="contact-input">
             </div>
-            
-            <!-- Contenuto protetto (invisibile fino all'autenticazione) -->
-            <div id="upload-content" style="display: none;">
-                <h3>UPLOAD</h3>
-                <p class="upload-intro">Area di caricamento contenuti</p>
-                
-                <!-- Form di creazione nuova scheda -->
-                <div class="card-creation-form">
-                    <h3>Crea Nuova Scheda</h3>
-                    <form id="new-card-form">
-                        <div class="form-group">
-                            <label for="card-category">Categoria</label>
-                            <select id="card-category" class="contact-input" required>
-                                <option value="">-- Seleziona categoria --</option>
-                                <option value="FILM">FILM</option>
-                                <option value="DOCUMENTARY">DOCUMENTARY</option>
-                                <option value="COMMERCIAL">COMMERCIAL</option>
-                                <option value="LIBRARY">LIBRARY</option>
-                            </select>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="card-title">Titolo</label>
-                            <input type="text" id="card-title" class="contact-input" placeholder="Inserisci il titolo" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="card-job">Job</label>
-                            <input type="text" id="card-job" class="contact-input" placeholder="Inserisci il ruolo (es. SOUND EDITOR)" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="card-director">Director</label>
-                            <input type="text" id="card-director" class="contact-input" placeholder="Inserisci il regista" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="card-prod">Production</label>
-                            <input type="text" id="card-prod" class="contact-input" placeholder="Inserisci la produzione" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="card-year">Year</label>
-                            <input type="text" id="card-year" class="contact-input" placeholder="Inserisci l'anno" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="card-genre">Genre</label>
-                            <input type="text" id="card-genre" class="contact-input" placeholder="Inserisci il genere" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="card-trailer">Link Trailer</label>
-                            <input type="url" id="card-trailer" class="contact-input" placeholder="Inserisci URL del trailer">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="card-poster">Link Immagine Poster</label>
-                            <input type="url" id="card-poster" class="contact-input" placeholder="Inserisci URL dell'immagine poster" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="card-audio">Link Audio (opzionale)</label>
-                            <input type="url" id="card-audio" class="contact-input" placeholder="Inserisci URL del file audio">
-                        </div>
-                        
-                        <button type="submit" class="submit-btn">Crea Scheda</button>
-                    </form>
-                </div>
-            </div>
+            <button onclick="checkPassword()" class="submit-btn">Accedi</button>
         </div>
         
-        <!-- Footer (in ogni pagina) -->
-        <footer class="site-footer">
-            <div class="copyright">
-                © 2025 silviaorengoDS
+        <!-- Contenuto protetto (invisibile fino all'autenticazione) -->
+        <div id="upload-content" style="display: none;">
+            <h3>UPLOAD</h3>
+            <p class="upload-intro">Area di caricamento contenuti</p>
+            
+            <!-- Form di creazione nuova scheda -->
+            <div class="card-creation-form">
+                <h3>Crea Nuova Scheda</h3>
+                <form id="new-card-form">
+                    <div class="form-group">
+                        <label for="card-category">Categoria</label>
+                        <select id="card-category" class="contact-input" required>
+                            <option value="">-- Seleziona categoria --</option>
+                            <option value="FILM">FILM</option>
+                            <option value="DOCUMENTARY">DOCUMENTARY</option>
+                            <option value="COMMERCIAL">COMMERCIAL</option>
+                            <option value="LIBRARY">LIBRARY</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="card-title">Titolo</label>
+                        <input type="text" id="card-title" class="contact-input" placeholder="Inserisci il titolo" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="card-job">Job</label>
+                        <input type="text" id="card-job" class="contact-input" placeholder="Inserisci il ruolo (es. SOUND EDITOR)" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="card-director">Director</label>
+                        <input type="text" id="card-director" class="contact-input" placeholder="Inserisci il regista" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="card-prod">Production</label>
+                        <input type="text" id="card-prod" class="contact-input" placeholder="Inserisci la produzione" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="card-year">Year</label>
+                        <input type="text" id="card-year" class="contact-input" placeholder="Inserisci l'anno" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="card-genre">Genre</label>
+                        <input type="text" id="card-genre" class="contact-input" placeholder="Inserisci il genere" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="card-trailer">Link Trailer</label>
+                        <input type="url" id="card-trailer" class="contact-input" placeholder="Inserisci URL del trailer">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="card-poster">Link Immagine Poster</label>
+                        <input type="url" id="card-poster" class="contact-input" placeholder="Inserisci URL dell'immagine poster" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="card-audio">Link Audio (opzionale)</label>
+                        <input type="url" id="card-audio" class="contact-input" placeholder="Inserisci URL del file audio">
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">Crea Scheda</button>
+                </form>
             </div>
-        </footer>
-    </section>
+        </div>
+    </div>
+    
+    <!-- Footer (in ogni pagina) -->
+    <footer class="site-footer">
+        <div class="copyright">
+            © 2025 silviaorengoDS
+        </div>
+    </footer>
+</section>
 </div><!-- Fine web-area -->
 
 <!-- Script di navigazione e funzionalità -->
@@ -1892,343 +1892,326 @@
         });
     }
     
-// Funzione per creare una nuova scheda
-function createNewCard(event) {
-    event.preventDefault();
-    
-    try {
-        // Log per debug
-        console.log("Inizio creazione scheda");
+    // Funzione unificata per la creazione di schede - gestisce tutte le categorie
+    function createCard(event) {
+        event.preventDefault();
         
-        // Ottieni la categoria selezionata
-        const category = document.getElementById('card-category').value;
-        console.log("Categoria selezionata:", category);
-        
-        // Dati di base
-        const title = document.getElementById('card-title').value || 'Untitled';
-        const posterImage = document.getElementById('card-poster').value || 'https://via.placeholder.com/300x450?text=No+Image';
-        
-        // Se è LIBRARY, usa una soluzione molto semplice e diretta
-        if (category === "LIBRARY") {
-            console.log("Creazione scheda LIBRARY");
-            
-            // Seleziona il container principale
-            const librariesPage = document.getElementById('library-page');
-            console.log("Pagina libraries trovata:", librariesPage);
-            
-            if (!librariesPage) {
-                throw new Error("Pagina library-page non trovata!");
-            }
-            
-            // Cerca qualsiasi container all'interno della pagina libraries
-            let container = librariesPage.querySelector('.grid-container');
-            if (!container) {
-                // Fallback: cerca qualsiasi contenitore di schede
-                container = librariesPage.querySelector('main');
-            }
-            if (!container) {
-                // Ultimo tentativo: usa la pagina stessa
-                container = librariesPage;
-            }
-            
-            console.log("Container per insertion trovato:", container);
-            
-            // Crea il markup HTML per la scheda LIBRARY
-            const location = document.getElementById('card-director').value || 'N/A';
-            const tags = document.getElementById('card-prod').value || 'N/A';
-            const audioLink = document.getElementById('card-audio').value || '';
-            
-            // Crea una struttura HTML molto semplice
-            const libraryCardDiv = document.createElement('div');
-            libraryCardDiv.className = "scheda torn-poster";
-            libraryCardDiv.innerHTML = `
-                <div class="poster-container">
-                    <img class="poster-base" src="${posterImage}" alt="${title}">
-                    <div class="poster-texture"></div>
-                </div>
-                <div class="torn-edge"></div>
-                <div class="torn-info-container">
-                    <h3 class="scheda-titolo">${title}</h3>
-                    <p><strong>LOCATION:</strong> ${location}</p>
-                    <p><strong>TAGS:</strong> ${tags}</p>
-                    ${audioLink ? `
-                    <div class="audio-preview">
-                        <audio controls>
-                            <source src="${audioLink}" type="audio/mpeg">
-                            Il tuo browser non supporta l'elemento audio.
-                        </audio>
-                    </div>
-                    ` : ''}
-                </div>
-                <div class="scheda-info">
-                    <h3 class="scheda-titolo">${title}</h3>
-                </div>
-            `;
-            
-            // Inserisci all'inizio del container
-            if (container.firstChild) {
-                container.insertBefore(libraryCardDiv, container.firstChild);
-            } else {
-                container.appendChild(libraryCardDiv);
-            }
-            
-            console.log("Scheda LIBRARY aggiunta al DOM");
-            
-            // Inizializza la scheda
-            if (typeof initTornPosters === 'function') {
-                initTornPosters();
-            }
-            
-            // Resetta il form e mostra feedback
-            document.getElementById('new-card-form').reset();
-            alert('Scheda LIBRARY creata con successo!');
-            
-            return; // Termina qui per LIBRARY
-        }
-        
-        // Per altre categorie, usa il codice esistente che sappiamo funzionare
-        // ... [resto del codice per altre categorie]
-        
-        // Reset form e feedback finale
-        document.getElementById('new-card-form').reset();
-        alert('Scheda creata con successo!');
-        
-    } catch (error) {
-        // Gestione degli errori
-        console.error('Errore durante la creazione della scheda:', error);
-        alert('Si è verificato un errore durante la creazione della scheda: ' + error.message);
-    }
-}
-    
-// Inizializzazione al caricamento della pagina
-document.addEventListener('DOMContentLoaded', function() {
-    // Controlla se l'utente è già autenticato
-    if (sessionStorage.getItem('authenticated') === 'true') {
-        if (document.getElementById('password-form-container')) {
-            document.getElementById('password-form-container').style.display = 'none';
-            document.getElementById('upload-content').style.display = 'block';
-        }
-    }
-    
-    // Verifica URL hash all'avvio
-    var hash = window.location.hash;
-    if (hash) {
-        var targetLink = document.querySelector('.nav-menu a[href="' + hash + '"]');
-        if (targetLink) {
-            showPage(targetLink.getAttribute('href').replace('#', '') + '-page', targetLink);
-        }
-    }
-    
-    // Inizializza texture per tutti i poster strappati
-    initTornPosters();
-    
-      // Gestione form di upload - CORRETTO
-    const newCardForm = document.getElementById('new-card-form');
-    if (newCardForm) {
-        // Rimuovi tutti i listener precedenti
-        const newForm = newCardForm.cloneNode(true);
-        newCardForm.parentNode.replaceChild(newForm, newCardForm);
-        
-        // Aggiungi nuovo listener unico
-        newForm.addEventListener('submit', function(event) {
-            event.preventDefault();
-            
+        try {
+            // Ottieni la categoria selezionata
             const category = document.getElementById('card-category').value;
+            console.log("Creazione scheda per categoria:", category);
             
-            if (category === "LIBRARY" || category === "library") {
-                createLibraryCard(event); // Passa l'evento!
+            // Dati base comuni
+            const title = document.getElementById('card-title').value || 'Untitled';
+            const posterImage = document.getElementById('card-poster').value || 'https://via.placeholder.com/300x450?text=No+Image';
+            
+            // Logica differenziata per schede LIBRARY
+            if (category === "LIBRARY") {
+                // Dati specifici per LIBRARY
+                const location = document.getElementById('card-director').value || 'N/A';
+                const tags = document.getElementById('card-prod').value || 'N/A';
+                const audioLink = document.getElementById('card-audio').value || '';
+                
+                // Trova il container per LIBRARY
+                const libraryPage = document.getElementById('library-page');
+                if (!libraryPage) {
+                    throw new Error("Pagina library-page non trovata!");
+                }
+                
+                const container = libraryPage.querySelector('.grid-container');
+                if (!container) {
+                    throw new Error("Container .grid-container non trovato nella pagina library!");
+                }
+                
+                // Crea elemento DIV per scheda quadrata LIBRARY
+                const newCard = document.createElement('div');
+                newCard.className = 'schedasquare torn-poster';
+                
+                // Configura HTML interno della scheda
+                newCard.innerHTML = `
+                    <div class="poster-container">
+                        <img class="poster-base" src="${posterImage}" alt="${title}">
+                        <div class="poster-texture"></div>
+                    </div>
+                    <div class="torn-edge"></div>
+                    <div class="torn-info-container">
+                        <h3 class="scheda-titolo">${title}</h3>
+                        <p><strong>LOCATION:</strong> ${location}</p>
+                        <p><strong>TAGS:</strong> ${tags}</p>
+                        ${audioLink ? `
+                        <div class="audio-preview">
+                            <audio controls>
+                                <source src="${audioLink}" type="audio/mpeg">
+                                Il tuo browser non supporta l'elemento audio.
+                            </audio>
+                        </div>
+                        ` : ''}
+                    </div>
+                    <div class="scheda-info">
+                        <h3 class="scheda-titolo">${title}</h3>
+                    </div>
+                `;
+                
+                // Inserisci all'inizio del container
+                container.insertBefore(newCard, container.firstChild);
+                
+                // Inizializza effetti del poster strappato
+                initTornPosters();
+                
+                // Resetta form e notifica utente
+                document.getElementById('new-card-form').reset();
+                alert('Scheda LIBRARY creata con successo!');
+                
             } else {
-                createNewCard(event);
+                // Logica per altre categorie (FILM, DOCUMENTARY, COMMERCIAL)
+                
+                // Ottieni dati specifici per queste categorie
+                const jobTitle = document.getElementById('card-job').value || 'SOUND DESIGNER';
+                const director = document.getElementById('card-director').value || '';
+                const production = document.getElementById('card-prod').value || '';
+                const year = document.getElementById('card-year').value || '';
+                const genre = document.getElementById('card-genre').value || '';
+                const trailerLink = document.getElementById('card-trailer').value || '';
+                
+                // Trova la pagina della categoria selezionata
+                const categoryLower = category.toLowerCase();
+                const pageId = `${categoryLower}-page`;
+                const categoryPage = document.getElementById(pageId);
+                
+                if (!categoryPage) {
+                    throw new Error(`Pagina ${pageId} non trovata!`);
+                }
+                
+                // Trova il container appropriato
+                const container = categoryPage.querySelector('.grid-container');
+                if (!container) {
+                    throw new Error(`Container .grid-container non trovato nella pagina ${pageId}!`);
+                }
+                
+                // Crea elemento DIV per la scheda
+                const newCard = document.createElement('div');
+                newCard.className = 'scheda torn-poster';
+                
+                // Configura HTML interno della scheda
+                newCard.innerHTML = `
+                    <div class="poster-container">
+                        <img class="poster-base" src="${posterImage}" alt="${title}">
+                        <div class="poster-texture"></div>
+                    </div>
+                    <div class="torn-edge"></div>
+                    <div class="torn-info-container">
+                        <h3 class="scheda-titolo">${title}</h3>
+                        <p><strong>DIRECTOR:</strong> ${director}</p>
+                        <p><strong>PROD:</strong> ${production}</p>
+                        <p><strong>YEAR:</strong> ${year}</p>
+                        <p><strong>GENRE:</strong> ${genre}</p>
+                        ${trailerLink ? `<p><strong>TRAILER:</strong> <a href="${trailerLink}" target="_blank" class="trailer-link">Watch here</a></p>` : ''}
+                    </div>
+                    <div class="scheda-info">
+                        <h3 class="scheda-titolo">${jobTitle}</h3>
+                    </div>
+                `;
+                
+                // Inserisci all'inizio del container
+                container.insertBefore(newCard, container.firstChild);
+                
+                // Inizializza effetti del poster strappato
+                initTornPosters();
+                
+                // Resetta form e notifica utente
+                document.getElementById('new-card-form').reset();
+                alert(`Scheda ${category} creata con successo!`);
             }
+            
+        } catch (error) {
+            console.error('Errore durante la creazione della scheda:', error);
+            alert('Si è verificato un errore: ' + error.message);
+        }
+    }
+    
+    // Funzione per aggiornare i campi del form in base alla categoria
+    function updateFormFields(category) {
+        // Riferimenti ai contenitori di campi
+        const jobGroup = document.querySelector('label[for="card-job"]').closest('.form-group');
+        const directorGroup = document.querySelector('label[for="card-director"]').closest('.form-group');
+        const prodGroup = document.querySelector('label[for="card-prod"]').closest('.form-group');
+        const genreGroup = document.querySelector('label[for="card-genre"]').closest('.form-group');
+        const yearGroup = document.querySelector('label[for="card-year"]').closest('.form-group');
+        const trailerGroup = document.querySelector('label[for="card-trailer"]').closest('.form-group');
+        const audioGroup = document.querySelector('label[for="card-audio"]').closest('.form-group');
+        
+        // Riferimenti ai campi di input per modificare i placeholder
+        const directorInput = document.getElementById('card-director');
+        const prodInput = document.getElementById('card-prod');
+        const genreInput = document.getElementById('card-genre');
+        const trailerInput = document.getElementById('card-trailer');
+        const audioInput = document.getElementById('card-audio');
+        
+        // Riferimenti alle label
+        const prodLabel = document.querySelector('label[for="card-prod"]');
+        const directorLabel = document.querySelector('label[for="card-director"]');
+        const genreLabel = document.querySelector('label[for="card-genre"]');
+        const trailerLabel = document.querySelector('label[for="card-trailer"]');
+        const audioLabel = document.querySelector('label[for="card-audio"]');
+        
+        // Prima mostra tutti i gruppi (in caso fossero stati nascosti)
+        if (jobGroup) jobGroup.style.display = 'block';
+        if (directorGroup) directorGroup.style.display = 'block';
+        if (prodGroup) prodGroup.style.display = 'block';
+        if (genreGroup) genreGroup.style.display = 'block';
+        if (yearGroup) yearGroup.style.display = 'block';
+        if (trailerGroup) trailerGroup.style.display = 'block';
+        
+        if (category === "COMMERCIAL") {
+            // Modifica etichette e placeholder per progetti Commercial
+            if (directorLabel) directorLabel.textContent = "Director:";
+            if (directorInput) directorInput.placeholder = "Inserisci il regista";
+            
+            if (prodLabel) prodLabel.textContent = "Client:";
+            if (prodInput) prodInput.placeholder = "Inserisci il cliente";
+            
+            if (genreLabel) genreLabel.textContent = "Agency:";
+            if (genreInput) genreInput.placeholder = "Inserisci l'agenzia";
+            
+            if (trailerLabel) trailerLabel.textContent = "Commercial Link:";
+            if (trailerInput) trailerInput.placeholder = "Inserisci URL dello spot";
+            
+            // Nascondi il campo Audio per Commercial
+            if (audioGroup) audioGroup.style.display = 'none';
+            
+        } else if (category === "LIBRARY") {
+            // Modifica etichette e placeholder per progetti Library
+            
+            // Nascondi i campi Job e Year per Library
+            if (jobGroup) jobGroup.style.display = 'none';
+            if (yearGroup) yearGroup.style.display = 'none';
+            
+            if (directorLabel) directorLabel.textContent = "Location:";
+            if (directorInput) directorInput.placeholder = "Dove hai registrato?";
+            
+            if (prodLabel) prodLabel.textContent = "Tags:";
+            if (prodInput) prodInput.placeholder = "Che suoni sono?";
+            
+            // Nascondi il campo Genre per Library
+            if (genreGroup) genreGroup.style.display = 'none';
+            
+            if (trailerLabel) trailerLabel.textContent = "Library Link:";
+            if (trailerInput) trailerInput.placeholder = "Link alla libreria (opzionale)";
+            
+            // Mostra il campo Audio per Library
+            if (audioGroup) audioGroup.style.display = 'block';
+            if (audioLabel) audioLabel.textContent = "Audio Preview:";
+            if (audioInput) audioInput.placeholder = "Inserisci URL del file audio";
+            
+        } else {
+            // Default per Film, Documentary, ecc.
+            if (directorLabel) directorLabel.textContent = "Director:";
+            if (directorInput) directorInput.placeholder = "Inserisci il regista";
+            
+            if (prodLabel) prodLabel.textContent = "Production:";
+            if (prodInput) prodInput.placeholder = "Inserisci la produzione";
+            
+            if (genreLabel) genreLabel.textContent = "Genre:";
+            if (genreInput) genreInput.placeholder = "Inserisci il genere";
+            
+            if (trailerLabel) trailerLabel.textContent = "Trailer Link:";
+            if (trailerInput) trailerInput.placeholder = "Inserisci URL del trailer";
+            
+            // Nascondi il campo Audio per non-Library
+            if (audioGroup) audioGroup.style.display = 'none';
+        }
+    }
+    
+    // Inizializzazione al caricamento della pagina
+    document.addEventListener('DOMContentLoaded', function() {
+        // Controlla se l'utente è già autenticato
+        if (sessionStorage.getItem('authenticated') === 'true') {
+            if (document.getElementById('password-form-container')) {
+                document.getElementById('password-form-container').style.display = 'none';
+                document.getElementById('upload-content').style.display = 'block';
+            }
+        }
+        
+        // Verifica URL hash all'avvio
+        var hash = window.location.hash;
+        if (hash) {
+            var targetLink = document.querySelector('.nav-menu a[href="' + hash + '"]');
+            if (targetLink) {
+                showPage(targetLink.getAttribute('href').replace('#', '') + '-page', targetLink);
+            }
+        }
+        
+        // Inizializza texture per tutti i poster strappati
+        initTornPosters();
+        
+        // Gestione form di upload
+        const newCardForm = document.getElementById('new-card-form');
+        if (newCardForm) {
+            // Rimuovi tutti i listener precedenti
+            const newForm = newCardForm.cloneNode(true);
+            newCardForm.parentNode.replaceChild(newForm, newCardForm);
+            
+            // Aggiungi nuovo listener unificato per tutte le categorie
+            newForm.addEventListener('submit', createCard);
+        }
+        
+        // Trova il menu a tendina della categoria per aggiornare i campi del form
+        const categorySelect = document.getElementById('card-category');
+        if (categorySelect) {
+            // Aggiungi un event listener per i cambiamenti di selezione
+            categorySelect.addEventListener('change', function() {
+                updateFormFields(this.value);
+            });
+            
+            // Esegui una volta all'inizio per impostare lo stato corretto
+            updateFormFields(categorySelect.value);
+        }
+        
+        // Codice per inserire dinamicamente l'alieno
+        // Rimuovi eventuali alien button esistenti
+        var existingButtons = document.querySelectorAll('.alien-button, #alien-button-container');
+        existingButtons.forEach(function(btn) {
+            btn.parentNode.removeChild(btn);
         });
-    }
-    
-    // Trova il menu a tendina della categoria per aggiornare i campi del form
-    const categorySelect = document.getElementById('card-category');
-    if (categorySelect) {
-        // Aggiungi un event listener per i cambiamenti di selezione
-        categorySelect.addEventListener('change', function() {
-            updateFormFields(this.value);
+        
+        // Crea nuovo elemento
+        var alien = document.createElement('div');
+        alien.id = 'alien-button-container';
+        alien.innerHTML = '👽';
+        
+        // Aggiungi stili inline per essere sicuro che funzionino
+        alien.style.position = 'fixed';
+        alien.style.bottom = '30px';
+        alien.style.right = '30px';
+        alien.style.zIndex = '9999';
+        alien.style.fontSize = '2.5rem';
+        alien.style.cursor = 'pointer';
+        alien.style.color = 'white'; // o var(--text-color) se accessibile
+        alien.style.textShadow = '0 0 10px rgba(255, 77, 109, 0.5)';
+        alien.style.transition = 'transform 0.3s ease, text-shadow 0.3s ease';
+        
+        // Aggiungi anche l'effetto hover
+        alien.addEventListener('mouseenter', function() {
+            this.style.transform = 'scale(1.2)';
+            this.style.textShadow = '0 0 20px rgba(255, 77, 109, 0.8)';
         });
         
-        // Esegui una volta all'inizio per impostare lo stato corretto
-        updateFormFields(categorySelect.value);
-    }
-    
-    // Codice per inserire dinamicamente l'alieno
-    // Rimuovi eventuali alien button esistenti
-    var existingButtons = document.querySelectorAll('.alien-button, #alien-button-container');
-    existingButtons.forEach(function(btn) {
-        btn.parentNode.removeChild(btn);
+        alien.addEventListener('mouseleave', function() {
+            this.style.transform = 'scale(1)';
+            this.style.textShadow = '0 0 10px rgba(255, 77, 109, 0.5)';
+        });
+        
+        // Aggiungi il click handler
+        alien.addEventListener('click', function() {
+            showPage('upload-page', null);
+            return false;
+        });
+        
+        // Aggiungi direttamente al body
+        document.body.appendChild(alien);
     });
-    
-    // Crea nuovo elemento
-    var alien = document.createElement('div');
-    alien.id = 'alien-button-container';
-    alien.innerHTML = '👽';
-    
-    // Aggiungi stili inline per essere sicuro che funzionino
-    alien.style.position = 'fixed';
-    alien.style.bottom = '30px';
-    alien.style.right = '30px';
-    alien.style.zIndex = '9999';
-    alien.style.fontSize = '2.5rem';
-    alien.style.cursor = 'pointer';
-    alien.style.color = 'white'; // o var(--text-color) se accessibile
-    alien.style.textShadow = '0 0 10px rgba(255, 77, 109, 0.5)';
-    alien.style.transition = 'transform 0.3s ease, text-shadow 0.3s ease';
-    
-    // Aggiungi anche l'effetto hover
-    alien.addEventListener('mouseenter', function() {
-        this.style.transform = 'scale(1.2)';
-        this.style.textShadow = '0 0 20px rgba(255, 77, 109, 0.8)';
-    });
-    
-    alien.addEventListener('mouseleave', function() {
-        this.style.transform = 'scale(1)';
-        this.style.textShadow = '0 0 10px rgba(255, 77, 109, 0.5)';
-    });
-    
-    // Aggiungi il click handler
-    alien.addEventListener('click', function() {
-        showPage('upload-page', null);
-        return false;
-    });
-    
-    // Aggiungi direttamente al body
-    document.body.appendChild(alien);
-});
-
-// Modifica la funzione createLibraryCard per accettare l'evento
-function createLibraryCard(event) {
-    event.preventDefault(); // Per sicurezza
-    
-    alert("Funzione createLibraryCard chiamata");
-    
-    // Dati essenziali
-    const title = document.getElementById('card-title').value || "Titolo";
-    const posterUrl = document.getElementById('card-poster').value || "https://via.placeholder.com/300";
-    
-    // Trova il container direttamente
-    const container = document.querySelector('#library-page .grid-container');
-    
-    if (!container) {
-        alert("ERRORE: Container non trovato!");
-        return;
-    }
-    
-    // Crea un elemento molto semplice
-    const newCard = document.createElement('div');
-    newCard.className = 'schedasquare';
-    newCard.innerHTML = `
-        <img src="${posterUrl}" alt="${title}" style="width:100%; height:100%; object-fit:cover;">
-        <div style="position:absolute; bottom:0; background:rgba(0,0,0,0.7); color:white; padding:10px; width:100%;">
-            ${title}
-        </div>
-    `;
-    
-    // Inserisci all'inizio
-    container.insertBefore(newCard, container.firstChild);
-    
-    // Messaggio di successo
-    alert("Scheda inserita con successo!");
-}
-
-
-// Funzione per aggiornare i campi del form in base alla categoria
-function updateFormFields(category) {
-    // Riferimenti ai contenitori di campi (i div.form-group che contengono sia label che input)
-    const jobGroup = document.querySelector('label[for="card-job"]').closest('.form-group');
-    const directorGroup = document.querySelector('label[for="card-director"]').closest('.form-group');
-    const prodGroup = document.querySelector('label[for="card-prod"]').closest('.form-group');
-    const genreGroup = document.querySelector('label[for="card-genre"]').closest('.form-group');
-    const yearGroup = document.querySelector('label[for="card-year"]').closest('.form-group');
-    const trailerGroup = document.querySelector('label[for="card-trailer"]').closest('.form-group');
-    const audioGroup = document.querySelector('label[for="card-audio"]').closest('.form-group');
-    
-    // Riferimenti ai campi di input per modificare i placeholder
-    const directorInput = document.getElementById('card-director');
-    const prodInput = document.getElementById('card-prod');
-    const genreInput = document.getElementById('card-genre');
-    const trailerInput = document.getElementById('card-trailer');
-    const audioInput = document.getElementById('card-audio');
-    
-    // Riferimenti alle label
-    const prodLabel = document.querySelector('label[for="card-prod"]');
-    const directorLabel = document.querySelector('label[for="card-director"]');
-    const genreLabel = document.querySelector('label[for="card-genre"]');
-    const trailerLabel = document.querySelector('label[for="card-trailer"]');
-    const audioLabel = document.querySelector('label[for="card-audio"]');
-    
-    // Prima mostra tutti i gruppi (in caso fossero stati nascosti)
-    if (jobGroup) jobGroup.style.display = 'block';
-    if (directorGroup) directorGroup.style.display = 'block';
-    if (prodGroup) prodGroup.style.display = 'block';
-    if (genreGroup) genreGroup.style.display = 'block';
-    if (yearGroup) yearGroup.style.display = 'block';
-    if (trailerGroup) trailerGroup.style.display = 'block';
-    
-    if (category === "COMMERCIAL") {
-        // Modifica etichette e placeholder per progetti Commercial
-        if (directorLabel) directorLabel.textContent = "Director:";
-        if (directorInput) directorInput.placeholder = "Inserisci il regista";
-        
-        if (prodLabel) prodLabel.textContent = "Client:";
-        if (prodInput) prodInput.placeholder = "Inserisci il cliente";
-        
-        if (genreLabel) genreLabel.textContent = "Agency:";
-        if (genreInput) genreInput.placeholder = "Inserisci l'agenzia";
-        
-        if (trailerLabel) trailerLabel.textContent = "Commercial Link:";
-        if (trailerInput) trailerInput.placeholder = "Inserisci URL dello spot";
-        
-        // Nascondi il campo Audio per Commercial
-        if (audioGroup) audioGroup.style.display = 'none';
-        
-    } else if (category === "LIBRARY") {
-        // Modifica etichette e placeholder per progetti Library
-        
-        // Nascondi i campi Job e Year per Library
-        if (jobGroup) jobGroup.style.display = 'none';
-        if (yearGroup) yearGroup.style.display = 'none';
-        
-        if (directorLabel) directorLabel.textContent = "Location:";
-        if (directorInput) directorInput.placeholder = "Dove hai registrato?";
-        
-        if (prodLabel) prodLabel.textContent = "Tags:";
-        if (prodInput) prodInput.placeholder = "Che suoni sono?";
-        
-        // Nascondi il campo Genre per Library
-        if (genreGroup) genreGroup.style.display = 'none';
-        
-        if (trailerLabel) trailerLabel.textContent = "Library Link:";
-        if (trailerInput) trailerInput.placeholder = "Link alla libreria (opzionale)";
-        
-        // Mostra il campo Audio per Library
-        if (audioGroup) audioGroup.style.display = 'block';
-        if (audioLabel) audioLabel.textContent = "Audio Preview:";
-        if (audioInput) audioInput.placeholder = "Inserisci URL del file audio";
-        
-    } else {
-        // Default per Film, Documentary, ecc.
-        if (directorLabel) directorLabel.textContent = "Director:";
-        if (directorInput) directorInput.placeholder = "Inserisci il regista";
-        
-        if (prodLabel) prodLabel.textContent = "Production:";
-        if (prodInput) prodInput.placeholder = "Inserisci la produzione";
-        
-        if (genreLabel) genreLabel.textContent = "Genre:";
-        if (genreInput) genreInput.placeholder = "Inserisci il genere";
-        
-        if (trailerLabel) trailerLabel.textContent = "Trailer Link:";
-        if (trailerInput) trailerInput.placeholder = "Inserisci URL del trailer";
-        
-        // Nascondi il campo Audio per non-Library
-        if (audioGroup) audioGroup.style.display = 'none';
-    }
-}
-
 </script>
+    
+    </body>
 
-</body>
 </html>
