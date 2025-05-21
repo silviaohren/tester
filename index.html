@@ -1303,9 +1303,11 @@
         });
     }
     
-    // Funzione per creare una scheda LIBRARY
+   // Funzione per creare una scheda LIBRARY (versione corretta)
     function createLibraryCard() {
         try {
+            console.log("Inizio creazione scheda LIBRARY");
+            
             // Trova il container per schede LIBRARY
             const container = document.querySelector('#library-page .grid-container');
             if (!container) {
@@ -1318,11 +1320,14 @@
             const tags = document.getElementById('card-prod').value || "Tags";
             const imageUrl = document.getElementById('card-poster').value || "https://via.placeholder.com/300";
             
-            // Crea una scheda
+            console.log("Dati raccolti:", { title, location, tags, imageUrl });
+            console.log("Container trovato:", container);
+            
+            // Crea una scheda - USO DELLA CLASSE 'scheda' INVECE DI 'schedasquare'
             const newCard = document.createElement('div');
             newCard.className = 'scheda torn-poster';
             
-            // HTML interno
+            // HTML interno semplificato
             newCard.innerHTML = `
                 <div class="poster-container">
                     <img class="poster-base" src="${imageUrl}" alt="${title}">
@@ -1345,8 +1350,14 @@
                 </div>
             `;
             
-            // Inserisci all'inizio
-            container.insertBefore(newCard, container.firstChild);
+            // Inserisci la nuova scheda all'inizio del container
+            if (container.firstChild) {
+                container.insertBefore(newCard, container.firstChild);
+            } else {
+                container.appendChild(newCard);
+            }
+            
+            console.log("Scheda inserita con successo");
             
             // Riattiva l'effetto torn poster
             initTornPosters();
@@ -1356,7 +1367,7 @@
             alert("Scheda LIBRARY creata con successo!");
             
         } catch (error) {
-            console.error("Errore:", error);
+            console.error("Errore durante la creazione scheda LIBRARY:", error);
             alert("Errore durante la creazione: " + error.message);
         }
     }
