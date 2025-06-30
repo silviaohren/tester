@@ -3,637 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Portfolio</title>
+    <title>Silvia Orengo - Sound Designer Portfolio</title>
+    <meta name="description" content="Portfolio di Silvia Orengo, Sound Designer e Compositrice specializzata in design sonoro per film, documentari e contenuti commerciali.">
     
     <!-- Custom Favicon -->
     <link rel="icon" type="image/png" href="FAVICON_audio-editing.png">
     
-    <style>
-        /* ============================================
-           IMPORTAZIONE FONT PERSONALIZZATI
-        ============================================ */
-        @font-face {
-            font-family: 'SVBasicManual';
-            src: url('main/font/SVBasicManual.woff2') format('woff2'),
-                 url('main/font/SVBasicManual.woff') format('woff'),
-                 url('main/font/SVBasicManual.ttf') format('truetype');
-            font-weight: normal;
-            font-style: normal;
-            font-display: swap;
-        }
-        
-        @font-face {
-            font-family: 'SVBasicManualBold';
-            src: url('main/font/SVBasicManualBold.woff2') format('woff2'),
-                 url('main/font/SVBasicManualBold.woff') format('woff'),
-                 url('main/font/SVBasicManualBold.ttf') format('truetype');
-            font-weight: bold;
-            font-style: normal;
-            font-display: swap;
-        }
-        
-        /* ============================================
-           VARIABILI GLOBALI E COLORI
-        ============================================ */
-        :root {
-            --bg-color: #1E1E2E;
-            --text-color: #f5f5f5;
-            --accent-color: #ff4d6d;
-            --sidebands-color: #14141F;
-            --content-max-width: 1024px;
-            --content-padding: 2rem;
-            --body-font: 'SVBasicManual', monospace;
-            --heading-font: 'SVBasicManualBold', monospace;
-        }
-        
-        /* ============================================
-           RESET CSS DI BASE
-        ============================================ */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        /* ============================================
-           LAYOUT PRINCIPALE
-        ============================================ */
-        body {
-            font-family: var(--body-font);
-            background-color: var(--sidebands-color);
-            color: var(--text-color);
-            min-height: 100vh;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-        }
-        
-        /* ============================================
-           WEB-AREA (CONTENITORE PRINCIPALE)
-        ============================================ */
-        .web-area {
-            background-color: var(--bg-color);
-            width: 100%; 
-            max-width: var(--content-max-width);
-            min-height: 100vh;
-            padding: var(--content-padding);
-            position: relative;
-            box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
-        }
-        
-        /* ============================================
-           STILE HEADER
-        ============================================ */
-        header {
-            text-align: center;
-            margin-bottom: 1rem;
-        }
-        
-        h1 {
-            font-family: var(--heading-font);
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            letter-spacing: -0.02em;
-        }
-        
-        .subtitle {
-            font-family: var(--body-font);
-            color: rgba(255, 255, 255, 0.6);
-            font-size: 1rem;
-        }
-        
-        /* ============================================
-           MENU DI NAVIGAZIONE
-        ============================================ */
-        .nav-menu {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 2rem 0;
-            font-family: var(--body-font);
-            font-size: 0.9rem;
-            letter-spacing: 0.05em;
-        }
-        
-        .nav-menu a {
-            color: var(--text-color);
-            text-decoration: none;
-            padding: 0.5rem 0.8rem;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-        
-        .nav-menu a:hover {
-            color: var(--accent-color);
-        }
-        
-        .nav-menu a.active {
-            color: var(--accent-color);
-        }
-        
-        .nav-menu a.active::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0.8rem;
-            right: 0.8rem;
-            height: 2px;
-            background-color: var(--accent-color);
-        }
-        
-        .nav-separator {
-            margin: 0 0.2rem;
-            color: rgba(255, 255, 255, 0.3);
-        }
-
-        /* Verde smeraldo per link specifici del menu */
-        .nav-menu a.menu-green:hover {
-            color: #10b981 !important; /* Verde smeraldo */
-        }
-        
-        .nav-menu a.menu-green.active {
-            color: #10b981 !important; /* Verde smeraldo */
-        }
-        
-        .nav-menu a.menu-green.active::after {
-            background-color: #10b981 !important; /* Verde smeraldo */
-        }
-
-        /* ============================================
-           LAYOUT GRIGLIA
-        ============================================ */
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 2rem;
-            width: 100%;
-            margin: 3rem auto 0;
-        }
-        /* ============================================
-           STILE SCHEDA (CARD FILM)
-        ============================================ */
-        .scheda {
-            position: relative;
-            aspect-ratio: 2/3;
-            border-radius: 12px;
-            overflow: hidden;
-            cursor: pointer;
-            filter: grayscale(100%);
-            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-            background-color: rgba(0, 0, 0, 0.3); /* Sfondo base per schede vuote */
-        }
-        
-        /* Effetto hover sulla scheda */
-        .scheda:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
-            filter: grayscale(0%);
-        }
-                
-        /* ============================================
-           STILE POSTER STRAPPATO
-        ============================================ */
-        .torn-poster {
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .poster-container {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-        }
-        
-        .poster-base {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-        
-        .poster-texture {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-size: cover;
-            background-position: center;
-            mix-blend-mode: overlay;
-            opacity: 0.7;
-            pointer-events: none;
-        }
-        
-        .torn-edge {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 20px;
-            background-color: rgba(255, 255, 255, 0.8);
-            clip-path: polygon(0% 100%, 4% 60%, 10% 90%, 16% 40%, 22% 100%, 30% 50%, 36% 100%, 44% 30%, 52% 100%, 62% 40%, 70% 90%, 76% 30%, 84% 100%, 92% 50%, 96% 100%, 100% 10%, 100% 100%);
-            z-index: 3;
-            transform: translateY(100%);
-            transition: transform 0.3s ease 0.5s;
-        }
-        
-        .torn-poster.active .torn-edge {
-            transform: translateY(0);
-            transition: transform 0.3s ease;
-        }
-        
-        .torn-info-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: #f5f5f5;
-            background-image: linear-gradient(to bottom, rgba(255,255,255,0.8), rgba(210,210,210,0.5)), url('https://www.transparenttextures.com/patterns/paper.png');
-            padding: 1.5rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            z-index: 1;
-            color: #333;
-            transform: translateY(100%);
-            transition: transform 0.5s ease;
-        }
-        
-        .torn-poster.active .poster-container {
-            transform: translateY(-100%);
-            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        
-        .torn-poster.active .torn-info-container {
-            transform: translateY(0);
-        }
-        
-        .torn-info-container p {
-            margin-bottom: 0.8rem;
-            font-size: 0.9rem;
-        }
-        
-        .torn-info-container a {
-            color: var(--accent-color);
-            text-decoration: none;
-            transition: opacity 0.3s ease;
-        }
-        
-        .torn-info-container a:hover {
-            opacity: 0.8;
-        }
-        
-        .audio-preview {
-            margin-top: 1rem;
-        }
-        
-        .audio-preview audio {
-            width: 100%;
-            height: 30px;
-        }
-        
-        /* Override per hover sulla scheda con poster strappato */
-        .torn-poster:hover .poster-base {
-            transform: scale(1.05);
-        }
-        /* ============================================
-           STILE POSTER FILM
-        ============================================ */
-        .poster {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-        
-        .scheda:hover .poster {
-            transform: scale(1.05);
-        }
-        
-        /* ============================================
-           INFORMAZIONI SCHEDA
-        ============================================ */
-        .scheda-info {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            padding: 1.5rem;
-            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
-            transform: translateY(20px);
-            opacity: 0;
-            transition: all 0.3s ease;
-        }
-        
-        .scheda:hover .scheda-info {
-            transform: translateY(0);
-            opacity: 1;
-        }
-        
-        .scheda-titolo {
-            font-family: var(--heading-font);
-            font-size: 1.2rem;
-            font-weight: 600;
-            margin-bottom: 0.3rem;
-        }
-        
-        .scheda-dettagli {
-            font-family: var(--body-font);
-            font-size: 0.8rem;
-            color: rgba(255, 255, 255, 0.7);
-            display: flex;
-            justify-content: center;
-        }
-        
-        /* ============================================
-           GESTIONE PAGINE
-        ============================================ */
-        .page {
-            display: none; /* Tutte le pagine sono nascoste di default */
-        }
-        
-        .page.active {
-            display: block; /* Solo la pagina attiva viene mostrata */
-        }
-        
-        /* ============================================
-           STILE FOOTER
-        ============================================ */
-        .site-footer {
-            margin-top: 4rem;
-            padding-top: 0.2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            text-align: center;
-        }
-        
-        .contact-footer {
-            margin-top: 4rem;       
-            margin-bottom: 4rem;    
-            padding-bottom: 4rem;     
-            padding-top: 0;         
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05); 
-        }
-
-        .contact-footer a {
-            font-family: var(--heading-font);
-            font-size: 1.5rem;
-            color: var(--text-color);
-            text-decoration: none;
-            transition: color 0.3s ease;
-            letter-spacing: 0.05em;
-            padding: 0.5rem 0;
-            display: inline-block;
-        }
-
-        .contact-footer a:hover {
-            color: var(--accent-color);
-        }
-
-        .copyright {
-            font-size: 0.8rem;
-            color: rgba(255, 255, 255, 0.6);
-            margin-bottom: 1rem;
-        }
-
-        .copyright a {
-            color: rgba(255, 255, 255, 0.6);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .copyright a:hover {
-            color: var(--accent-color);
-        }
-        /* ============================================
-           BIO PAGE STYLING
-        ============================================ */
-        .bio-container {
-            display: flex;
-            flex-direction: row;
-            gap: 3rem;
-            margin: 3rem auto;
-            max-width: 900px;
-        }
-        
-        .bio-photo-container {
-            flex: 0 0 300px;
-        }
-        
-        .bio-photo {
-            width: 100%;
-            aspect-ratio: 3/4;
-            object-fit: cover;
-            border-radius: 12px;
-            filter: grayscale(50%);
-            transition: filter 0.3s ease;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-        }
-        
-        .bio-photo:hover {
-            filter: grayscale(0%);
-        }
-        
-        .bio-text-container {
-            flex: 1;
-        }
-        
-        .bio-text {
-            line-height: 1.7;
-            margin-bottom: 2rem;
-            color: rgba(255, 255, 255, 0.9);
-        }
-        
-        .bio-links {
-            display: flex;
-            gap: 1rem;
-            margin-top: 2rem;
-            flex-wrap: wrap;
-        }
-        
-        .bio-button {
-            padding: 0.7rem 1.5rem;
-            background-color: var(--bg-color);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 6px;
-            color: var(--text-color);
-            font-family: var(--body-font);
-            font-size: 0.9rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        
-        .bio-button:hover {
-            background-color: rgba(255, 77, 109, 0.1);
-            border-color: var(--accent-color);
-            transform: translateY(-3px);
-        }
-        
-        .bio-button img {
-            height: 20px;
-            width: auto;
-        }
-        
-        /* Responsive design per la pagina bio */
-        @media (max-width: 768px) {
-            .bio-container {
-                flex-direction: column;
-                gap: 2rem;
-            }
-            
-            .bio-photo-container {
-                flex: 0 0 auto;
-                max-width: 250px;
-                margin: 0 auto;
-            }
-        }
-        /* ============================================
-           STILE FORM CONTATTO
-        ============================================ */
-        .contact-container {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 2rem 0;
-        }
-
-        .contact-intro {
-            margin-bottom: 2rem;
-            color: rgba(255, 255, 255, 0.8);
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .contact-input {
-            width: 100%;
-            padding: 1rem;
-            border: none;
-            border-radius: 5px;
-            background-color: rgba(255, 77, 109, 0.15);
-            color: var(--text-color);
-            font-family: var(--body-font);
-            transition: background-color 0.3s ease;
-        }
-
-        .contact-input:focus {
-            outline: none;
-            background-color: rgba(255, 77, 109, 0.25);
-        }
-
-        textarea.contact-input {
-            min-height: 150px;
-            resize: vertical;
-        }
-
-        .submit-btn {
-            background-color: var(--accent-color);
-            color: white;
-            border: none;
-            padding: 0.8rem 2rem;
-            border-radius: 5px;
-            font-family: var(--heading-font);
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .submit-btn:hover {
-            background-color: #e04463;
-            transform: translateY(-2px);
-        }
-        
-        /* ============================================
-           ALIEN BUTTON
-        ============================================ */
-        .alien-button {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            z-index: 100;
-            font-size: 2.5rem;
-            cursor: pointer;
-            transition: transform 0.3s ease, text-shadow 0.3s ease;
-            text-shadow: 0 0 10px rgba(255, 77, 109, 0.5);
-        }
-        
-        .alien-button:hover {
-            transform: scale(1.2);
-            text-shadow: 0 0 20px rgba(255, 77, 109, 0.8);
-        }
-        
-        /* ============================================
-           UPLOAD PAGE STYLING
-        ============================================ */
-        .upload-container {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 2rem 0;
-        }
-
-        .upload-intro {
-            margin-bottom: 2rem;
-            color: rgba(255, 255, 255, 0.8);
-        }
-
-        #password-form-container {
-            text-align: center;
-            max-width: 300px;
-            margin: 0 auto;
-        }
-
-        #upload-content {
-            text-align: center;
-            margin-top: 2rem;
-        }
-        
-        /* ============================================
-           RESPONSIVE DESIGN
-        ============================================ */
-        @media (max-width: 768px) {
-            .grid-container {
-                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-                gap: 1rem;
-            }
-            
-            .scheda-titolo {
-                font-size: 1rem;
-            }
-            
-            .scheda-dettagli {
-                font-size: 0.7rem;
-            }
-            
-            .web-area {
-                padding: 1rem;
-            }
-            
-            .nav-menu {
-                flex-wrap: wrap;
-                font-size: 0.8rem;
-            }
-            
-            h1 {
-                font-size: 2rem;
-            }
-            
-            .alien-button {
-                bottom: 20px;
-                right: 20px;
-                font-size: 2rem;
-            }
-        }
-    </style>
+    <!-- External CSS -->
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <!-- Bottone UFO in alto a sinistra per accesso a WAVETABLE -->
+    <div class="ufo-button" onclick="showPage('wavetable-page', null); return false;" aria-label="Area Wavetable">🛸</div>
+    
     <!-- Bottone Alieno -->
-    <div class="alien-button" onclick="showPage('upload-page', null); return false;">👽</div>
+    <div class="alien-button" onclick="showPage('upload-page', null); return false;" aria-label="Area riservata">👽</div>
     
     <!-- ============================================
          WEB-AREA (CONTENITORE PRINCIPALE)
@@ -650,7 +34,7 @@
         <!-- ============================================
              MENU DI NAVIGAZIONE
         ============================================ -->
-        <nav class="nav-menu">
+        <nav class="nav-menu" role="navigation" aria-label="Menu principale">
             <a href="#film" class="active" onclick="showPage('film-page', this); return false;">FILM</a>
             <span class="nav-separator">-</span>
             <a href="#documentary" onclick="showPage('documentary-page', this); return false;">DOCUMENTARY</a>
@@ -667,139 +51,27 @@
         <!-- ============================================
              PAGINA FILM (ATTIVA DI DEFAULT)
         ============================================ -->
-        <section id="film-page" class="page active">
+        <section id="film-page" class="page active" role="main">
             <main class="grid-container">
-                <!-- SCHEDA 1 - Con effetto poster strappato -->
-                <div class="scheda torn-poster">
+                <div class="scheda torn-poster" tabindex="0" role="button" aria-label="La Belva - Sound Editor / Dialogue Editor">
                     <div class="poster-container">
-                        <!-- Immagine poster base dal link diretto -->
                         <img class="poster-base" src="https://www.ivanagloria.com/wp-content/uploads/2025/05/so_2020_LA-BELVA.jpg" alt="LA BELVA">
-                        <!-- Overlay con texture -->
-                        <div class="poster-texture"></div>
                     </div>
                     <div class="torn-edge"></div>
                     <div class="torn-info-container">
-                        <h3 class="scheda-titolo">LA BELVA</h3>
-                        <p><strong>TITLE:</strong> La Belva</p>
+                        <h3 class="scheda-titolo">LA BELVA <span style="color: #888; font-size: 1rem; font-weight: 400;">Feature Film</span></h3>
+                        <div style="height: 1.1rem;"></div>
                         <p><strong>DIRECTOR:</strong> Ludovico Di Martino</p>
-                        <p><strong>PRODUCTION:</strong> Groenlandia</p>
+                        <!--#if production --><p><strong>PRODUCTION:</strong> Groenlandia</p><!--#endif-->
                         <p><strong>YEAR:</strong> 2020</p>
-                        <p><strong>GENRE:</strong> Thriller/Azione</p>
-                        <p><strong>TRAILER:</strong> <a href="https://www.youtube.com/watch?v=example" target="_blank">Trailer</a></p>
-                        <div class="audio-preview">
-                            <audio controls>
-                                <source src="#" type="audio/mpeg">
-                                Il tuo browser non supporta l'elemento audio.
-                            </audio>
+                        <!--#if genre --><p><strong>GENRE:</strong> Thriller/Azione</p><!--#endif-->
+                        <p><strong>ROLE:</strong> Sound Editor / Dialogue Editor</p>
+                        <div class="trailer-link-bottom-right">
+                            <a href="https://www.youtube.com/watch?v=example" target="_blank" rel="noopener">&#9654; Trailer</a>
                         </div>
                     </div>
                     <div class="scheda-info">
                         <h3 class="scheda-titolo">SOUND EDITOR / DIALOGUE EDITOR</h3>
-                    </div>
-                </div>
-                
-                <!-- SCHEDA 2 -->
-                <div class="scheda torn-poster">
-                    <div class="poster-container">
-                        <img class="poster-base" src="https://source.unsplash.com/CiUR8zISX60" alt="Abissi Profondi">
-                        <div class="poster-texture"></div>
-                    </div>
-                    <div class="torn-edge"></div>
-                    <div class="torn-info-container">
-                        <h3 class="scheda-titolo">ABISSI PROFONDI</h3>
-                        <p><strong>TITLE:</strong> Abissi Profondi</p>
-                        <p><strong>DIRECTOR:</strong> Laura Bianchi</p>
-                        <p><strong>PRODUCTION:</strong> Deep Studios</p>
-                        <p><strong>YEAR:</strong> 2019</p>
-                        <p><strong>GENRE:</strong> Thriller/Drama</p>
-                        <p><strong>TRAILER:</strong> <a href="https://www.youtube.com/watch?v=example" target="_blank">Trailer</a></p>
-                    </div>
-                    <div class="scheda-info">
-                        <h3 class="scheda-titolo">SOUND DESIGNER</h3>
-                    </div>
-                </div>
-                
-                <!-- SCHEDA 3 -->
-                <div class="scheda torn-poster">
-                    <div class="poster-container">
-                        <img class="poster-base" src="https://source.unsplash.com/Qsjm7o3J7Gg" alt="Echi del Silenzio">
-                        <div class="poster-texture"></div>
-                    </div>
-                    <div class="torn-edge"></div>
-                    <div class="torn-info-container">
-                        <h3 class="scheda-titolo">ECHI DEL SILENZIO</h3>
-                        <p><strong>TITLE:</strong> Echi del Silenzio</p>
-                        <p><strong>DIRECTOR:</strong> Andrea Neri</p>
-                        <p><strong>PRODUCTION:</strong> Echo Films</p>
-                        <p><strong>YEAR:</strong> 2020</p>
-                        <p><strong>GENRE:</strong> Drama</p>
-                        <p><strong>TRAILER:</strong> <a href="https://www.youtube.com/watch?v=example" target="_blank">Trailer</a></p>
-                    </div>
-                    <div class="scheda-info">
-                        <h3 class="scheda-titolo">SOUND EDITOR</h3>
-                    </div>
-                </div>
-                
-                <!-- SCHEDA 4 -->
-                <div class="scheda torn-poster">
-                    <div class="poster-container">
-                        <img class="poster-base" src="https://source.unsplash.com/c1Jp-fo53U8" alt="Corsa Finale">
-                        <div class="poster-texture"></div>
-                    </div>
-                    <div class="torn-edge"></div>
-                    <div class="torn-info-container">
-                        <h3 class="scheda-titolo">CORSA FINALE</h3>
-                        <p><strong>TITLE:</strong> Corsa Finale</p>
-                        <p><strong>DIRECTOR:</strong> Gianni Moretti</p>
-                        <p><strong>PRODUCTION:</strong> Race Productions</p>
-                        <p><strong>YEAR:</strong> 2021</p>
-                        <p><strong>GENRE:</strong> Action/Thriller</p>
-                        <p><strong>TRAILER:</strong> <a href="https://www.youtube.com/watch?v=example" target="_blank">Trailer</a></p>
-                    </div>
-                    <div class="scheda-info">
-                        <h3 class="scheda-titolo">SOUND DESIGNER / MIXER</h3>
-                    </div>
-                </div>
-                
-                <!-- SCHEDA 5 -->
-                <div class="scheda torn-poster">
-                    <div class="poster-container">
-                        <img class="poster-base" src="https://source.unsplash.com/GnvurwJsKaY" alt="Frequenze Future">
-                        <div class="poster-texture"></div>
-                    </div>
-                    <div class="torn-edge"></div>
-                    <div class="torn-info-container">
-                        <h3 class="scheda-titolo">FREQUENZE FUTURE</h3>
-                        <p><strong>TITLE:</strong> Frequenze Future</p>
-                        <p><strong>DIRECTOR:</strong> Sofia Romano</p>
-                        <p><strong>PRODUCTION:</strong> Waveline Studios</p>
-                        <p><strong>YEAR:</strong> 2022</p>
-                        <p><strong>GENRE:</strong> Sci-Fi</p>
-                        <p><strong>TRAILER:</strong> <a href="https://www.youtube.com/watch?v=example" target="_blank">Trailer</a></p>
-                    </div>
-                    <div class="scheda-info">
-                        <h3 class="scheda-titolo">SOUND EDITOR / COMPOSER</h3>
-                    </div>
-                </div>
-                
-                <!-- SCHEDA 6 -->
-                <div class="scheda torn-poster">
-                    <div class="poster-container">
-                        <img class="poster-base" src="https://source.unsplash.com/g1Kr4Ozfoac" alt="Attimo Sospeso">
-                        <div class="poster-texture"></div>
-                    </div>
-                    <div class="torn-edge"></div>
-                    <div class="torn-info-container">
-                        <h3 class="scheda-titolo">ATTIMO SOSPESO</h3>
-                        <p><strong>TITLE:</strong> Attimo Sospeso</p>
-                        <p><strong>DIRECTOR:</strong> Luca Verdi</p>
-                        <p><strong>PRODUCTION:</strong> Moment Pictures</p>
-                        <p><strong>YEAR:</strong> 2023</p>
-                        <p><strong>GENRE:</strong> Drama/Romance</p>
-                        <p><strong>TRAILER:</strong> <a href="https://www.youtube.com/watch?v=example" target="_blank">Trailer</a></p>
-                    </div>
-                    <div class="scheda-info">
-                        <h3 class="scheda-titolo">DIALOGUE EDITOR</h3>
                     </div>
                 </div>
             </main>
@@ -819,89 +91,27 @@
         <!-- ============================================
              PAGINA DOCUMENTARY
         ============================================ -->
-        <section id="documentary-page" class="page">
+        <section id="documentary-page" class="page" role="main">
             <main class="grid-container">
-                <!-- SCHEDA 1 -->
-                <div class="scheda torn-poster">
+                <div class="scheda torn-poster" tabindex="0" role="button" aria-label="Ruggiti della Savana - Sound Designer">
                     <div class="poster-container">
                         <img class="poster-base" src="https://source.unsplash.com/IH7wPsjwomc" alt="Ruggiti della Savana">
-                        <div class="poster-texture"></div>
                     </div>
                     <div class="torn-edge"></div>
                     <div class="torn-info-container">
                         <h3 class="scheda-titolo">RUGGITI DELLA SAVANA</h3>
-                        <p><strong>TITLE:</strong> Ruggiti della Savana</p>
+                        <div style="height: 1.1rem;"></div>
                         <p><strong>DIRECTOR:</strong> Paolo Serra</p>
                         <p><strong>PRODUCTION:</strong> Wild Nature Films</p>
                         <p><strong>YEAR:</strong> 2019</p>
-                        <p><strong>GENRE:</strong> Nature Documentary</p>
-                        <p><strong>TRAILER:</strong> <a href="https://www.youtube.com/watch?v=example" target="_blank">Trailer</a></p>
+                        <!--#if genre --><p><strong>GENRE:</strong> Nature Documentary</p><!--#endif-->
+                        <p><strong>ROLE:</strong> Sound Designer</p>
+                        <div class="trailer-link-bottom-right">
+                            <a href="https://www.youtube.com/watch?v=example" target="_blank" rel="noopener">&#9654; Trailer</a>
+                        </div>
                     </div>
                     <div class="scheda-info">
                         <h3 class="scheda-titolo">SOUND DESIGNER</h3>
-                    </div>
-                </div>
-                
-                <!-- SCHEDA 2 -->
-                <div class="scheda torn-poster">
-                    <div class="poster-container">
-                        <img class="poster-base" src="https://source.unsplash.com/y8TMoCzw87E" alt="Barriera Corallina">
-                        <div class="poster-texture"></div>
-                    </div>
-                    <div class="torn-edge"></div>
-                    <div class="torn-info-container">
-                        <h3 class="scheda-titolo">BARRIERA CORALLINA</h3>
-                        <p><strong>TITLE:</strong> Barriera Corallina</p>
-                        <p><strong>DIRECTOR:</strong> Marina Costa</p>
-                        <p><strong>PRODUCTION:</strong> Ocean Depths</p>
-                        <p><strong>YEAR:</strong> 2020</p>
-                        <p><strong>GENRE:</strong> Marine Documentary</p>
-                        <p><strong>TRAILER:</strong> <a href="https://www.youtube.com/watch?v=example" target="_blank">Trailer</a></p>
-                    </div>
-                    <div class="scheda-info">
-                        <h3 class="scheda-titolo">SOUND EDITOR / MIXER</h3>
-                    </div>
-                </div>
-                
-                <!-- SCHEDA 3 -->
-                <div class="scheda torn-poster">
-                    <div class="poster-container">
-                        <img class="poster-base" src="https://source.unsplash.com/FV3GConVSss" alt="Connessioni Digitali">
-                        <div class="poster-texture"></div>
-                    </div>
-                    <div class="torn-edge"></div>
-                    <div class="torn-info-container">
-                        <h3 class="scheda-titolo">CONNESSIONI DIGITALI</h3>
-                        <p><strong>TITLE:</strong> Connessioni Digitali</p>
-                        <p><strong>DIRECTOR:</strong> Roberto Neri</p>
-                        <p><strong>PRODUCTION:</strong> Tech Docs</p>
-                        <p><strong>YEAR:</strong> 2021</p>
-                        <p><strong>GENRE:</strong> Technology Documentary</p>
-                        <p><strong>TRAILER:</strong> <a href="https://www.youtube.com/watch?v=example" target="_blank">Trailer</a></p>
-                    </div>
-                    <div class="scheda-info">
-                        <h3 class="scheda-titolo">DIALOGUE EDITOR</h3>
-                    </div>
-                </div>
-                
-                <!-- SCHEDA 4 -->
-                <div class="scheda torn-poster">
-                    <div class="poster-container">
-                        <img class="poster-base" src="https://source.unsplash.com/Nyvq2juw4_o" alt="Voci della Città">
-                        <div class="poster-texture"></div>
-                    </div>
-                    <div class="torn-edge"></div>
-                    <div class="torn-info-container">
-                        <h3 class="scheda-titolo">VOCI DELLA CITTÀ</h3>
-                        <p><strong>TITLE:</strong> Voci della Città</p>
-                        <p><strong>DIRECTOR:</strong> Carla Bianchi</p>
-                        <p><strong>PRODUCTION:</strong> Urban Stories</p>
-                        <p><strong>YEAR:</strong> 2022</p>
-                        <p><strong>GENRE:</strong> Urban Documentary</p>
-                        <p><strong>TRAILER:</strong> <a href="https://www.youtube.com/watch?v=example" target="_blank">Trailer</a></p>
-                    </div>
-                    <div class="scheda-info">
-                        <h3 class="scheda-titolo">SOUND DESIGNER / RECORDIST</h3>
                     </div>
                 </div>
             </main>
@@ -921,89 +131,90 @@
         <!-- ============================================
              PAGINA COMMERCIAL
         ============================================ -->
-        <section id="commercial-page" class="page">
-            <main class="grid-container">
-                <!-- SCHEDA 1 -->
-                <div class="scheda torn-poster">
-                    <div class="poster-container">
-                        <img class="poster-base" src="https://source.unsplash.com/dUV3oohJzE8" alt="Innovazione Sonora">
-                        <div class="poster-texture"></div>
+        <section id="commercial-page" class="page" role="main">
+            <main class="commercial-container">
+                <!-- PROGETTO 1 -->
+                <div class="commercial-card">
+                    <div class="poster-col">
+                        <div class="poster-img horizontal-poster">
+                            <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80" alt="Poster Urban Energy">
+                            <button class="play-btn" onclick="openVideo('https://www.youtube.com/watch?v=3JZ_D3ELwOQ')">▶</button>
                     </div>
-                    <div class="torn-edge"></div>
-                    <div class="torn-info-container">
-                        <h3 class="scheda-titolo">INNOVAZIONE SONORA</h3>
-                        <p><strong>TITLE:</strong> Innovazione Sonora</p>
-                        <p><strong>DIRECTOR:</strong> Marco Rossi</p>
-                        <p><strong>PRODUCTION:</strong> TechSound Inc.</p>
-                        <p><strong>YEAR:</strong> 2020</p>
-                        <p><strong>GENRE:</strong> Technology</p>
-                        <p><strong>TRAILER:</strong> <a href="https://www.youtube.com/watch?v=example" target="_blank">Trailer</a></p>
                     </div>
-                    <div class="scheda-info">
-                        <h3 class="scheda-titolo">SOUND DESIGNER</h3>
-                    </div>
-                </div>
-                
-                <!-- SCHEDA 2 -->
-                <div class="scheda torn-poster">
-                    <div class="poster-container">
-                        <img class="poster-base" src="https://source.unsplash.com/_H0fjILH5Vw" alt="Armonia Naturale">
-                        <div class="poster-texture"></div>
-                    </div>
-                    <div class="torn-edge"></div>
-                    <div class="torn-info-container">
-                        <h3 class="scheda-titolo">ARMONIA NATURALE</h3>
-                        <p><strong>TITLE:</strong> Armonia Naturale</p>
-                        <p><strong>DIRECTOR:</strong> Laura Verde</p>
-                        <p><strong>PRODUCTION:</strong> NatureCare</p>
-                        <p><strong>YEAR:</strong> 2021</p>
-                        <p><strong>GENRE:</strong> Cosmetics</p>
-                        <p><strong>TRAILER:</strong> <a href="https://www.youtube.com/watch?v=example" target="_blank">Trailer</a></p>
-                    </div>
-                    <div class="scheda-info">
-                        <h3 class="scheda-titolo">COMPOSER / MIXER</h3>
+                    <div class="info-col">
+                        <div class="project-info vertical-info">
+                            <h3 class="project-title">URBAN ENERGY</h3>
+                            <div class="project-details">
+                                <p><strong>DIRECTOR:</strong> Elisa Conti</p>
+                                <p><strong>PRODUCTION:</strong> CityVibes Studio</p>
+                                <p><strong>YEAR:</strong> 2023</p>
+                                <p><strong>SECTOR:</strong> Automotive</p>
+                                <p><strong>ROLE:</strong> Sound Designer</p>
                     </div>
                 </div>
-                
-                <!-- SCHEDA 3 -->
-                <div class="scheda torn-poster">
-                    <div class="poster-container">
-                        <img class="poster-base" src="https://source.unsplash.com/BtbjCFUvBXs" alt="Velocità Acustica">
-                        <div class="poster-texture"></div>
                     </div>
-                    <div class="torn-edge"></div>
-                    <div class="torn-info-container">
-                        <h3 class="scheda-titolo">VELOCITÀ ACUSTICA</h3>
-                        <p><strong>TITLE:</strong> Velocità Acustica</p>
-                        <p><strong>DIRECTOR:</strong> Piero Ferrari</p>
-                        <p><strong>PRODUCTION:</strong> SonicMotors</p>
+                    </div>
+                <!-- PROGETTO 2 -->
+                <div class="commercial-card offset-card">
+                    <div class="poster-col">
+                        <div class="poster-img horizontal-poster">
+                            <img src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=800&q=80" alt="Poster Natural Beauty">
+                            <button class="play-btn" onclick="openVideo('https://www.youtube.com/watch?v=ScMzIvxBSi4')">▶</button>
+                    </div>
+                </div>
+                    <div class="info-col">
+                        <div class="project-info vertical-info">
+                            <h3 class="project-title">NATURAL BEAUTY</h3>
+                            <div class="project-details">
+                                <p><strong>DIRECTOR:</strong> Marco Bianchi</p>
+                                <p><strong>PRODUCTION:</strong> GreenCare Media</p>
                         <p><strong>YEAR:</strong> 2022</p>
-                        <p><strong>GENRE:</strong> Automotive</p>
-                        <p><strong>TRAILER:</strong> <a href="https://www.youtube.com/watch?v=example" target="_blank">Trailer</a></p>
+                                <p><strong>SECTOR:</strong> Cosmetics</p>
+                                <p><strong>ROLE:</strong> Composer</p>
                     </div>
-                    <div class="scheda-info">
-                        <h3 class="scheda-titolo">SOUND DESIGNER / RECORDIST</h3>
                     </div>
                 </div>
-                
-                <!-- SCHEDA 4 -->
-                <div class="scheda torn-poster">
-                    <div class="poster-container">
-                        <img class="poster-base" src="https://source.unsplash.com/tA90pRfL2gM" alt="Freschezza Sonora">
-                        <div class="poster-texture"></div>
                     </div>
-                    <div class="torn-edge"></div>
-                    <div class="torn-info-container">
-                        <h3 class="scheda-titolo">FRESCHEZZA SONORA</h3>
-                        <p><strong>TITLE:</strong> Freschezza Sonora</p>
-                        <p><strong>DIRECTOR:</strong> Gaia Marino</p>
-                        <p><strong>PRODUCTION:</strong> BeverageStudio</p>
+                <!-- PROGETTO 3 -->
+                <div class="commercial-card">
+                    <div class="poster-col">
+                        <div class="poster-img horizontal-poster">
+                            <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=800&q=80" alt="Poster Digital Future">
+                            <button class="play-btn" onclick="openVideo('https://www.youtube.com/watch?v=ysz5S6PUM-U')">▶</button>
+                        </div>
+                    </div>
+                    <div class="info-col">
+                        <div class="project-info vertical-info">
+                            <h3 class="project-title">DIGITAL FUTURE</h3>
+                            <div class="project-details">
+                                <p><strong>DIRECTOR:</strong> Sara Neri</p>
+                                <p><strong>PRODUCTION:</strong> NextGen Films</p>
+                                <p><strong>YEAR:</strong> 2024</p>
+                                <p><strong>SECTOR:</strong> Technology</p>
+                                <p><strong>ROLE:</strong> Sound Editor</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- PROGETTO 4 -->
+                <div class="commercial-card offset-card">
+                    <div class="poster-col">
+                        <div class="poster-img horizontal-poster">
+                            <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=800&q=80" alt="Poster Summer Refresh">
+                            <button class="play-btn" onclick="openVideo('https://www.youtube.com/watch?v=2Vv-BfVoq4g')">▶</button>
+                        </div>
+                    </div>
+                    <div class="info-col">
+                        <div class="project-info vertical-info">
+                            <h3 class="project-title">SUMMER REFRESH</h3>
+                            <div class="project-details">
+                                <p><strong>DIRECTOR:</strong> Luca Verdi</p>
+                                <p><strong>PRODUCTION:</strong> FreshMedia</p>
                         <p><strong>YEAR:</strong> 2023</p>
-                        <p><strong>GENRE:</strong> Beverage</p>
-                        <p><strong>TRAILER:</strong> <a href="https://www.youtube.com/watch?v=example" target="_blank">Trailer</a></p>
+                                <p><strong>SECTOR:</strong> Beverage</p>
+                                <p><strong>ROLE:</strong> Composer / Mixer</p>
                     </div>
-                    <div class="scheda-info">
-                        <h3 class="scheda-titolo">COMPOSER</h3>
+                        </div>
                     </div>
                 </div>
             </main>
@@ -1023,113 +234,85 @@
         <!-- ============================================
              PAGINA LIBRARIES
         ============================================ -->
-        <section id="libraries-page" class="page">
-            <main class="grid-container">
+        <section id="libraries-page" class="page" role="main">
+            <main class="grid-container libraries-grid">
                 <!-- SCHEDA 1 -->
-                <div class="scheda torn-poster">
+                <div class="scheda library-card" tabindex="0" role="button" aria-label="Atmosfere Futuristiche">
                     <div class="poster-container">
-                        <img class="poster-base" src="https://source.unsplash.com/pVoEPpLw818" alt="Atmosfere Futuristiche">
-                        <div class="poster-texture"></div>
+                        <img class="poster-base" src="https://images.unsplash.com/photo-1465101178521-c1a9136a3b99?auto=format&fit=crop&w=800&q=80" alt="Atmosfere Futuristiche">
                     </div>
                     <div class="torn-edge"></div>
                     <div class="torn-info-container">
                         <h3 class="scheda-titolo">ATMOSFERE FUTURISTICHE</h3>
-                        <p><strong>TITLE:</strong> Atmosfere Futuristiche</p>
-                        <p><strong>TYPE:</strong> Sound Library</p>
-                        <p><strong>PUBLISHED:</strong> 2020</p>
-                        <p><strong>PUBLISHER:</strong> SoundStash</p>
-                        <p><strong>GENRE:</strong> Sci-Fi / Ambient</p>
-                        <p><strong>SAMPLE:</strong> <a href="#" target="_blank">Listen</a></p>
-                        <div class="audio-preview">
+                        <div style="height: 1.1rem;"></div>
+                        <p><strong>Location:</strong> Milano, Italia</p>
+                        <p><strong>Year:</strong> 2020</p>
+                        <div class="classic-audio-player">
                             <audio controls>
                                 <source src="#" type="audio/mpeg">
                                 Il tuo browser non supporta l'elemento audio.
                             </audio>
                         </div>
-                    </div>
-                    <div class="scheda-info">
-                        <h3 class="scheda-titolo">SOUND DESIGNER / COMPOSER</h3>
                     </div>
                 </div>
                 
                 <!-- SCHEDA 2 -->
-                <div class="scheda torn-poster">
+                <div class="scheda library-card" tabindex="0" role="button" aria-label="Inquietudini Sonore">
                     <div class="poster-container">
                         <img class="poster-base" src="https://source.unsplash.com/1Pgq9ZpIatI" alt="Inquietudini Sonore">
-                        <div class="poster-texture"></div>
                     </div>
                     <div class="torn-edge"></div>
                     <div class="torn-info-container">
                         <h3 class="scheda-titolo">INQUIETUDINI SONORE</h3>
-                        <p><strong>TITLE:</strong> Inquietudini Sonore</p>
-                        <p><strong>TYPE:</strong> Sound Library</p>
-                        <p><strong>PUBLISHED:</strong> 2021</p>
-                        <p><strong>PUBLISHER:</strong> Horror Soundscapes</p>
-                        <p><strong>GENRE:</strong> Horror / Suspense</p>
-                        <p><strong>SAMPLE:</strong> <a href="#" target="_blank">Listen</a></p>
-                        <div class="audio-preview">
+                        <div style="height: 1.1rem;"></div>
+                        <p><strong>Location:</strong> Roma, Italia</p>
+                        <p><strong>Year:</strong> 2021</p>
+                        <div class="classic-audio-player">
                             <audio controls>
                                 <source src="#" type="audio/mpeg">
                                 Il tuo browser non supporta l'elemento audio.
                             </audio>
                         </div>
-                    </div>
-                    <div class="scheda-info">
-                        <h3 class="scheda-titolo">SOUND DESIGNER</h3>
                     </div>
                 </div>
                 
                 <!-- SCHEDA 3 -->
-                <div class="scheda torn-poster">
+                <div class="scheda library-card" tabindex="0" role="button" aria-label="Paesaggi Urbani">
                     <div class="poster-container">
                         <img class="poster-base" src="https://source.unsplash.com/nDd3dIkkOLo" alt="Paesaggi Urbani">
-                        <div class="poster-texture"></div>
                     </div>
                     <div class="torn-edge"></div>
                     <div class="torn-info-container">
                         <h3 class="scheda-titolo">PAESAGGI URBANI</h3>
-                        <p><strong>TITLE:</strong> Paesaggi Urbani</p>
-                        <p><strong>TYPE:</strong> Field Recordings</p>
-                        <p><strong>PUBLISHED:</strong> 2022</p>
-                        <p><strong>PUBLISHER:</strong> Urban Audio</p>
-                        <p><strong>GENRE:</strong> Ambient / Documentary</p>
-                        <p><strong>SAMPLE:</strong> <a href="#" target="_blank">Listen</a></p>
-                        <div class="audio-preview">
+                        <div style="height: 1.1rem;"></div>
+                        <p><strong>Location:</strong> Torino, Italia</p>
+                        <p><strong>Year:</strong> 2022</p>
+                        <div class="classic-audio-player">
                             <audio controls>
                                 <source src="#" type="audio/mpeg">
                                 Il tuo browser non supporta l'elemento audio.
                             </audio>
                         </div>
-                    </div>
-                    <div class="scheda-info">
-                        <h3 class="scheda-titolo">FIELD RECORDIST</h3>
                     </div>
                 </div>
                 
                 <!-- SCHEDA 4 -->
-                <div class="scheda torn-poster">
+                <div class="scheda library-card" tabindex="0" role="button" aria-label="Sinfonie Orchestrali">
                     <div class="poster-container">
                         <img class="poster-base" src="https://source.unsplash.com/iQSAuTAKfNo" alt="Sinfonie Orchestrali">
-                        <div class="poster-texture"></div>
                     </div>
                     <div class="torn-edge"></div>
                     <div class="torn-info-container">
                         <h3 class="scheda-titolo">SINFONIE ORCHESTRALI</h3>
-                        <p><strong>TITLE:</strong> Sinfonie Orchestrali</p>
-                        <p><strong>TYPE:</strong> Orchestral Library</p>
-                        <p><strong>PUBLISHED:</strong> 2023</p>
-                        <p><strong>PUBLISHER:</strong> Classical Elements</p>
-                        <p><strong>GENRE:</strong> Orchestral / Cinematic</p>
-                        <p><strong>SAMPLE:</strong> <a href="#" target="_blank">Listen</a></p>
-                        <div class="audio-preview">
+                        <div style="height: 1.1rem;"></div>
+                        <p><strong>Location:</strong> Firenze, Italia</p>
+                        <p><strong>Year:</strong> 2023</p>
+                        <div class="classic-audio-player">
                             <audio controls>
                                 <source src="#" type="audio/mpeg">
                                 Il tuo browser non supporta l'elemento audio.
                             </audio>
                         </div>
-                    </div>
-                    <div class="scheda-info">
-                        <h3 class="scheda-titolo">COMPOSER / PRODUCER</h3>
                     </div>
                 </div>
             </main>
@@ -1149,7 +332,7 @@
         <!-- ============================================
              PAGINA BIO
         ============================================ -->
-        <section id="bio-page" class="page">
+        <section id="bio-page" class="page" role="main">
             <div class="bio-container">
                 <!-- Colonna Foto -->
                 <div class="bio-photo-container">
@@ -1177,17 +360,17 @@
                     
                     <!-- Bottoni Link -->
                     <div class="bio-links">
-                        <a href="https://www.imdb.com/it/name/nm8344062/?ref_=nv_sr_srsg_0_tt_1_nm_7_in_0_q_silvia%2520orengo" target="_blank" class="bio-button">
+                        <a href="https://www.imdb.com/it/name/nm8344062/?ref_=nv_sr_srsg_0_tt_1_nm_7_in_0_q_silvia%2520orengo" target="_blank" rel="noopener" class="bio-button">
                             <img src="images/IMDB2.jpg" alt="IMDB">
                             IMDB Page
                         </a>
                         
-                        <a href="https://drive.google.com/file/d/19SK-auUjR9R9ewyq9DI3l55HmCcC6aR5/view?usp=share_link" target="_blank" class="bio-button">
+                        <a href="https://drive.google.com/file/d/19SK-auUjR9R9ewyq9DI3l55HmCcC6aR5/view?usp=share_link" target="_blank" rel="noopener" class="bio-button">
                             <img src="images/cv1.png" alt="CV">
                             CV
                         </a>
                         
-                        <a href="https://www.bncapps.it/" target="_blank" class="bio-button">
+                        <a href="https://www.bncapps.it/" target="_blank" rel="noopener" class="bio-button">
                             <img src="images/Master_logo_BNC_web_color.png" alt="BNC">
                             Studio Facility
                         </a>
@@ -1210,10 +393,10 @@
         <!-- ============================================
              PAGINA CONTACT ME
         ============================================ -->
-        <section id="contact-page" class="page">
+        <section id="contact-page" class="page" role="main">
             <div class="contact-container">
                 <h2>Contact Me</h2>
-                <p class="contact-intro">For collaborations or information, drop me a line at siorengo19@gmail.com or fill out the form below:</p>
+                <p class="contact-intro">For collaborations or information, drop me a line at <a href="mailto:com">siorengo19@gmail.com</a> or fill out the form below:</p>
                 
                 <form id="contact-form" action="https://api.web3forms.com/submit" method="POST">
                     <!-- Chiave API di Web3Forms -->
@@ -1226,15 +409,15 @@
                     <input type="hidden" name="to" value="siorengo19@gmail.com">
                     
                     <div class="form-group">
-                        <input type="email" name="email" placeholder="Your email" required class="contact-input">
+                        <input type="email" name="email" placeholder="Your email" required class="contact-input" aria-label="Your email">
                     </div>
                     
                     <div class="form-group">
-                        <input type="text" name="subject" placeholder="Subject" required class="contact-input">
+                        <input type="text" name="subject" placeholder="Subject" required class="contact-input" aria-label="Subject">
                     </div>
                     
                     <div class="form-group">
-                        <textarea name="message" placeholder="Your message" required class="contact-input"></textarea>
+                        <textarea name="message" placeholder="Your message" required class="contact-input" aria-label="Your message"></textarea>
                     </div>
                     
                     <button type="submit" class="submit-btn">Send</button>
@@ -1252,7 +435,7 @@
         <!-- ============================================
              PAGINA UPLOAD (CON PROTEZIONE PASSWORD)
         ============================================ -->
-        <section id="upload-page" class="page">
+        <section id="upload-page" class="page" role="main">
             <div class="upload-container">
                 <h2>Area Riservata</h2>
                 
@@ -1260,16 +443,309 @@
                 <div id="password-form-container">
                     <p class="upload-intro">Inserisci la password per accedere all'area di upload</p>
                     <div class="form-group">
-                        <input type="password" id="access-password" placeholder="Password" class="contact-input">
+                        <input type="password" id="access-password" placeholder="Password" class="contact-input" aria-label="Password">
                     </div>
                     <button onclick="checkPassword()" class="submit-btn">Accedi</button>
                 </div>
                 
                 <!-- Contenuto protetto (invisibile fino all'autenticazione) -->
                 <div id="upload-content" style="display: none;">
-                    <h3>UPLOAD</h3>
-                    <p class="upload-intro">Area di caricamento contenuti</p>
-                    <!-- Qui inseriremo il contenuto dell'area riservata -->
+                    <h3>Carica Nuovo Progetto</h3>
+                    <p class="upload-intro">Seleziona la categoria del progetto e compila le informazioni necessarie.</p>
+                    
+                    <!-- Menu a tendina per selezione categoria -->
+                    <div class="upload-section">
+                        <h4>📂 Seleziona Categoria</h4>
+                        <div class="category-selector">
+                            <select id="project-category" onchange="showCategoryForm()" class="category-dropdown">
+                                <option value="">-- Scegli una categoria --</option>
+                                <option value="film">FILM&TV</option>
+                                <option value="documentary">DOCUMENTARY</option>
+                                <option value="commercial">COMMERCIAL</option>
+                                <option value="libraries">LIBRARIES</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <!-- Form per FILM&TV -->
+                    <div id="film-form" class="upload-form" style="display: none;">
+                        <div class="upload-section">
+                            <h4>🎬 Nuovo Progetto FILM&TV</h4>
+                            <form class="project-form">
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="film-title">Titolo del Film&TV *</label>
+                                        <input type="text" id="film-title" name="title" required class="contact-input">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="film-director">Regista *</label>
+                                        <input type="text" id="film-director" name="director" required class="contact-input">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="film-type">Tipo *</label>
+                                        <select id="film-type" name="type" required class="contact-input">
+                                            <option value="">-- Scegli tipo --</option>
+                                            <option value="Short Film">Short Film</option>
+                                            <option value="Feature Film">Feature Film</option>
+                                            <option value="Tv Show">Tv Show</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="film-production">Casa di Produzione</label>
+                                        <input type="text" id="film-production" name="production" class="contact-input">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="film-year">Anno *</label>
+                                        <input type="number" id="film-year" name="year" min="2020" max="2030" required class="contact-input">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="film-genre">Genere</label>
+                                        <select id="film-genre" name="genre" class="contact-input">
+                                            <option value="">-- Seleziona genere --</option>
+                                            <option value="Thriller/Azione">Thriller/Azione</option>
+                                            <option value="Drama">Drama</option>
+                                            <option value="Commedia">Commedia</option>
+                                            <option value="Horror">Horror</option>
+                                            <option value="Sci-Fi">Sci-Fi</option>
+                                            <option value="Romance">Romance</option>
+                                            <option value="Avventura">Avventura</option>
+                                            <option value="Altro">Altro</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="film-role">Il Tuo Ruolo *</label>
+                                        <select id="film-role" name="role" required class="contact-input">
+                                            <option value="">-- Seleziona ruolo --</option>
+                                            <option value="Sound Designer">Sound Designer</option>
+                                            <option value="Sound Editor">Sound Editor</option>
+                                            <option value="Dialogue Editor">Dialogue Editor</option>
+                                            <option value="Sound Mixer">Sound Mixer</option>
+                                            <option value="Composer">Composer</option>
+                                            <option value="Foley Artist">Foley Artist</option>
+                                            <option value="Altro">Altro</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="film-trailer">Link Trailer</label>
+                                    <input type="url" id="film-trailer" name="trailer" placeholder="https://www.youtube.com/watch?v=..." class="contact-input">
+                                </div>
+                                <div class="form-group">
+                                    <label for="film-poster">Poster del Film&TV *</label>
+                                    <input type="file" id="film-poster" name="poster" accept="image/*" required class="file-input">
+                                    <small>Formati: JPG, PNG. Dimensione max: 5MB</small>
+                                </div>
+                                <div class="form-actions">
+                                    <button type="submit" class="submit-btn">Carica Progetto FILM&TV</button>
+                                    <button type="button" onclick="resetForm('film-form')" class="reset-btn">Reset</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    
+                    <!-- Form per DOCUMENTARY -->
+                    <div id="documentary-form" class="upload-form" style="display: none;">
+                        <div class="upload-section">
+                            <h4>📹 Nuovo Progetto DOCUMENTARY</h4>
+                            <form class="project-form">
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="doc-title">Titolo del Documentario *</label>
+                                        <input type="text" id="doc-title" name="title" required class="contact-input">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="doc-director">Regista *</label>
+                                        <input type="text" id="doc-director" name="director" required class="contact-input">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="doc-production">Casa di Produzione</label>
+                                        <input type="text" id="doc-production" name="production" class="contact-input">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="doc-year">Anno *</label>
+                                        <input type="number" id="doc-year" name="year" min="2020" max="2030" required class="contact-input">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="doc-genre">Tipo di Documentario</label>
+                                        <select id="doc-genre" name="genre" class="contact-input">
+                                            <option value="">-- Seleziona tipo --</option>
+                                            <option value="Nature Documentary">Nature Documentary</option>
+                                            <option value="Marine Documentary">Marine Documentary</option>
+                                            <option value="Technology Documentary">Technology Documentary</option>
+                                            <option value="Urban Documentary">Urban Documentary</option>
+                                            <option value="Historical Documentary">Historical Documentary</option>
+                                            <option value="Social Documentary">Social Documentary</option>
+                                            <option value="Altro">Altro</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="doc-role">Il Tuo Ruolo *</label>
+                                        <select id="doc-role" name="role" required class="contact-input">
+                                            <option value="">-- Seleziona ruolo --</option>
+                                            <option value="Sound Designer">Sound Designer</option>
+                                            <option value="Sound Editor">Sound Editor</option>
+                                            <option value="Dialogue Editor">Dialogue Editor</option>
+                                            <option value="Sound Mixer">Sound Mixer</option>
+                                            <option value="Field Recordist">Field Recordist</option>
+                                            <option value="Composer">Composer</option>
+                                            <option value="Altro">Altro</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="doc-trailer">Link Trailer</label>
+                                    <input type="url" id="doc-trailer" name="trailer" placeholder="https://www.youtube.com/watch?v=..." class="contact-input">
+                                </div>
+                                <div class="form-group">
+                                    <label for="doc-poster">Poster del Documentario *</label>
+                                    <input type="file" id="doc-poster" name="poster" accept="image/*" required class="file-input">
+                                    <small>Formati: JPG, PNG. Dimensione max: 5MB</small>
+                                </div>
+                                <div class="form-actions">
+                                    <button type="submit" class="submit-btn">Carica Progetto DOCUMENTARY</button>
+                                    <button type="button" onclick="resetForm('documentary-form')" class="reset-btn">Reset</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    
+                    <!-- Form per COMMERCIAL -->
+                    <div id="commercial-form" class="upload-form" style="display: none;">
+                        <div class="upload-section">
+                            <h4>📺 Nuovo Progetto COMMERCIAL</h4>
+                            <form class="project-form">
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="com-title">Titolo del Commercial *</label>
+                                        <input type="text" id="com-title" name="title" required class="contact-input">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="com-director">Regista *</label>
+                                        <input type="text" id="com-director" name="director" required class="contact-input">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="com-production">Agenzia/Casa di Produzione</label>
+                                        <input type="text" id="com-production" name="production" class="contact-input">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="com-year">Anno *</label>
+                                        <input type="number" id="com-year" name="year" min="2020" max="2030" required class="contact-input">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="com-genre">Settore</label>
+                                        <select id="com-genre" name="genre" class="contact-input">
+                                            <option value="">-- Seleziona settore --</option>
+                                            <option value="Technology">Technology</option>
+                                            <option value="Cosmetics">Cosmetics</option>
+                                            <option value="Automotive">Automotive</option>
+                                            <option value="Beverage">Beverage</option>
+                                            <option value="Fashion">Fashion</option>
+                                            <option value="Food">Food</option>
+                                            <option value="Healthcare">Healthcare</option>
+                                            <option value="Altro">Altro</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="com-role">Il Tuo Ruolo *</label>
+                                        <select id="com-role" name="role" required class="contact-input">
+                                            <option value="">-- Seleziona ruolo --</option>
+                                            <option value="Sound Designer">Sound Designer</option>
+                                            <option value="Composer">Composer</option>
+                                            <option value="Sound Mixer">Sound Mixer</option>
+                                            <option value="Sound Editor">Sound Editor</option>
+                                            <option value="Field Recordist">Field Recordist</option>
+                                            <option value="Altro">Altro</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="com-trailer">Link Commercial</label>
+                                    <input type="url" id="com-trailer" name="trailer" placeholder="https://www.youtube.com/watch?v=..." class="contact-input">
+                                </div>
+                                <div class="form-group">
+                                    <label for="com-poster">Poster del Commercial *</label>
+                                    <input type="file" id="com-poster" name="poster" accept="image/*" required class="file-input">
+                                    <small>Formati: JPG, PNG. Dimensione max: 5MB</small>
+                                </div>
+                                <div class="form-actions">
+                                    <button type="submit" class="submit-btn">Carica Progetto COMMERCIAL</button>
+                                    <button type="button" onclick="resetForm('commercial-form')" class="reset-btn">Reset</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    
+                    <!-- Form per LIBRARIES -->
+                    <div id="libraries-form" class="upload-form" style="display: none;">
+                        <div class="upload-section">
+                            <h4>🌳 Nuovo Progetto LIBRARIES</h4>
+                            <form class="project-form">
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="lib-title">Titolo della Libreria *</label>
+                                        <input type="text" id="lib-title" name="title" required class="contact-input">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="lib-role">Il Tuo Ruolo *</label>
+                                        <select id="lib-role" name="role" required class="contact-input">
+                                            <option value="">-- Seleziona ruolo --</option>
+                                            <option value="Sound Designer">Sound Designer</option>
+                                            <option value="Composer">Composer</option>
+                                            <option value="Producer">Producer</option>
+                                            <option value="Field Recordist">Field Recordist</option>
+                                            <option value="Mix Engineer">Mix Engineer</option>
+                                            <option value="Altro">Altro</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="lib-location">Location *</label>
+                                        <input type="text" id="lib-location" name="location" placeholder="es. Milano, Italia" required class="contact-input">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="lib-year">Anno *</label>
+                                        <input type="number" id="lib-year" name="year" min="2020" max="2030" required class="contact-input">
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="lib-poster">Cover della Libreria *</label>
+                                    <input type="file" id="lib-poster" name="poster" accept="image/*" required class="file-input">
+                                    <small>Formati: JPG, PNG. Dimensione max: 5MB. Immagine quadrata 1:1 consigliata.</small>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="lib-audio">Audio Sample *</label>
+                                    <input type="file" id="lib-audio" name="audio" accept="audio/*" required class="file-input">
+                                    <small>Formati: MP3, WAV. Dimensione max: 10MB</small>
+                                </div>
+                                
+                                <div class="form-actions">
+                                    <button type="submit" class="submit-btn">Carica Progetto LIBRARIES</button>
+                                    <button type="button" onclick="resetForm('libraries-form')" class="reset-btn">Reset</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    
+                    <!-- Pulsante Logout -->
+                    <div class="logout-section">
+                        <button onclick="logout()" class="logout-btn">Logout</button>
+                    </div>
                 </div>
             </div>
             
@@ -1284,115 +760,106 @@
                 </div>
             </footer>
         </section>
+
+        <!-- ============================================
+             PAGINA WAVETABLE (nascosta di default)
+        ============================================ -->
+        <section id="wavetable-page" class="page" role="main" style="display: none;">
+          <div class="wavetable-container" style="display: flex; justify-content: center; align-items: center; min-height: 100vh; background: #1E1E2E;">
+            <style>
+              .wave-container {
+                position: relative;
+                width: 600px;
+                height: 300px;
+                border: 1px solid rgba(92, 187, 246, 0.2);
+                overflow: hidden;
+                background-color: rgba(24, 24, 37, 0.8);
+                cursor: none;
+              }
+              .wave-node {
+                position: absolute;
+                width: 1em;
+                height: 1em;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: rgba(92, 187, 246, 0.7);
+                font-size: 12px;
+                transition: color 0.1s ease;
+                user-select: none;
+                z-index: 1;
+              }
+              .wave-node.active-1 { color: rgba(255, 95, 86, 0.9); }
+              .wave-node.active-2 { color: rgba(162, 119, 255, 0.9); }
+              .wave-node.active-3 { color: rgba(98, 232, 132, 0.9); }
+              .mouse-cursor {
+                position: absolute;
+                width: 10px;
+                height: 10px;
+                border-radius: 50%;
+                background-color: rgba(255, 95, 86, 0.7);
+                transform: translate(-50%, -50%);
+                pointer-events: none;
+                z-index: 100;
+                box-shadow: 0 0 10px rgba(255, 95, 86, 0.5);
+              }
+              .service-grid {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                grid-template-rows: repeat(3, 1fr);
+                z-index: 2;
+              }
+              .service-cell {
+                position: relative;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+              }
+              .service-label {
+                color: rgba(255, 255, 255, 0);
+                font-family: monospace;
+                font-size: 14px;
+                font-weight: bold;
+                text-align: center;
+                transition: all 0.3s ease;
+                padding: 5px 10px;
+                border-radius: 3px;
+                opacity: 0;
+                text-shadow: 0 0 5px rgba(255, 95, 86, 0);
+                letter-spacing: 1px;
+                pointer-events: none;
+              }
+              .service-cell:hover .service-label {
+                color: rgba(255, 255, 255, 0.9);
+                background-color: rgba(24, 24, 37, 0.7);
+                opacity: 1;
+                text-shadow: 0 0 5px rgba(255, 95, 86, 0.5);
+              }
+            </style>
+            <div class="wave-container" id="waveContainer">
+              <div class="mouse-cursor" id="mouseCursor"></div>
+              <div class="service-grid">
+                <div class="service-cell"><div class="service-label">DIALOGUE EDITING</div></div>
+                <div class="service-cell"><div class="service-label"></div></div>
+                <div class="service-cell"><div class="service-label">LOCATION SOUND</div></div>
+                <div class="service-cell"><div class="service-label"></div></div>
+                <div class="service-cell"><div class="service-label">SOUND DESIGN</div></div>
+                <div class="service-cell"><div class="service-label"></div></div>
+                <div class="service-cell"><div class="service-label">MUSIC EDITING</div></div>
+                <div class="service-cell"><div class="service-label"></div></div>
+                <div class="service-cell"><div class="service-label">SOUND RESTORATION</div></div>
+              </div>
+            </div>
+          </div>
+        </section>
     </div><!-- Fine web-area -->
     
-    <!-- Script di navigazione e altro -->
-    <script>
-        // Funzione per cambiare pagina
-        function showPage(pageId, clickedLink) {
-            // Nascondi tutte le pagine
-            var pages = document.querySelectorAll('.page');
-            for (var i = 0; i < pages.length; i++) {
-                pages[i].classList.remove('active');
-            }
-            
-            // Mostra la pagina selezionata
-            document.getElementById(pageId).classList.add('active');
-            
-            // Se è stato passato un link (non per il bottone alieno)
-            if (clickedLink) {
-                // Rimuovi classe active da tutti i link ma preserva menu-green
-                var links = document.querySelectorAll('.nav-menu a');
-                for (var i = 0; i < links.length; i++) {
-                    var isGreen = links[i].classList.contains('menu-green');
-                    links[i].classList.remove('active');
-                    // Ripristina la classe menu-green se necessario
-                    if (isGreen && !links[i].classList.contains('menu-green')) {
-                        links[i].classList.add('menu-green');
-                    }
-                }
-                
-                // Aggiungi classe active al link cliccato
-                clickedLink.classList.add('active');
-                
-                // Aggiorna URL senza causare refresh della pagina
-                history.pushState(null, null, clickedLink.getAttribute('href'));
-            }
-            
-            return false; // Previene l'azione predefinita del link
-        }
-        
-        // Controlla URL all'avvio
-        document.addEventListener('DOMContentLoaded', function() {
-            var hash = window.location.hash;
-            if (hash) {
-                var targetLink = document.querySelector('.nav-menu a[href="' + hash + '"]');
-                if (targetLink) {
-                    showPage(targetLink.getAttribute('href').replace('#', '') + '-page', targetLink);
-                }
-            }
-            
-            // Inizializza texture per tutti i poster strappati
-            initTornPosters();
-        });
-        
-        // Sistema di verifica password per area upload
-        function checkPassword() {
-            var password = document.getElementById('access-password').value;
-            var correctPassword = 'bastacinema42';
-            
-            if (password === correctPassword) {
-                // Nascondi il form di accesso
-                document.getElementById('password-form-container').style.display = 'none';
-                
-                // Mostra il contenuto protetto
-                document.getElementById('upload-content').style.display = 'block';
-                
-                // Opzionale: salva un flag in sessionStorage
-                sessionStorage.setItem('authenticated', 'true');
-            } else {
-                alert('Password non corretta. Riprova.');
-            }
-        }
-        
-        // Funzione per inizializzare tutti i poster strappati
-        function initTornPosters() {
-            // Seleziona tutti gli elementi con poster texture
-            var textureElements = document.querySelectorAll('.poster-texture');
-            
-            // Array con i percorsi delle texture dal server WordPress
-            var textures = [
-                'https://www.ivanagloria.com/wp-content/uploads/2025/05/so_TEXTR1.jpg',
-                'https://www.ivanagloria.com/wp-content/uploads/2025/05/so_TEXTR2.png'
-            ];
-            
-            // Applica texture a ciascun elemento
-            textureElements.forEach(function(element) {
-                // Seleziona casualmente una texture
-                var randomTexture = textures[Math.floor(Math.random() * textures.length)];
-                
-                // Applica la texture come background
-                element.style.backgroundImage = 'url(' + randomTexture + ')';
-            });
-            
-            // Aggiungi interazione di click per ogni poster strappato
-            var tornPosters = document.querySelectorAll('.torn-poster');
-            tornPosters.forEach(function(poster) {
-                poster.addEventListener('click', function() {
-                    this.classList.toggle('active');
-                });
-            });
-        }
-        
-        // Controlla se l'utente è già autenticato all'apertura della pagina
-        document.addEventListener('DOMContentLoaded', function() {
-            if (sessionStorage.getItem('authenticated') === 'true') {
-                if (document.getElementById('password-form-container')) {
-                    document.getElementById('password-form-container').style.display = 'none';
-                    document.getElementById('upload-content').style.display = 'block';
-                }
-            }
-        });
-    </script>
+    <!-- External JavaScript -->
+    <script src="script.js"></script>
 </body>
 </html>
